@@ -1,0 +1,11 @@
+/firmware
+/firmware-nonfree
+/bluez-firmware
+/raspberrypi-kernel
+/log
+/repo
+/output*
+/root
+/boot
+/rootfs*
+/img

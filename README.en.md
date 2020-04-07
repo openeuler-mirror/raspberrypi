@@ -1,36 +1,53 @@
 # raspberrypi
 
 #### Description
-It provides scripts for building openEuler image on Raspberry Pi and documents
 
-#### Software Architecture
-Software architecture description
+This repository provides scripts for building openEuler image for Raspberry Pi and related documents:
 
-#### Installation
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Instructions
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Contribution
-
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+* [Script for building openEuler image for Raspberry Pi](build_img.sh)
+* [Building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md)
+* [Install openEuler on a SD card](documents/树莓派刷机.md)
+* [How to use Raspberry Pi](documents/树莓派使用.md)
 
 
-#### Gitee Feature
+#### Build openEuler image
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+##### Prepare the environment
+
+To build openEuler ARM64 image for Raspberry Pi, the requirements of runing scripts of this repository are as follows:
+- OS: openEuler or Centos 7/8
+- Architecture: ARM
+
+For example, you can use [QEMU](https://www.qemu.org/) to build ARM system emulation or directly use an ARM hardware such as Raspberry Pi.
+
+##### Run the scripts to build image
+
+Refer to [Script for building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md) for details.
+
+Build script: build_img.sh，which can be set 0/5/7 parameters.
+
+1. Build with default parameters
+
+`sudo bash build_img.sh`
+
+2. Build with custom parameters
+
+`sudo bash build_img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE_URL --cores MAKE_CORES`
+
+or
+
+`sudo bash build_img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE_URL`
+
+The meaning of each parameter:
+
+- KERNEL_URL：The URL of kernel source's repository，which defaults to `git@gitee.com:openeuler/raspberrypi-kernel.git`.
+- KERNEL_BRANCH：The branch name of kernel source's repository，which defaults to `openEuler-1.0-LTS-raspi`.
+- KERNEL_DEFCONFIG：The filename of configuration for compiling kernel, which defaults to `openeuler-raspi_defconfig`. The configuration file should be in the config directory or in arch/arm64/configs of the kernel source. If this configuration file does not exist, the script uses the next parameter: DEFAULT_DEFCONFIG.
+- DEFAULT_DEFCONFIG：The filename of configuration for kernel, which defaults to `openeuler-raspi_defconfig`. The configuration file should be in arch/arm64/configs of the kernel source. If both KERNEL_DEFCONFIG and this file do not exist, the process of building image will exit.
+- REPO_FILE：The URL or name of openEuler's file, which defaults to `openEuler-1.0-LTS.repo`. Caution, if REPO_FILE is a file name, please make sure this file in the config directory. Otherwise, if REPO_FILE is a URL, please make sure you can get a correct repo file from this URL.
+- --cores：Followed by parameter MAKE_CORES
+- MAKE_CORES：The number of parallel compilations, according to the actual number of CPU of the server running the script. The default is 18.
+
+#### Use image
+
+Refer to [Install openEuler on a SD card](documents/树莓派刷机.md) and [How to use Raspberry Pi](documents/树莓派使用.md) for details about how to use the image on Raspberry Pi.

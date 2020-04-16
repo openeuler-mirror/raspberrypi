@@ -1,15 +1,15 @@
 # 环境需求
 
 - 操作系统：openEuler 或 Centos 7/8；
-- 架构：ARM；
-- 硬盘存储不低于50G；
-- 内存不低于2G；
+- 架构：AArch64；
+- 硬盘存储不低于 50G；
+- 内存不低于 2G；
 - 可访问外网。
 
-可以通过以下方式获取 ARM 架构的运行环境：
+可以通过以下方式获取 AArch64 架构的运行环境：
 
-- 使用 ARM 架构的主机，例如树莓派
-- 使用 [QEMU](https://www.qemu.org/) 模拟器搭建 ARM 运行环境
+- 使用 AArch64 架构的主机，例如树莓派
+- 使用 [QEMU](https://www.qemu.org/) 模拟器搭建 AArch64 运行环境
 
 # 树莓派相关
 
@@ -20,15 +20,15 @@
 ### 准备环境
 
 - 操作系统：openEuler 或 Centos 7/8
-- 架构：ARM
+- 架构：AArch64
 
-除了使用 ARM 架构的运行环境，也可以采用交叉编译的方式编译内核。这里，我们在 ARM 架构的服务器上编译内核。
+除了使用 AArch64 架构的运行环境，也可以采用交叉编译的方式编译内核，文档详见 [交叉编译内核](./交叉编译内核.md)。这里，我们在 AArch64 架构的服务器上编译内核。
 
 ### 下载源码
 
 `git clone git@gitee.com:openeuler/raspberrypi-kernel.git`
 
-得到文件${WORKDIR}/raspberrypi-kernel。
+得到文件 ${WORKDIR}/raspberrypi-kernel。
 
 ### 进入内核目录
 
@@ -36,7 +36,7 @@
 
 ### 切换分支
 
-这里适用于树莓派的 openEuler-1.0-LTS 内核源码的分支为 openEuler-1.0-LTS-raspi，
+这里适用于树莓派的 openEuler-1.0-LTS 内核源码的分支为 openEuler-1.0-LTS-raspi。
 
 `git checkout -b openEuler-1.0-LTS-raspi origin/openEuler-1.0-LTS-raspi`
 
@@ -139,7 +139,7 @@
 
 ## 下载安装openEuler发布包
 
-`rpm -ivh --nodeps --root /${WORKDIR}/rootfs/ http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/Packages/openEuler-release-20.03LTS-33.oe1.aarch64.rpm`
+`rpm -ivh --nodeps --root ${WORKDIR}/rootfs/ http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/Packages/openEuler-release-20.03LTS-33.oe1.aarch64.rpm`
 
 会在 ${WORKDIR}/rootfs 下生成三个文件夹:
 
@@ -151,7 +151,7 @@ etc/ usr/ var/
 
 `mkdir ${WORKDIR}/rootfs/etc/yum.repos.d`
 
-`vim ${WORKDIR}/rootfs/etc/yum.repos.d/openEuler-20.03LTS.repo`
+`vim ${WORKDIR}/rootfs/etc/yum.repos.d/openEuler-20.03-LTS.repo`
 
 添加内容：
 
@@ -175,13 +175,13 @@ enabled=1
 
 ### 安装dnf
 
-`dnf --installroot=${rootfs_dir}/ install dnf --nogpgcheck -y`
+`dnf --installroot=${WORKDIR}/rootfs/ install dnf --nogpgcheck -y`
 
 ### 安装必要软件
 
-`dnf --installroot=${rootfs_dir}/ makecache`
+`dnf --installroot=${WORKDIR}/rootfs/ makecache`
 
-`dnf --installroot=${rootfs_dir}/ install -y wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp`
+`dnf --installroot=${WORKDIR}/rootfs/ install -y wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp`
 
 ## 添加配置文件
 
@@ -254,7 +254,7 @@ DEVICE=eth0
  
 `passwd root`
 
-输入要设置的root密码
+输入要设置的root密码。
 
 5. 设置主机名
 
@@ -278,34 +278,42 @@ DEVICE=eth0
 
 ### 将固件放进rootfs
 
-`mkdir -p /${WORKDIR}/rootfs/lib/firmware`
+`mkdir -p ${WORKDIR}/rootfs/lib/firmware`
 
-`cp /${WORKDIR}/bluez-firmware/broadcom/* /${WORKDIR}/rootfs/lib/firmware/`
+`cp ${WORKDIR}/bluez-firmware/broadcom/* ${WORKDIR}/rootfs/lib/firmware/`
 
-`cp -r /${WORKDIR}/firmware-nonfree/brcm/ ${WORKDIR}/rootfs/lib/firmware/`
+`cp -r ${WORKDIR}/firmware-nonfree/brcm/ ${WORKDIR}/rootfs/lib/firmware/`
+
+蓝牙相关固件放到 ${WORKDIR}/rootfs/lib/firmware/brcm/ 下：
+
+`mv ${WORKDIR}/rootfs/lib/firmware/BCM43430A1.hcd ${WORKDIR}/rootfs/lib/firmware/brcm/`
+
+`mv ${WORKDIR}/rootfs/lib/firmware/BCM4345C0.hcd ${WORKDIR}/rootfs/lib/firmware/brcm/`
 
 ### 将内核模块放进rootfs
 
-`cp -r /${WORKDIR}/output/lib/modules /${WORKDIR}/rootfs/lib/`
+`cp -r ${WORKDIR}/output/lib/modules ${WORKDIR}/rootfs/lib/`
 
 ## boot内容完善
 
 ### 将内核放进引导
 
-`cp /${WORKDIR}/output/Image /${WORKDIR}/firmware/boot/kernel8.img`
+`cp ${WORKDIR}/output/Image ${WORKDIR}/firmware/boot/kernel8.img`
 
-### 将dtb放进引导
+### 将设备树文件放进引导
 
-`cp /${WORKDIR}/output/*.dtb /${WORKDIR}/firmware/boot/`
+`cp ${WORKDIR}/output/*.dtb ${WORKDIR}/firmware/boot/`
+
+`cp ${WORKDIR}/output/overlays/* ${WORKDIR}/firmware/boot/overlays/`
 
 ## 生成镜像并分区挂载
 
 ### 计算镜像大小
 
-`du -sh --block-size=1MiB /${WORKDIR}/rootfs`
-`du -sh --block-size=1MiB /${WORKDIR}/firmware/boot`
+`du -sh --block-size=1MiB ${WORKDIR}/rootfs`
+`du -sh --block-size=1MiB ${WORKDIR}/firmware/boot`
 
-得到总大小略加1100MiB即可，将该大小记为 SIZE。
+得到总大小略加 1100MiB 即可，将该大小记为 `SIZE`。
 
 ### 创建空镜像
 
@@ -313,7 +321,7 @@ DEVICE=eth0
 
 `dd if=/dev/zero of=openEuler_raspi.img bs=1M count=SIZE`
 
-其中 SIZE 为前面计算得到的计算镜像大小，最终生成空的镜像文件 ${WORKDIR}/openEuler_raspi.img。
+其中 `SIZE` 为前面计算得到的计算镜像大小，最终生成空的镜像文件 ${WORKDIR}/openEuler_raspi.img。
 
 ### 使用 losetup 将磁盘镜像文件虚拟成快设备
 
@@ -332,7 +340,7 @@ add map loop0p2 ...
 add map loop0p3 ...
 ```
 
-运行`ls /dev/mapper/loop0p*`可以看到分区分别对应刚才为openEuler_raspi.img做的三个分区：
+运行 `ls /dev/mapper/loop0p*` 可以看到分区分别对应刚才为 openEuler_raspi.img 做的三个分区：
 
 ```
 /dev/mapper/loop0p1 /dev/mapper/loop0p2 /dev/mapper/loop0p3
@@ -420,6 +428,6 @@ UUID=a451bee4-4384-48a2-8d5a-d09c2dd9a1a  swap swap    defaults,noatime 0 0
 
 `losetup -d /dev/loop0`
 
-这样，最终就生成了需要的openEuler_raspi.img镜像文件。
+这样，最终就生成了需要的 openEuler_raspi.img 镜像文件。
 
 之后就可以使用镜像刷写 SD 卡并使用树莓派了，详见 [树莓派刷机](./树莓派刷机.md) 和 [树莓派使用](./树莓派使用.md)。

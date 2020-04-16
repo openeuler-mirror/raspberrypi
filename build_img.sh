@@ -11,7 +11,7 @@ kernel_url="git@gitee.com:openeuler/raspberrypi-kernel.git"
 kernel_branch="openEuler-1.0-LTS-rasp"
 kernel_defconfig="openeuler-raspi_defconfig"
 default_defconfig="openeuler-raspi_defconfig"
-repo_file=openEuler-1.0-LTS.repo
+repo_file=openEuler-20.03-LTS.repo
 
 date_str=$(date "+%Y%m%d")
 output_dir=${run_dir}/output
@@ -56,6 +56,9 @@ LOG(){
 }
 
 prepare(){
+    if [ ! -d ${cur_dir}/log ]; then
+        mkdir ${cur_dir}/log
+    fi
     LOG "prepare begin..."
     rmp_names=("bison" "flex" "parted" "wget" "multipath-tools")
     rmp_install_names=("bison" "flex" "parted" "wget" "kpartx")
@@ -67,9 +70,6 @@ prepare(){
         [ $? -ne 0 ] && echo "yum install ${rmp_install_names[i]} failed." && ERROR "yum install ${rmp_install_names[i]} failed." && yum_right=3
     done
     [ $yum_right ] && exit 3
-    if [ ! -d ${cur_dir}/log ]; then
-        mkdir ${cur_dir}/log
-    fi
     if [ ! -d ${run_dir}/img ]; then
         mkdir ${run_dir}/img
     fi
@@ -357,6 +357,8 @@ make_rootfs(){
     mkdir -p ${rootfs_dir}/lib/firmware
     cp bluez-firmware/broadcom/* ${rootfs_dir}/lib/firmware/
     cp -r firmware-nonfree/brcm/ ${rootfs_dir}/lib/firmware/
+    mv ${rootfs_dir}/lib/firmware/BCM43430A1.hcd ${rootfs_dir}/lib/firmware/brcm/
+    mv ${rootfs_dir}/lib/firmware/BCM4345C0.hcd ${rootfs_dir}/lib/firmware/brcm/
     cp -r ${output_dir}/lib/modules ${rootfs_dir}/lib/
     rm ${rootfs_dir}/chroot.sh
     LOG "make rootfs for ${repo_file} end."
@@ -433,6 +435,17 @@ make_img(){
     tar cpf ${run_dir}/rootfs.tar .
     cd ${root_mnt}
     tar xpf ${run_dir}/rootfs.tar -C .
+    for tmpdir in `ls ${output_dir}/lib/modules`
+    do
+        if [ -d ./lib/modules/${tmpdir} ]; then
+            if [ -L ./lib/modules/${tmpdir}/build ]; then
+                rm -rf ./lib/modules/${tmpdir}/build
+            fi
+            if [ -L ./lib/modules/${tmpdir}/source ]; then
+                rm -rf ./lib/modules/${tmpdir}/source
+            fi
+        fi
+    done
     cd "${run_dir}"
     sync
     sleep 10

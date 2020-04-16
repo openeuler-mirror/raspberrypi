@@ -2,8 +2,8 @@
 
 - 操作系统：openEuler 或 Centos 7/8；
 - 架构：AArch64；
-- 硬盘存储不低于50G；
-- 内存不低于2G；
+- 硬盘存储不低于 50G；
+- 内存不低于 2G；
 - 可访问外网。
 
 可以通过以下方式获取 AArch64 架构的运行环境：
@@ -28,7 +28,7 @@
 
 `git clone git@gitee.com:openeuler/raspberrypi-kernel.git`
 
-得到文件${WORKDIR}/raspberrypi-kernel。
+得到文件 ${WORKDIR}/raspberrypi-kernel。
 
 ### 进入内核目录
 
@@ -36,7 +36,7 @@
 
 ### 切换分支
 
-这里适用于树莓派的 openEuler-1.0-LTS 内核源码的分支为 openEuler-1.0-LTS-raspi，
+这里适用于树莓派的 openEuler-1.0-LTS 内核源码的分支为 openEuler-1.0-LTS-raspi。
 
 `git checkout -b openEuler-1.0-LTS-raspi origin/openEuler-1.0-LTS-raspi`
 
@@ -313,7 +313,7 @@ DEVICE=eth0
 `du -sh --block-size=1MiB ${WORKDIR}/rootfs`
 `du -sh --block-size=1MiB ${WORKDIR}/firmware/boot`
 
-得到总大小略加1100MiB即可，将该大小记为 SIZE。
+得到总大小略加 1100MiB 即可，将该大小记为 `SIZE`。
 
 ### 创建空镜像
 
@@ -321,7 +321,7 @@ DEVICE=eth0
 
 `dd if=/dev/zero of=openEuler_raspi.img bs=1M count=SIZE`
 
-其中 SIZE 为前面计算得到的计算镜像大小，最终生成空的镜像文件 ${WORKDIR}/openEuler_raspi.img。
+其中 `SIZE` 为前面计算得到的计算镜像大小，最终生成空的镜像文件 ${WORKDIR}/openEuler_raspi.img。
 
 ### 使用 losetup 将磁盘镜像文件虚拟成快设备
 
@@ -340,7 +340,7 @@ add map loop0p2 ...
 add map loop0p3 ...
 ```
 
-运行`ls /dev/mapper/loop0p*`可以看到分区分别对应刚才为openEuler_raspi.img做的三个分区：
+运行 `ls /dev/mapper/loop0p*` 可以看到分区分别对应刚才为 openEuler_raspi.img 做的三个分区：
 
 ```
 /dev/mapper/loop0p1 /dev/mapper/loop0p2 /dev/mapper/loop0p3
@@ -428,6 +428,6 @@ UUID=a451bee4-4384-48a2-8d5a-d09c2dd9a1a  swap swap    defaults,noatime 0 0
 
 `losetup -d /dev/loop0`
 
-这样，最终就生成了需要的openEuler_raspi.img镜像文件。
+这样，最终就生成了需要的 openEuler_raspi.img 镜像文件。
 
 之后就可以使用镜像刷写 SD 卡并使用树莓派了，详见 [树莓派刷机](./树莓派刷机.md) 和 [树莓派使用](./树莓派使用.md)。

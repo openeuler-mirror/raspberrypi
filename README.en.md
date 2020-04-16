@@ -6,6 +6,7 @@ This repository provides scripts for building openEuler image for Raspberry Pi a
 
 * [Script for building openEuler image for Raspberry Pi](build_img.sh)
 * [Building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md)
+* [Cross-compile the kernel](documents/交叉编译内核.md)
 * [Install openEuler on a SD card](documents/树莓派刷机.md)
 * [How to use Raspberry Pi](documents/树莓派使用.md)
 

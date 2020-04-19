@@ -2,6 +2,15 @@
 
 #### 介绍
 
+openEuler 20.03 LTS 的内测版本镜像：<https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200415/openEuler_20200415.img.xz>。
+
+该镜像的基本信息：
+
+- 内核版本号：4.19.90-2003.4.0.0036
+- 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+- 构建文件系统的源仓库：[openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
+- 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/openeuler/raspberrypi/blob/master/config/openEuler-20.03-LTS.repo)
+
 本仓库提供适用于树莓派的 openEuler 镜像的构建脚本和相关文档：
 
 * [适用于树莓派的 openEuler 镜像构建脚本](build_img.sh)

@@ -2,6 +2,15 @@
 
 #### Description
 
+Alpha version of openEuler 20.03 LTS image for Raspberry Pi: <https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200415/openEuler_20200415.img.xz>.
+
+Basic information of the above image:
+
+- Kernel version number: 4.19.90-2003.4.0.0036
+- Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+- Repository of rootfs: [openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
+- Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/config/openEuler-20.03-LTS.repo)
+
 This repository provides scripts for building openEuler image for Raspberry Pi and related documents:
 
 * [Script for building openEuler image for Raspberry Pi](build_img.sh)

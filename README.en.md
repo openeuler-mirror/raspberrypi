@@ -1,5 +1,7 @@
 # raspberrypi
 
+English | [简体中文](./README.md)
+
 #### Description
 
 Alpha version of openEuler 20.03 LTS image for Raspberry Pi: <https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200415/openEuler_20200415.img.xz>.

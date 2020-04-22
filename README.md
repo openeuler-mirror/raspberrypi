@@ -1,5 +1,7 @@
 # raspberrypi
 
+[English](./README.cn.md) | 简体中文
+
 #### 介绍
 
 openEuler 20.03 LTS 的内测版本镜像：<https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200415/openEuler_20200415.img.xz>。

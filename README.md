@@ -1,6 +1,32 @@
 # raspberrypi
 
-#### 介绍
+[English](./README.cn.md) | 简体中文
+
+本仓库是 openEuler 社区树莓派 SIG 组的主仓库，提供 SIG 组相关信息以及适用于树莓派的 openEuler 镜像的构建脚本和相关文档：
+
+## 如何参与 SIG 组
+
+SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community/tree/master/sig/sig-RaspberryPi)。
+
+- 建立或回复 issue：欢迎通过建立或回复 issue 来讨论，此 SIG 组维护的仓库列表可在 [sig-RaspberryPi](https://gitee.com/jianminw/community/tree/master/sig/sig-RaspberryPi) 中查看。
+- 加入 Slack 群组：[openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com )
+  - [加入群组链接](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-dlqztpyb-GSgR98xIAI06SoTpFiJH6A)，此链接于 5 月 15 日失效，我们会定期更新。
+- 每周 SIG 组会议：每周二下午 03:00 - 03:30 会进行一次讨论会议，Zoom Meeting ID: 881 4204 8958
+  - [会议议题](https://docs.google.com/document/d/1HuN7sWLiPuvGLqd-1tH1WAbzk51tgXpFBodp3dz_DBY/)：每周会议前填写要讨论的议题，我们也会从 issue 列表中提取本周讨论的内容。
+  - [会议记录](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6?from=project-issue)：每周会议结束后会议结论会更新在此 issue 中。
+- 重要的事说三遍：**欢迎提交 PR！欢迎提交 PR！欢迎提交 PR！**
+
+## 仓库目录
+
+- [build_img.sh](build_img.sh): 构建 openEuler 树莓派镜像的主脚本
+- [config](./config/): 构建使用的配置文件
+- [documents](./documents/): 使用文档
+  - [openEuler 镜像的构建](documents/openEuler镜像的构建.md)
+  - [交叉编译内核](documents/交叉编译内核.md)
+  - [树莓派刷机](documents/树莓派刷机.md)
+  - [树莓派使用](documents/树莓派使用.md)
+
+## 最新镜像
 
 openEuler 20.03 LTS 的内测版本镜像：<https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200415/openEuler_20200415.img.xz>。
 
@@ -11,27 +37,25 @@ openEuler 20.03 LTS 的内测版本镜像：<https://isrc.iscas.ac.cn/EulixOS/re
 - 构建文件系统的源仓库：[openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
 - 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/openeuler/raspberrypi/blob/master/config/openEuler-20.03-LTS.repo)
 
-本仓库提供适用于树莓派的 openEuler 镜像的构建脚本和相关文档：
+## 使用镜像
 
-* [适用于树莓派的 openEuler 镜像构建脚本](build_img.sh)
-* [openEuler 镜像的构建](documents/openEuler镜像的构建.md)
-* [交叉编译内核](documents/交叉编译内核.md)
-* [树莓派刷机](documents/树莓派刷机.md)
-* [树莓派使用](documents/树莓派使用.md)
+镜像刷写 SD 卡并使用树莓派，详见以下文档：
 
-#### openEuler镜像构建
+- [树莓派刷机](documents/树莓派刷机.md)
+- [树莓派使用](documents/树莓派使用.md)
 
-##### 准备环境
+## 镜像构建
 
-用于生成 openEuler AArch64 的树莓派镜像。
+### 准备环境
 
-本仓库的脚本运行环境要求：
-- 操作系统：openEuler 或 Centos 7/8
-- 架构：AArch64
+本仓库的脚本运行环境要求如下：
 
-可以使用 [QEMU](https://www.qemu.org/) 模拟器搭建 AArch64 运行环境或者直接使用 AArch64 架构的主机（例如，树莓派）。
+- 操作系统：openEuler、CentOS 7、CentOS 8
+- 架构：AArch64，如树莓派
 
-##### 构建镜像
+其他架构可以使用 [QEMU](https://www.qemu.org/) 模拟器搭建 AArch64 运行环境。
+
+### 构建镜像
 
 详细过程参见 [openEuler 镜像的构建](documents/openEuler镜像的构建.md)。
 
@@ -58,7 +82,3 @@ openEuler 20.03 LTS 的内测版本镜像：<https://isrc.iscas.ac.cn/EulixOS/re
 - REPO_FILE：openEuler 开发源的 repo 文件的 URL 或者文件名称， 默认为 `openEuler-20.03-LTS.repo`。注意，如果 REPO_FILE 为文件名称，需要保证该文件在脚本 build_img.sh 所在目录的 config 文件夹下。
 - --cores：其后跟参数 MAKE_CORES。
 - MAKE_CORES：并行编译的数量，根据运行脚本的服务器CPU实际数目设定，默认为 18。
-
-#### 镜像使用
-
-镜像刷写 SD 卡并使用树莓派，详见 [树莓派刷机](documents/树莓派刷机.md) 和 [树莓派使用](documents/树莓派使用.md)。

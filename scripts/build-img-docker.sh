@@ -15,7 +15,7 @@ fi
 
 docker_file="https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz"
 kernel_url="https://gitee.com/openeuler/raspberrypi-kernel.git"
-kernel_branch="openEuler-1.0-LTS-raspi"
+kernel_branch="master"
 kernel_defconfig="openeuler-raspi_defconfig"
 default_defconfig="openeuler-raspi_defconfig"
 repo_file=openEuler-20.03-LTS.repo

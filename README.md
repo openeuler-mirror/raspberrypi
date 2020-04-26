@@ -79,7 +79,7 @@ openEuler 20.03 LTS 的内测版本镜像：<https://isrc.iscas.ac.cn/EulixOS/re
 其中，各个参数意义：
 
 - KERNEL_URL：内核源码的项目地址，默认为 `https://gitee.com/openeuler/raspberrypi-kernel.git`。
-- KERNEL_BRANCH：内核源码的对应分支，默认为 `openEuler-1.0-LTS-raspi`。
+- KERNEL_BRANCH：内核源码的对应分支，默认为 `master`。
 - KERNEL_DEFCONFIG：内核编译使用的配置文件名称，默认为 `openeuler-raspi_defconfig`，在本目录的 config 目录下或内核源码的目录 arch/arm64/configs 下。如果该文件不存在则使用配置文件 DEFAULT_DEFCONFIG。
 - DEFAULT_DEFCONFIG：内核默认配置文件名称，默认为 `openeuler-raspi_defconfig`，在内核源码的目录 arch/arm64/configs 下。如果 KERNEL_DEFCONFIG 和该文件均不存在则退出镜像构建过程。
 - REPO_FILE：openEuler 开发源的 repo 文件的 URL 或者文件名称， 默认为 `openEuler-20.03-LTS.repo`。注意，如果 REPO_FILE 为文件名称，需要保证该文件在本目录的 config 文件夹下。否则，如果 REPO_FILE 为 URL，请保证可以通过该链接获取到该 repo 文件。

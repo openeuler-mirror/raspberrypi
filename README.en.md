@@ -78,7 +78,7 @@ or
 The meaning of each parameter:
 
 - KERNEL_URL: The URL of kernel source's repository, which defaults to `https://gitee.com/openeuler/raspberrypi-kernel.git`.
-- KERNEL_BRANCH: The branch name of kernel source's repository, which defaults to `openEuler-1.0-LTS-raspi`.
+- KERNEL_BRANCH: The branch name of kernel source's repository, which defaults to `master`.
 - KERNEL_DEFCONFIG: The filename of configuration for compiling kernel, which defaults to `openeuler-raspi_defconfig`. The configuration file should be in the config directory or in arch/arm64/configs of the kernel source. If this configuration file does not exist, the script uses the next parameter: DEFAULT_DEFCONFIG.
 - DEFAULT_DEFCONFIG: The filename of configuration for kernel, which defaults to `openeuler-raspi_defconfig`. The configuration file should be in arch/arm64/configs of the kernel source. If both KERNEL_DEFCONFIG and this file do not exist, the process of building image will exit.
 - REPO_FILE: The URL or name of openEuler's file, which defaults to `openEuler-20.03-LTS.repo`. Caution, if REPO_FILE is a file name, please make sure this file in the config directory. Otherwise, if REPO_FILE is a URL, please make sure you can get a correct repo file from this URL.

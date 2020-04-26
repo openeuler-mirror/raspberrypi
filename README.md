@@ -18,8 +18,9 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 ## 仓库目录
 
-- [build_img.sh](build_img.sh): 构建 openEuler 树莓派镜像的主脚本
-- [config](./config/): 构建使用的配置文件
+- [scripts](./scripts): 构建 openEuler 树莓派镜像的脚本
+  - [主机上构建](scripts/build-img.sh)
+  - [Docker 容器中构建](scripts/build-img-docker.sh)
 - [documents](./documents/): 使用文档
   - [openEuler 镜像的构建](documents/openEuler镜像的构建.md)
   - [交叉编译内核](documents/交叉编译内核.md)
@@ -59,26 +60,50 @@ openEuler 20.03 LTS 的内测版本镜像：<https://isrc.iscas.ac.cn/EulixOS/re
 
 详细过程参见 [openEuler 镜像的构建](documents/openEuler镜像的构建.md)。
 
-构建脚本 build_img.sh，其后可设置 0/5/7 个参数。
+#### 主机上构建
+
+构建脚本 [build-img.sh](scripts/build-img.sh)，其后可设置 0/5/7 个参数。
 
 1. 使用脚本默认参数构建
 
-`sudo bash build_img.sh`
+`sudo bash build-img.sh`
 
 2. 自行设置参数构建
 
-`sudo bash build_img.sh <KERNEL_URL> <KERNEL_BRANCH>  <KERNEL_DEFCONFIG> <DEFAULT_DEFCONFIG> <REPO_FILE_URL> --cores <MAKE_CORES>`
+`sudo bash build-img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES`
 
 或
 
-`sudo bash build_img.sh <KERNEL_URL> <KERNEL_BRANCH>  <KERNEL_DEFCONFIG> <DEFAULT_DEFCONFIG> <REPO_FILE_URL>`
+`sudo bash build-img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE`
 
 其中，各个参数意义：
 
-- KERNEL_URL：内核源码的项目地址，默认为 `git@gitee.com:openeuler/raspberrypi-kernel.git`。
-- KERNEL_BRANCH：内核源码的对应分支，默认为 `openEuler-1.0-LTS-raspi`。
+- KERNEL_URL：内核源码的项目地址，默认为 `https://gitee.com/openeuler/raspberrypi-kernel.git`。
+- KERNEL_BRANCH：内核源码的对应分支，默认为 `master`。
 - KERNEL_DEFCONFIG：内核编译使用的配置文件名称，默认为 `openeuler-raspi_defconfig`，在本目录的 config 目录下或内核源码的目录 arch/arm64/configs 下。如果该文件不存在则使用配置文件 DEFAULT_DEFCONFIG。
 - DEFAULT_DEFCONFIG：内核默认配置文件名称，默认为 `openeuler-raspi_defconfig`，在内核源码的目录 arch/arm64/configs 下。如果 KERNEL_DEFCONFIG 和该文件均不存在则退出镜像构建过程。
-- REPO_FILE：openEuler 开发源的 repo 文件的 URL 或者文件名称， 默认为 `openEuler-20.03-LTS.repo`。注意，如果 REPO_FILE 为文件名称，需要保证该文件在脚本 build_img.sh 所在目录的 config 文件夹下。
+- REPO_FILE：openEuler 开发源的 repo 文件的 URL 或者文件名称， 默认为 `openEuler-20.03-LTS.repo`。注意，如果 REPO_FILE 为文件名称，需要保证该文件在本目录的 config 文件夹下。否则，如果 REPO_FILE 为 URL，请保证可以通过该链接获取到该 repo 文件。
 - --cores：其后跟参数 MAKE_CORES。
 - MAKE_CORES：并行编译的数量，根据运行脚本的服务器CPU实际数目设定，默认为 18。
+
+#### Docker 容器内构建
+
+构建脚本 [build-img-docker.sh](scripts/build-img-docker.sh)，其后可设置 0/6/8 个参数。该脚本会自动下载 openEuler 的 Docker 镜像，并导入本机系统中，下载并导入的 Docker 镜像版本由该脚本参数 DOCKER_FILE 决定。
+
+注意！！！运行该脚本前，需安装 Docker 运行环境。
+
+1. 使用脚本默认参数构建
+
+`sudo bash build-img-docker.sh`
+
+2. 自行设置参数构建
+
+`sudo bash build-img-docker.sh DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES`
+
+或
+
+`sudo bash build-img-docker.sh DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE`
+
+其中，除第一个参数 DOCKER_FILE 外，剩余参数与`主机上构建`中对应参数一致：
+
+- DOCKER_FILE：Docker 镜像的 URL 或者文件名称， 默认为 `https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz`。使用该默认参数时，脚本会自动下载 openEuler 20.03 LTS 的 Docker 镜像，并导入本机系统中。注意，如果 DOCKER_FILE 为文件名称，需要保证该文件在本目录的 config 文件夹下。否则，如果 DOCKER_FILE 为 URL，请保证可以通过该链接获取到该 Docker 镜像。

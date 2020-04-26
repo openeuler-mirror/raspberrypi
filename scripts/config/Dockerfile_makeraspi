@@ -1,0 +1,16 @@
+FROM openeuler-20.03-lts:latest
+
+RUN dnf clean expire-cache
+
+COPY config/openEuler-20.03-LTS.repo /etc/yum.repos.d/openEuler-20.03-LTS.repo
+
+RUN dnf -y install cmake gdb gcc gcc-c++ libstdc++-static ncurses ncurses-devel make python bash coreutils && \
+    dnf -y clean all
+
+RUN dnf -y install module-init-tools git openssl-devel bc bison flex dosfstools parted wget device-mapper-multipath
+RUN dnf -y install tar passwd diffutils
+
+ENV SHELL=/bin/bash
+
+ENTRYPOINT ["/bin/bash", "/work/build-img.sh"]
+

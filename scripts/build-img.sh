@@ -3,19 +3,23 @@ set -e
 
 if [[ $# -ne 0 && $# -ne 5 && $# -ne 7 ]]; then
     echo "params length: $# is not 0/5/7."
+    echo Example1: bash $0
+    echo Example2: bash $0 KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES
+    echo Example3: bash $0 KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE
     exit 1
 fi
-cur_dir=`pwd`
+cur_dir=$(cd $(dirname $0);pwd)
 run_dir=${cur_dir}
-kernel_url="git@gitee.com:openeuler/raspberrypi-kernel.git"
-kernel_branch="openEuler-1.0-LTS-rasp"
+kernel_url="https://gitee.com/openeuler/raspberrypi-kernel.git"
+kernel_branch="master"
 kernel_defconfig="openeuler-raspi_defconfig"
 default_defconfig="openeuler-raspi_defconfig"
 repo_file=openEuler-20.03-LTS.repo
 
-date_str=$(date "+%Y%m%d")
+buildid=$(date +%Y%m%d%H%M%S)
+builddate=${buildid:0:8}
 output_dir=${run_dir}/output
-rootfs_dir=${run_dir}/rootfs_${date_str}
+rootfs_dir=${run_dir}/rootfs_${builddate}
 root_mnt=${run_dir}/root
 boot_mnt=${run_dir}/boot
 make_cores=18
@@ -45,14 +49,14 @@ repo_file_name=${repo_file##*/}
 img_suffix=${repo_file_name%%-*}
 img_suffix=`echo $img_suffix | grep -Eo "^[a-zA-Z ]*"`
 os_release_name=${img_suffix}-release
-img_file=${run_dir}/img/${date_str}/${img_suffix}_${date_str}.img
+img_file=${run_dir}/img/${builddate}/${img_suffix}_${buildid}.img
 
 ERROR(){
-    echo `date` - ERROR, $* | tee -a ${cur_dir}/log/log_${date_str}.log
+    echo `date` - ERROR, $* | tee -a ${cur_dir}/log/log_${builddate}.log
 }
 
 LOG(){
-    echo `date` - INFO, $* | tee -a ${cur_dir}/log/log_${date_str}.log
+    echo `date` - INFO, $* | tee -a ${cur_dir}/log/log_${builddate}.log
 }
 
 prepare(){
@@ -73,30 +77,30 @@ prepare(){
     if [ ! -d ${run_dir}/img ]; then
         mkdir ${run_dir}/img
     fi
-    if [ -d ${cur_dir}/repo ]; then
-        rm -rf ${cur_dir}/repo
+    if [ ! -d ${cur_dir}/tmp ]; then
+        mkdir ${cur_dir}/tmp
     fi
-    mkdir ${cur_dir}/repo
+    
     if [ "${repo_file:0:4}" = "http" ]; then
         # rpm_url=`wget -q -O - ${repo_file} | grep "^baseurl=" | cut -d '=' -f 2 | xargs`
-        wget ${repo_file} -P ${cur_dir}/repo/
+        wget ${repo_file} -P ${cur_dir}/tmp/
     else
         # rpm_url=`cat ${repo_file} | grep "^baseurl=" | grep "everything" | cut -d '=' -f 2 | xargs`
-        cp ${cur_dir}/config/${repo_file} ${cur_dir}/repo/${repo_file_name}
+        cp ${cur_dir}/config/${repo_file} ${cur_dir}/tmp/${repo_file_name}
     fi
     if [ $? -ne 0 ]; then
         ERROR ${repo_file} not found.
         exit 1
     else
-        yumdownloader --downloaddir=${cur_dir}/repo/ $os_release_name -c ${cur_dir}/repo/${repo_file_name}
-        os_release_name=`ls -r ${cur_dir}/repo/${os_release_name}*.rpm | head -n 1`
+        yumdownloader --downloaddir=${cur_dir}/tmp/ $os_release_name -c ${cur_dir}/tmp/${repo_file_name}
+        os_release_name=`ls -r ${cur_dir}/tmp/${os_release_name}*.rpm | head -n 1`
         if [ -z "${os_release_name}" ]; then
             ERROR "Fail to download ${os_release_name}!"
             exit 1
         fi
     fi
-    if [ ! -d ${run_dir}/img/${date_str} ]; then
-        mkdir -p ${run_dir}/img/${date_str}
+    if [ ! -d ${run_dir}/img/${builddate} ]; then
+        mkdir -p ${run_dir}/img/${builddate}
     fi
     LOG "prepare end."
 }
@@ -324,7 +328,7 @@ make_rootfs(){
     if [[ ! -d ${rootfs_dir}/etc/yum.repos.d ]]; then
         mkdir -p ${rootfs_dir}/etc/yum.repos.d
     fi
-    cp ${cur_dir}/repo/*.repo $rootfs_dir/etc/yum.repos.d/
+    cp ${cur_dir}/tmp/*.repo $rootfs_dir/etc/yum.repos.d/
     dnf --installroot=${rootfs_dir}/ install dnf --nogpgcheck -y #--repofrompath=${repo_file_name},${rootfs_dir}/etc/yum.repos.d/${repo_file_name}
     dnf --installroot=${rootfs_dir}/ makecache
     dnf --installroot=${rootfs_dir}/ install -y wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp
@@ -476,3 +480,4 @@ update_kernel
 
 make_rootfs
 make_img
+

@@ -31,10 +31,12 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
 
 ## How to download latest image
 
-Alpha version of openEuler 20.03 LTS image for Raspberry Pi: <https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200415/openEuler_20200415.img.xz>.
+Alpha version of openEuler 20.03 LTS image for Raspberry Pi, [download](https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200427/openEuler_20200427121211.img.xz).
 
 Basic information of the above image:
 
+- Release date: 2020-04-27
+- Size: 240 MiB
 - Kernel version number: 4.19.90-2003.4.0.0036
 - Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
 - Repository of rootfs: [openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)

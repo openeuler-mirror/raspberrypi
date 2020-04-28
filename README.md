@@ -1,6 +1,6 @@
 # raspberrypi
 
-[English](./README.cn.md) | 简体中文
+[English](./README.en.md) | 简体中文
 
 本仓库是 openEuler 社区树莓派 SIG 组的主仓库，提供 SIG 组相关信息以及适用于树莓派的 openEuler 镜像的构建脚本和相关文档：
 
@@ -26,16 +26,20 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
   - [交叉编译内核](documents/交叉编译内核.md)
   - [树莓派刷机](documents/树莓派刷机.md)
   - [树莓派使用](documents/树莓派使用.md)
+  - [更新日志](documents/changelog.md)
 
 ## 最新镜像
 
-openEuler 20.03 LTS 的内测版本镜像，[下载地址](https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200427/openEuler_20200427121211.img.xz)。
+openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200427/openEuler_20200427121211.img.xz)。
+
 
 该镜像的基本信息：
 
+- [更新日志](documents/changelog.md)
 - 发布时间：2020-04-27
 - 大小：240 MiB
-- 内核版本号：4.19.90-2003.4.0.0036
+- 操作系统版本：openEuler 20.03 LTS
+- 内核版本：4.19.90-2003.4.0.0036
 - 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
 - 构建文件系统的源仓库：[openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
 - 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/openeuler/raspberrypi/blob/master/config/openEuler-20.03-LTS.repo)

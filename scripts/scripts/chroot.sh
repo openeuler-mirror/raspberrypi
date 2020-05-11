@@ -2,6 +2,7 @@
 set -e
 systemctl enable sshd
 systemctl enable ntpd
+systemctl enable hciuart
 echo openEuler > /etc/hostname
 echo "openeuler" | passwd --stdin root
 if [ -f /usr/share/zoneinfo/Asia/Shanghai ]; then

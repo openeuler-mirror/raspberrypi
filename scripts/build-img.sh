@@ -83,6 +83,7 @@ prepare(){
     
     if [ "${repo_file:0:4}" = "http" ]; then
         # rpm_url=`wget -q -O - ${repo_file} | grep "^baseurl=" | cut -d '=' -f 2 | xargs`
+        rm -f ${cur_dir}/tmp/*.repo
         wget ${repo_file} -P ${cur_dir}/tmp/
     else
         # rpm_url=`cat ${repo_file} | grep "^baseurl=" | grep "everything" | cut -d '=' -f 2 | xargs`
@@ -99,14 +100,16 @@ prepare(){
             exit 1
         fi
     fi
+    rm -f ${cur_dir}/tmp/*.rules
+    wget https://raw.githubusercontent.com/RPi-Distro/raspberrypi-sys-mods/master/etc.armhf/udev/rules.d/99-com.rules -P ${cur_dir}/tmp/
     if [ ! -d ${run_dir}/img/${builddate} ]; then
         mkdir -p ${run_dir}/img/${builddate}
     fi
     LOG "prepare end."
 }
 
-update_firmware(){
-    LOG "update firmware begin..."
+update_firmware_app(){
+    LOG "update firmware and app begin..."
     cd "${run_dir}"
     ######## firmware
     if [[ ! -d firmware ]]; then
@@ -150,7 +153,21 @@ update_firmware(){
         git pull origin master
         cd ../
     fi
-    LOG "update firmware end."
+    ######## pi-bluetooth
+    if [[ ! -d pi-bluetooth ]]; then
+        git clone https://github.com/RPi-Distro/pi-bluetooth
+        if [[ $? -eq 0 ]]; then
+            LOG "clone pi-bluetooth done."
+        else
+            ERROR "clone pi-bluetooth failed."
+            exit 1
+        fi
+    else
+        cd pi-bluetooth
+        git pull origin master
+        cd ../
+    fi
+    LOG "update firmware and app end."
 }
 
 make_kernel(){
@@ -331,7 +348,7 @@ make_rootfs(){
     cp ${cur_dir}/tmp/*.repo $rootfs_dir/etc/yum.repos.d/
     dnf --installroot=${rootfs_dir}/ install dnf --nogpgcheck -y #--repofrompath=${repo_file_name},${rootfs_dir}/etc/yum.repos.d/${repo_file_name}
     dnf --installroot=${rootfs_dir}/ makecache
-    dnf --installroot=${rootfs_dir}/ install -y wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp
+    dnf --installroot=${rootfs_dir}/ install -y alsa-utils wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp bluez pulseaudio-module-bluetooth
     set +e
     cat ${rootfs_dir}/etc/ntp.conf | grep "^server*"
     if [ $? -ne 0 ]; then
@@ -342,6 +359,23 @@ make_rootfs(){
         echo -e "\nfudge 127.0.0.1 stratum 10">>${rootfs_dir}/etc/ntp.conf
     fi
     set -e
+    cp ${cur_dir}/config/hosts ${rootfs_dir}/etc/hosts
+    # cp ${cur_dir}/config/resolv.conf $rootfs_dir/etc/resolv.conf
+    if [ ! -d $rootfs_dir/etc/sysconfig/network-scripts ]; then
+        mkdir -p $rootfs_dir/etc/sysconfig/network-scripts
+    fi
+    cp ${cur_dir}/config/ifup-eth0 $rootfs_dir/etc/sysconfig/network-scripts/ifup-eth0
+    mkdir -p ${rootfs_dir}/lib/firmware ${rootfs_dir}/usr/bin ${rootfs_dir}/lib/udev/rules.d ${rootfs_dir}/lib/systemd/system
+    cp bluez-firmware/broadcom/* ${rootfs_dir}/lib/firmware/
+    cp -r firmware-nonfree/brcm/ ${rootfs_dir}/lib/firmware/
+    mv ${rootfs_dir}/lib/firmware/BCM43430A1.hcd ${rootfs_dir}/lib/firmware/brcm/
+    mv ${rootfs_dir}/lib/firmware/BCM4345C0.hcd ${rootfs_dir}/lib/firmware/brcm/
+    cp ${cur_dir}/tmp/*.rules ${rootfs_dir}/lib/udev/rules.d/
+    cp pi-bluetooth/usr/bin/* ${rootfs_dir}/usr/bin/
+    cp pi-bluetooth/lib/udev/rules.d/90-pi-bluetooth.rules ${rootfs_dir}/lib/udev/rules.d/
+    cp pi-bluetooth/debian/pi-bluetooth.bthelper\@.service ${rootfs_dir}/lib/systemd/system/bthelper\@.service
+    cp pi-bluetooth/debian/pi-bluetooth.hciuart.service ${rootfs_dir}/lib/systemd/system/hciuart.service
+    cp -r ${output_dir}/lib/modules ${rootfs_dir}/lib/
     cp ${cur_dir}/scripts/chroot.sh ${rootfs_dir}/chroot.sh
     chmod +x ${rootfs_dir}/chroot.sh
     mount --bind /dev ${rootfs_dir}/dev
@@ -352,18 +386,6 @@ make_rootfs(){
     umount -l ${rootfs_dir}/dev
     umount -l ${rootfs_dir}/proc
     umount -l ${rootfs_dir}/sys
-    cp ${cur_dir}/config/hosts ${rootfs_dir}/etc/hosts
-    # cp ${cur_dir}/config/resolv.conf $rootfs_dir/etc/resolv.conf
-    if [ ! -d $rootfs_dir/etc/sysconfig/network-scripts ]; then
-        mkdir -p $rootfs_dir/etc/sysconfig/network-scripts
-    fi
-    cp ${cur_dir}/config/ifup-eth0 $rootfs_dir/etc/sysconfig/network-scripts/ifup-eth0
-    mkdir -p ${rootfs_dir}/lib/firmware
-    cp bluez-firmware/broadcom/* ${rootfs_dir}/lib/firmware/
-    cp -r firmware-nonfree/brcm/ ${rootfs_dir}/lib/firmware/
-    mv ${rootfs_dir}/lib/firmware/BCM43430A1.hcd ${rootfs_dir}/lib/firmware/brcm/
-    mv ${rootfs_dir}/lib/firmware/BCM4345C0.hcd ${rootfs_dir}/lib/firmware/brcm/
-    cp -r ${output_dir}/lib/modules ${rootfs_dir}/lib/
     rm ${rootfs_dir}/chroot.sh
     LOG "make rootfs for ${repo_file} end."
 }
@@ -476,7 +498,7 @@ make_img(){
 
 IFS=$'\n'
 prepare
-update_firmware
+update_firmware_app
 update_kernel
 
 make_rootfs

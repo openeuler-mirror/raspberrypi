@@ -105,9 +105,21 @@
 
 `console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p3 rootfstype=ext4 elevator=deadline rootwait`
 
+### boot 内容完善
+
+#### 将内核放进引导
+
+`cp ${WORKDIR}/output/Image ${WORKDIR}/firmware/boot/kernel8.img`
+
+#### 将设备树文件放进引导
+
+`cp ${WORKDIR}/output/*.dtb ${WORKDIR}/firmware/boot/`
+
+`cp ${WORKDIR}/output/overlays/* ${WORKDIR}/firmware/boot/overlays/`
+
 ## 树莓派固件
 
-### 下载固件
+### 下载固件和应用
 
 1. 进入下载目录
 
@@ -125,11 +137,17 @@
 
 得到文件 ${WORKDIR}/firmware-nonfree。
 
-# 制作openEuler的rootfs
+4. 下载 pi-bluetooth
+
+`git clone https://github.com/RPi-Distro/pi-bluetooth`
+
+得到文件 ${WORKDIR}/pi-bluetooth。
+
+# 制作 openEuler 的 rootfs
 
 操作目录：${WORKDIR}
 
-## 创建RPM数据库
+## 创建 RPM 数据库
 
 `mkdir ${WORKDIR}/rootfs`
 
@@ -137,7 +155,7 @@
 
 `rpm --root ${WORKDIR}/rootfs/ --initdb`
 
-## 下载安装openEuler发布包
+## 下载安装 openEuler 发布包
 
 `rpm -ivh --nodeps --root ${WORKDIR}/rootfs/ http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/Packages/openEuler-release-20.03LTS-33.oe1.aarch64.rpm`
 
@@ -145,9 +163,9 @@
 
 etc/ usr/ var/
 
-## 安装yum
+## 安装 yum
 
-### 添加yum源
+### 添加 yum 源
 
 `mkdir ${WORKDIR}/rootfs/etc/yum.repos.d`
 
@@ -173,7 +191,7 @@ baseurl=http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/
 enabled=1
 ```
 
-### 安装dnf
+### 安装 dnf
 
 `dnf --installroot=${WORKDIR}/rootfs/ install dnf --nogpgcheck -y`
 
@@ -181,21 +199,21 @@ enabled=1
 
 `dnf --installroot=${WORKDIR}/rootfs/ makecache`
 
-`dnf --installroot=${WORKDIR}/rootfs/ install -y wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp`
+`dnf --installroot=${WORKDIR}/rootfs/ install -y alsa-utils wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp bluez pulseaudio-module-bluetooth`
 
 ## 添加配置文件
 
-### 添加hosts
+### 添加 hosts
 
 `cp /etc/hosts ${WORKDIR}/rootfs/etc/hosts`
 
 ### 网络相关
 
-1. 设置DNS
+1. 设置 DNS
 
 `cp -L /etc/resolv.conf ${WORKDIR}/rootfs/etc/resolv.conf`
 
-编辑添加nameserver：
+编辑添加 nameserver：
 
 `vim ${WORKDIR}/rootfs/etc/resolv.conf`
 
@@ -205,7 +223,7 @@ nameserver 8.8.8.8
 nameserver 114.114.114.114
 ```
 
-2. 设置IP自动获取
+2. 设置 IP 自动获取
 
 `mkdir ${WORKDIR}/rootfs/etc/sysconfig/network-scripts`
 
@@ -232,6 +250,32 @@ DEVICE=eth0
 
 ```
 
+## rootfs 内容完善
+
+### 将固件放进 rootfs
+
+```
+mkdir -p ${WORKDIR}/rootfs/lib/firmware ${WORKDIR}/rootfs/usr/bin ${WORKDIR}/rootfs/lib/udev/rules.d ${WORKDIR}/rootfs/lib/systemd/system
+cp ${WORKDIR}/bluez-firmware/broadcom/* ${WORKDIR}/rootfs/lib/firmware/`
+cp -r ${WORKDIR}/firmware-nonfree/brcm/ ${WORKDIR}/rootfs/lib/firmware/
+wget https://raw.githubusercontent.com/RPi-Distro/raspberrypi-sys-mods/master/etc.armhf/udev/rules.d/99-com.rules -P ${WORKDIR}/rootfs/lib/udev/rules.d/
+cp pi-bluetooth/usr/bin/* ${WORKDIR}/rootfs/usr/bin/
+cp pi-bluetooth/lib/udev/rules.d/90-pi-bluetooth.rules ${WORKDIR}/rootfs/lib/udev/rules.d/
+cp pi-bluetooth/debian/pi-bluetooth.bthelper\@.service ${WORKDIR}/rootfs/lib/systemd/system/bthelper\@.service
+cp pi-bluetooth/debian/pi-bluetooth.hciuart.service ${WORKDIR}/rootfs/lib/systemd/system/hciuart.service
+```
+
+蓝牙相关固件放到 ${WORKDIR}/rootfs/lib/firmware/brcm/ 下：
+
+```
+mv ${WORKDIR}/rootfs/lib/firmware/BCM43430A1.hcd ${WORKDIR}/rootfs/lib/firmware/brcm/`
+mv ${WORKDIR}/rootfs/lib/firmware/BCM4345C0.hcd ${WORKDIR}/rootfs/lib/firmware/brcm/
+```
+
+### 将内核模块放进rootfs
+
+`cp -r ${WORKDIR}/output/lib/modules ${WORKDIR}/rootfs/lib/`
+
 ## rootfs设置
 
 1. 挂载必要的路径
@@ -246,7 +290,7 @@ DEVICE=eth0
 
 `chroot ${WORKDIR}/rootfs /bin/bash`
 
-3. 启用开机自启ssh
+3. 开机自启ssh
 
 `systemctl enable ssh`
 
@@ -258,13 +302,21 @@ DEVICE=eth0
 
 5. 设置主机名
 
-`hostname OpenEuler`
+`echo openEuler > /etc/hostname`
 
-6. 退出
+6. 设置默认时区为东八区
+
+`ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime`
+
+7. 开机自启 hciuart
+
+`systemctl enable hciuart`
+
+8. 退出
 
 `exit`
 
-7. 取消临时挂载的目录
+9. 取消临时挂载的目录
 
 `umount -l ${WORKDIR}/rootfs/dev`
 
@@ -273,38 +325,6 @@ DEVICE=eth0
 `umount -l ${WORKDIR}/rootfs/sys`
 
 # 制作镜像
-
-## rootfs内容完善
-
-### 将固件放进rootfs
-
-`mkdir -p ${WORKDIR}/rootfs/lib/firmware`
-
-`cp ${WORKDIR}/bluez-firmware/broadcom/* ${WORKDIR}/rootfs/lib/firmware/`
-
-`cp -r ${WORKDIR}/firmware-nonfree/brcm/ ${WORKDIR}/rootfs/lib/firmware/`
-
-蓝牙相关固件放到 ${WORKDIR}/rootfs/lib/firmware/brcm/ 下：
-
-`mv ${WORKDIR}/rootfs/lib/firmware/BCM43430A1.hcd ${WORKDIR}/rootfs/lib/firmware/brcm/`
-
-`mv ${WORKDIR}/rootfs/lib/firmware/BCM4345C0.hcd ${WORKDIR}/rootfs/lib/firmware/brcm/`
-
-### 将内核模块放进rootfs
-
-`cp -r ${WORKDIR}/output/lib/modules ${WORKDIR}/rootfs/lib/`
-
-## boot内容完善
-
-### 将内核放进引导
-
-`cp ${WORKDIR}/output/Image ${WORKDIR}/firmware/boot/kernel8.img`
-
-### 将设备树文件放进引导
-
-`cp ${WORKDIR}/output/*.dtb ${WORKDIR}/firmware/boot/`
-
-`cp ${WORKDIR}/output/overlays/* ${WORKDIR}/firmware/boot/overlays/`
 
 ## 生成镜像并分区挂载
 

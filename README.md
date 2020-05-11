@@ -30,14 +30,14 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 ## 最新镜像
 
-openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200427/openEuler_20200427121211.img.xz)。
+openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200508/openEuler_20200508151847.img.xz)。
 
 
 该镜像的基本信息：
 
 - [更新日志](documents/changelog.md)
-- 发布时间：2020-04-27
-- 大小：240 MiB
+- 发布时间：2020-05-11
+- 大小：245 MiB
 - 操作系统版本：openEuler 20.03 LTS
 - 内核版本：4.19.90-2003.4.0.0036
 - 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)

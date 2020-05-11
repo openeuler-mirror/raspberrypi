@@ -2,6 +2,24 @@
 
 English | [简体中文](./changelog.md)
 
+### 2020-05-09
+
+#### Basic information
+
+- Release date: 2020-05-11
+- Size: 245 MiB
+- OS version: openEuler 20.03 LTS
+- Kernel version: 4.19.90-2003.4.0.0036
+- Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+- Repository of rootfs: [openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
+- Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/config/openEuler-20.03-LTS.repo)
+
+#### Updates
+
+##### Bluetooth
+
+Start related services of bluetooth and bind Bluetooth devices by default.
+
 ### 2020-04-27
 
 #### Basic information

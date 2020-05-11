@@ -2,6 +2,24 @@
 
 [English](./changelog.en.md) | 简体中文
 
+### 2020-05-09
+
+#### 基本信息
+
+- 发布时间：2020-05-11
+- 大小：245 MiB
+- 操作系统版本：openEuler 20.03 LTS
+- 内核版本：4.19.90-2003.4.0.0036
+- 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+- 构建文件系统的源仓库：[openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
+- 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/openeuler/raspberrypi/blob/master/config/openEuler-20.03-LTS.repo)
+
+#### 更新说明
+
+##### 蓝牙
+
+默认启动蓝牙相关服务，并绑定蓝牙设备。
+
 ### 2020-04-27
 
 #### 基本信息

@@ -1,3 +1,61 @@
+<!-- TOC -->
+
+- [环境需求](#环境需求)
+- [树莓派相关](#树莓派相关)
+    - [编译内核](#编译内核)
+        - [准备环境](#准备环境)
+        - [下载源码](#下载源码)
+        - [进入内核目录](#进入内核目录)
+        - [切换分支](#切换分支)
+        - [载入默认配置](#载入默认配置)
+        - [编译](#编译)
+        - [创建编译内核模块目录](#创建编译内核模块目录)
+        - [编译内核模块](#编译内核模块)
+        - [收集编译结果](#收集编译结果)
+    - [配置引导](#配置引导)
+        - [下载引导](#下载引导)
+        - [进入引导目录](#进入引导目录)
+        - [删除没有必要的文件](#删除没有必要的文件)
+        - [添加cmdline.txt](#添加cmdlinetxt)
+        - [boot 内容完善](#boot-内容完善)
+            - [将内核放进引导](#将内核放进引导)
+            - [将设备树文件放进引导](#将设备树文件放进引导)
+    - [树莓派固件和应用](#树莓派固件和应用)
+        - [下载固件和应用](#下载固件和应用)
+- [制作 openEuler 的 rootfs](#制作-openeuler-的-rootfs)
+    - [创建 RPM 数据库](#创建-rpm-数据库)
+    - [下载安装 openEuler 发布包](#下载安装-openeuler-发布包)
+    - [安装 yum](#安装-yum)
+        - [添加 yum 源](#添加-yum-源)
+        - [安装 dnf](#安装-dnf)
+        - [安装必要软件](#安装必要软件)
+    - [添加配置文件](#添加配置文件)
+        - [添加 hosts](#添加-hosts)
+        - [网络相关](#网络相关)
+    - [rootfs 内容完善](#rootfs-内容完善)
+        - [将固件放进 rootfs](#将固件放进-rootfs)
+        - [将内核模块放进rootfs](#将内核模块放进rootfs)
+    - [rootfs设置](#rootfs设置)
+- [制作镜像](#制作镜像)
+    - [生成镜像并分区挂载](#生成镜像并分区挂载)
+        - [计算镜像大小](#计算镜像大小)
+        - [创建空镜像](#创建空镜像)
+        - [使用 losetup 将磁盘镜像文件虚拟成块设备](#使用-losetup-将磁盘镜像文件虚拟成块设备)
+        - [使用 kpartx 创建分区表 /dev/loop0 的设备映射](#使用-kpartx-创建分区表-devloop0-的设备映射)
+        - [格式化分区](#格式化分区)
+        - [创建要挂载的根目录和 boot 分区路径](#创建要挂载的根目录和-boot-分区路径)
+        - [挂载根目录和 boot 分区](#挂载根目录和-boot-分区)
+        - [获取生成的 img 镜像的 blkid](#获取生成的-img-镜像的-blkid)
+    - [修改 fstab](#修改-fstab)
+    - [rootfs 拷贝到镜像](#rootfs-拷贝到镜像)
+    - [boot 引导拷贝到镜像](#boot-引导拷贝到镜像)
+    - [卸载镜像](#卸载镜像)
+        - [同步到盘](#同步到盘)
+        - [卸载](#卸载)
+        - [卸载镜像文件虚拟的块设备](#卸载镜像文件虚拟的块设备)
+
+<!-- /TOC -->
+
 # 环境需求
 
 - 操作系统：openEuler 或 Centos 7/8；
@@ -22,7 +80,7 @@
 - 操作系统：openEuler 或 Centos 7/8
 - 架构：AArch64
 
-除了使用 AArch64 架构的运行环境，也可以采用交叉编译的方式编译内核，文档详见 [交叉编译内核](./交叉编译内核.md)。这里，我们在 AArch64 架构的服务器上编译内核。
+除了使用 AArch64 架构的 openEuler 或 Centos 7/8 运行环境，也可以采用交叉编译的方式编译内核，文档详见 [交叉编译内核](./交叉编译内核.md)。这里，我们在 AArch64 架构的服务器上编译内核。
 
 ### 下载源码
 
@@ -36,9 +94,9 @@
 
 ### 切换分支
 
-这里适用于树莓派的 openEuler-1.0-LTS 内核源码的分支有两个。其中，master 分支为开发分支，openEuler-1.0-LTS-raspi 为稳定分支。根据需要选择对应分支，下载源码后默认为 master 分支，如果需要选择 openEuler-1.0-LTS-raspi 分支，执行下面的命令：
+这里适用于树莓派的 openEuler-20.03-LTS-raspi 内核源码的分支有两个。其中，master 分支为开发分支，openEuler-20.03-LTS-raspi 为稳定分支。根据需要选择对应分支，下载源码后默认为 master 分支，如果需要选择 openEuler-20.03-LTS-raspi 分支，执行下面的命令：
 
-`git checkout -b openEuler-1.0-LTS-raspi origin/openEuler-1.0-LTS-raspi`
+`git checkout -b openEuler-20.03-LTS-raspi origin/openEuler-20.03-LTS-raspi`
 
 下面编译时可能还需要 bison、flex、build-essential 等，根据提示安装即可。
 
@@ -117,7 +175,7 @@
 
 `cp ${WORKDIR}/output/overlays/* ${WORKDIR}/firmware/boot/overlays/`
 
-## 树莓派固件
+## 树莓派固件和应用
 
 ### 下载固件和应用
 
@@ -343,7 +401,7 @@ mv ${WORKDIR}/rootfs/lib/firmware/BCM4345C0.hcd ${WORKDIR}/rootfs/lib/firmware/b
 
 其中 `SIZE` 为前面计算得到的计算镜像大小，最终生成空的镜像文件 ${WORKDIR}/openEuler_raspi.img。
 
-### 使用 losetup 将磁盘镜像文件虚拟成快设备
+### 使用 losetup 将磁盘镜像文件虚拟成块设备
 
 `losetup -f --show openEuler_raspi.img`
 
@@ -442,7 +500,7 @@ UUID=a451bee4-4384-48a2-8d5a-d09c2dd9a1a  swap swap    defaults,noatime 0 0
 
 `umount ${WORKDIR}/boot`
 
-### 卸载 loop0 挂载
+### 卸载镜像文件虚拟的块设备
 
 `kpartx -d /dev/loop0`
 
@@ -450,4 +508,4 @@ UUID=a451bee4-4384-48a2-8d5a-d09c2dd9a1a  swap swap    defaults,noatime 0 0
 
 这样，最终就生成了需要的 openEuler_raspi.img 镜像文件。
 
-之后就可以使用镜像刷写 SD 卡并使用树莓派了，详见 [树莓派刷机](./树莓派刷机.md) 和 [树莓派使用](./树莓派使用.md)。
+之后就可以使用镜像刷写 SD 卡并使用树莓派了，详见 [刷写镜像](./刷写镜像.md) 和 [树莓派使用](./树莓派使用.md)。

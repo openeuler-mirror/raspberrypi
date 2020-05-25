@@ -24,7 +24,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 - [documents](./documents/): 使用文档
   - [openEuler 镜像的构建](documents/openEuler镜像的构建.md)
   - [交叉编译内核](documents/交叉编译内核.md)
-  - [树莓派刷机](documents/树莓派刷机.md)
+  - [刷写镜像](documents/刷写镜像.md)
   - [树莓派使用](documents/树莓派使用.md)
   - [更新日志](documents/changelog.md)
 
@@ -42,13 +42,13 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/Eu
 - 内核版本：4.19.90-2003.4.0.0036
 - 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
 - 构建文件系统的源仓库：[openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
-- 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/openeuler/raspberrypi/blob/master/config/openEuler-20.03-LTS.repo)
+- 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config/openEuler-20.03-LTS.repo)
 
 ## 使用镜像
 
 镜像刷写 SD 卡并使用树莓派，详见以下文档：
 
-- [树莓派刷机](documents/树莓派刷机.md)
+- [刷写镜像](documents/刷写镜像.md)
 - [树莓派使用](documents/树莓派使用.md)
 
 ## 镜像构建

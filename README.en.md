@@ -26,7 +26,7 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
 - [documents](./documents/):
   - [Building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md)
   - [Cross-compile the kernel](documents/交叉编译内核.md)
-  - [Install openEuler on a SD card](documents/树莓派刷机.md)
+  - [Install openEuler on a SD card](documents/刷写镜像.md)
   - [How to use Raspberry Pi](documents/树莓派使用.md)
   - [ChangeLog](documents/changelog.en.md)
 
@@ -43,11 +43,11 @@ Basic information of the above image:
 - Kernel version: 4.19.90-2003.4.0.0036
 - Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
 - Repository of rootfs: [openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
-- Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/config/openEuler-20.03-LTS.repo)
+- Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config/openEuler-20.03-LTS.repo)
 
 ## How to Use image
 
-Refer to [Install openEuler on a SD card](documents/树莓派刷机.md) and [How to use Raspberry Pi](documents/树莓派使用.md) for details about how to use the image on Raspberry Pi.
+Refer to [Install openEuler on a SD card](documents/刷写镜像.md) and [How to use Raspberry Pi](documents/树莓派使用.md) for details about how to use the image on Raspberry Pi.
 
 ## How to build image locally
 

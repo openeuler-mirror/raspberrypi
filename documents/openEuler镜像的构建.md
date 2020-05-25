@@ -1,3 +1,5 @@
+[toc]
+
 # 环境需求
 
 - 操作系统：openEuler 或 Centos 7/8；
@@ -36,9 +38,9 @@
 
 ### 切换分支
 
-这里适用于树莓派的 openEuler-1.0-LTS 内核源码的分支有两个。其中，master 分支为开发分支，openEuler-1.0-LTS-raspi 为稳定分支。根据需要选择对应分支，下载源码后默认为 master 分支，如果需要选择 openEuler-1.0-LTS-raspi 分支，执行下面的命令：
+这里适用于树莓派的 openEuler-20.03-LTS-raspi 内核源码的分支有两个。其中，master 分支为开发分支，openEuler-20.03-LTS-raspi 为稳定分支。根据需要选择对应分支，下载源码后默认为 master 分支，如果需要选择 openEuler-20.03-LTS-raspi 分支，执行下面的命令：
 
-`git checkout -b openEuler-1.0-LTS-raspi origin/openEuler-1.0-LTS-raspi`
+`git checkout -b openEuler-20.03-LTS-raspi origin/openEuler-20.03-LTS-raspi`
 
 下面编译时可能还需要 bison、flex、build-essential 等，根据提示安装即可。
 
@@ -117,7 +119,7 @@
 
 `cp ${WORKDIR}/output/overlays/* ${WORKDIR}/firmware/boot/overlays/`
 
-## 树莓派固件
+## 树莓派固件和应用
 
 ### 下载固件和应用
 
@@ -343,7 +345,7 @@ mv ${WORKDIR}/rootfs/lib/firmware/BCM4345C0.hcd ${WORKDIR}/rootfs/lib/firmware/b
 
 其中 `SIZE` 为前面计算得到的计算镜像大小，最终生成空的镜像文件 ${WORKDIR}/openEuler_raspi.img。
 
-### 使用 losetup 将磁盘镜像文件虚拟成快设备
+### 使用 losetup 将磁盘镜像文件虚拟成块设备
 
 `losetup -f --show openEuler_raspi.img`
 
@@ -442,7 +444,7 @@ UUID=a451bee4-4384-48a2-8d5a-d09c2dd9a1a  swap swap    defaults,noatime 0 0
 
 `umount ${WORKDIR}/boot`
 
-### 卸载 loop0 挂载
+### 卸载镜像文件虚拟的块设备
 
 `kpartx -d /dev/loop0`
 
@@ -450,4 +452,4 @@ UUID=a451bee4-4384-48a2-8d5a-d09c2dd9a1a  swap swap    defaults,noatime 0 0
 
 这样，最终就生成了需要的 openEuler_raspi.img 镜像文件。
 
-之后就可以使用镜像刷写 SD 卡并使用树莓派了，详见 [树莓派刷机](./树莓派刷机.md) 和 [树莓派使用](./树莓派使用.md)。
+之后就可以使用镜像刷写 SD 卡并使用树莓派了，详见 [刷写镜像](./刷写镜像.md) 和 [树莓派使用](./树莓派使用.md)。

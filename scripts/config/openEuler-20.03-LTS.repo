@@ -1,17 +1,17 @@
-[basiclocal]
-name=basiclocal
+[openEuler]
+name=openEuler 20.03 LTS
 baseurl=http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/
 enabled=1
 gpgcheck=0
 
-[srclocal]
-name=srclocal
+[openEuler-source]
+name=openEuler 20.03 LTS - Source
 baseurl=http://repo.openeuler.org/openEuler-20.03-LTS/source/
 enabled=1
 gpgcheck=0
 
-[everythinglocal]
-name=everythinglocal
+[openEuler-everything]
+name=openEuler 20.03 LTS - Everything
 baseurl=http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/
 enabled=1
 gpgcheck=0

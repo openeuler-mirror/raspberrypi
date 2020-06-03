@@ -49,7 +49,7 @@ repo_file_name=${repo_file##*/}
 img_suffix=${repo_file_name%%-*}
 img_suffix=`echo $img_suffix | grep -Eo "^[a-zA-Z ]*"`
 os_release_name=${img_suffix}-release
-img_file=${run_dir}/img/${builddate}/${img_suffix}_${buildid}.img
+img_file=${run_dir}/img/${builddate}/${repo_file_name%.*}-aarch64-raspi-${buildid}.img
 
 ERROR(){
     echo `date` - ERROR, $* | tee -a ${cur_dir}/log/log_${builddate}.log
@@ -102,6 +102,9 @@ prepare(){
     fi
     rm -f ${cur_dir}/tmp/*.rules
     wget https://raw.githubusercontent.com/RPi-Distro/raspberrypi-sys-mods/master/etc.armhf/udev/rules.d/99-com.rules -P ${cur_dir}/tmp/
+    rm -f ${cur_dir}/tmp/regulatory.db*
+    wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/regulatory.db.p7s -P ${cur_dir}/tmp/
+    wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/regulatory.db -P ${cur_dir}/tmp/
     if [ ! -d ${run_dir}/img/${builddate} ]; then
         mkdir -p ${run_dir}/img/${builddate}
     fi
@@ -370,6 +373,7 @@ make_rootfs(){
     cp -r firmware-nonfree/brcm/ ${rootfs_dir}/lib/firmware/
     mv ${rootfs_dir}/lib/firmware/BCM43430A1.hcd ${rootfs_dir}/lib/firmware/brcm/
     mv ${rootfs_dir}/lib/firmware/BCM4345C0.hcd ${rootfs_dir}/lib/firmware/brcm/
+    cp ${cur_dir}/tmp/regulatory.db* ${rootfs_dir}/lib/firmware/
     cp ${cur_dir}/tmp/*.rules ${rootfs_dir}/lib/udev/rules.d/
     cp pi-bluetooth/usr/bin/* ${rootfs_dir}/usr/bin/
     cp pi-bluetooth/lib/udev/rules.d/90-pi-bluetooth.rules ${rootfs_dir}/lib/udev/rules.d/

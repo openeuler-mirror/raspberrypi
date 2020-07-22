@@ -227,27 +227,7 @@ etc/ usr/ var/
 
 `mkdir ${WORKDIR}/rootfs/etc/yum.repos.d`
 
-`vim ${WORKDIR}/rootfs/etc/yum.repos.d/openEuler-20.03-LTS.repo`
-
-添加内容：
-
-```[basiclocal]
-name=basiclocal
-baseurl=http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/
-enabled=1
-gpgcheck=0
-
-[srclocal]
-name=srclocal
-baseurl=http://repo.openeuler.org/openEuler-20.03-LTS/source/
-enabled=1
-gpgcheck=0
-
-[everythinglocal]
-name=everythinglocal
-baseurl=http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/
-enabled=1
-```
+`curl -o ${WORKDIR}/rootfs/etc/yum.repos.d/openEuler-20.03-LTS.repo https://gitee.com/src-openeuler/openEuler-repos/raw/openEuler-20.03-LTS/generic.repo`
 
 ### 安装 dnf
 

@@ -11,4 +11,6 @@ if [ -f /usr/share/zoneinfo/Asia/Shanghai ]; then
     fi
     ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 fi
-
+if [ -f /etc/rc.d/rc.local ]; then
+    chmod +x /etc/rc.d/rc.local
+fi

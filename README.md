@@ -10,8 +10,8 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 - 建立或回复 issue：欢迎通过建立或回复 issue 来讨论，此 SIG 组维护的仓库列表可在 [sig-RaspberryPi](https://gitee.com/jianminw/community/tree/master/sig/sig-RaspberryPi) 中查看。
 - 加入 Slack 群组：[openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com )
-  - [加入群组链接](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-dlqztpyb-GSgR98xIAI06SoTpFiJH6A)，此链接于 5 月 15 日失效，我们会定期更新。
-- 每周 SIG 组会议：每周二下午 03:00 - 03:30 会进行一次讨论会议，Zoom Meeting ID: 881 4204 8958
+  - [加入群组链接](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-gghnovr7-l05In14G3uAtuQIVZ3xH2A)，此链接于 9 月 7 日失效，我们会定期更新。
+- SIG 组会议：每个月的第一个和第三个周二下午 03:00 - 03:30 会进行一次讨论会议，Zoom Meeting ID: 881 4204 8958
   - [会议议题](https://docs.google.com/document/d/1HuN7sWLiPuvGLqd-1tH1WAbzk51tgXpFBodp3dz_DBY/)：每周会议前填写要讨论的议题，我们也会从 issue 列表中提取本周讨论的内容。
   - [会议记录](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6?from=project-issue)：每周会议结束后会议结论会更新在此 issue 中。
 - 重要的事说三遍：**欢迎提交 PR！欢迎提交 PR！欢迎提交 PR！**
@@ -30,16 +30,16 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 ## 最新镜像
 
-openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200508/openEuler_20200508151847.img.xz)。
+openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-aarch64-raspi.img.xz)。
 
 
 该镜像的基本信息：
 
 - [更新日志](documents/changelog.md)
-- 发布时间：2020-05-11
-- 大小：245 MiB
+- 发布时间：2020-08-10
+- 大小：259 MiB
 - 操作系统版本：openEuler 20.03 LTS
-- 内核版本：4.19.90-2003.4.0.0036
+- 内核版本：4.19.90-2005.2.0.0002
 - 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
 - 构建文件系统的源仓库：[openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
 - 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config/openEuler-20.03-LTS.repo)

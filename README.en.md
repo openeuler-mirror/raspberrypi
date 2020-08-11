@@ -10,9 +10,9 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
 
 - Issues: welcome to collaborate with us by create new issues or reply opened issues. You can get repository list from [sig-RaspberryPi](https://gitee.com/jianminw/community/tree/master/sig/sig-RaspberryPi).
 - Join Slack workspace: [openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com )
-  - [Invite link](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-dlqztpyb-GSgR98xIAI06SoTpFiJH6A), this link will be due on May 15th. We will update the link periodically.
+  - [Invite link](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-gghnovr7-l05In14G3uAtuQIVZ3xH2A), this link will be due on Sep 7th. We will update the link periodically.
 - Weekly meeting
-  - Time: Every week on Tue, 15:00 - 15:30 +0800
+  - Time: The first and third Tuesday of every month, 15:00 - 15:30 +0800
   - Zoom Meeting ID: 881 4204 8958
   - [Meeting Agenda](https://docs.google.com/document/d/1HuN7sWLiPuvGLqd-1tH1WAbzk51tgXpFBodp3dz_DBY/)
   - [Meeting Minutes](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6?from=project-issue)
@@ -32,15 +32,15 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
 
 ## How to download latest image
 
-Alpha version of openEuler 20.03 LTS image for Raspberry Pi, [download](https://isrc.iscas.ac.cn/EulixOS/repo/dailybuild/1/isos/20200508/openEuler_20200508151847.img.xz).
+Alpha version of openEuler 20.03 LTS image for Raspberry Pi, [download](https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-aarch64-raspi.img.xz).
 
 Basic information of the above image:
 
 - [ChangeLog](documents/changelog.en.md)
-- Release date: 2020-05-11
-- Size: 245 MiB
+- Release date: 2020-08-10
+- Size: 259 MiB
 - OS version: openEuler 20.03 LTS
-- Kernel version: 4.19.90-2003.4.0.0036
+- Kernel version: 4.19.90-2005.2.0.0002
 - Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
 - Repository of rootfs: [openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
 - Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config/openEuler-20.03-LTS.repo)

@@ -385,7 +385,6 @@ make_rootfs(){
     mount --bind /dev ${rootfs_dir}/dev
     mount -t proc /proc ${rootfs_dir}/proc
     mount -t sysfs /sys ${rootfs_dir}/sys
-    chmod +x ${cur_dir}/scripts/chroot.sh
     chroot ${rootfs_dir} /bin/bash -c "echo 'Y' | /chroot.sh"
     umount -l ${rootfs_dir}/dev
     umount -l ${rootfs_dir}/proc

@@ -68,27 +68,27 @@ Refer to [Script for building openEuler image for Raspberry Pi](documents/openEu
 
 Build script: [build-img.sh](scripts/build-img.sh), which can be set 0/5/7 parameters.
 
-1. Build with default parameters
+1.  Build with default parameters
 
-`sudo bash build-img.sh`
+    `sudo bash build-img.sh`
 
-2. Build with custom parameters
+2.  Build with custom parameters
 
-`sudo bash build-img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES`
+    `sudo bash build-img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES`
 
-or
+    or
 
-`sudo bash build-img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE`
+    `sudo bash build-img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE`
 
-The meaning of each parameter:
+    The meaning of each parameter:
 
-- KERNEL_URL: The URL of kernel source's repository, which defaults to `https://gitee.com/openeuler/raspberrypi-kernel.git`.
-- KERNEL_BRANCH: The branch name of kernel source's repository, which defaults to `master`.
-- KERNEL_DEFCONFIG: The filename of configuration for compiling kernel, which defaults to `openeuler-raspi_defconfig`. The configuration file should be in the config directory or in arch/arm64/configs of the kernel source. If this configuration file does not exist, the script uses the next parameter: DEFAULT_DEFCONFIG.
-- DEFAULT_DEFCONFIG: The filename of configuration for kernel, which defaults to `openeuler-raspi_defconfig`. The configuration file should be in arch/arm64/configs of the kernel source. If both KERNEL_DEFCONFIG and this file do not exist, the process of building image will exit.
-- REPO_FILE: The URL or name of openEuler's file, which defaults to `openEuler-20.03-LTS.repo`. Caution, if REPO_FILE is a file name, please make sure this file in the config directory. Otherwise, if REPO_FILE is a URL, please make sure you can get a correct repo file from this URL.
-- --cores: Followed by parameter MAKE_CORES
-- MAKE_CORES: The number of parallel compilations, according to the actual number of CPU of the server running the script. The default is 18.
+    - KERNEL_URL: The URL of kernel source's repository, which defaults to `https://gitee.com/openeuler/raspberrypi-kernel.git`.
+    - KERNEL_BRANCH: The branch name of kernel source's repository, which defaults to `master`.
+    - KERNEL_DEFCONFIG: The filename of configuration for compiling kernel, which defaults to `openeuler-raspi_defconfig`. The configuration file should be in the config directory or in arch/arm64/configs of the kernel source. If this configuration file does not exist, the script uses the next parameter: DEFAULT_DEFCONFIG.
+    - DEFAULT_DEFCONFIG: The filename of configuration for kernel, which defaults to `openeuler-raspi_defconfig`. The configuration file should be in arch/arm64/configs of the kernel source. If both KERNEL_DEFCONFIG and this file do not exist, the process of building image will exit.
+    - REPO_FILE: The URL or name of openEuler's file, which defaults to `openEuler-20.03-LTS.repo`. Caution, if REPO_FILE is a file name, please make sure this file in the config directory. Otherwise, if REPO_FILE is a URL, please make sure you can get a correct repo file from this URL.
+    - --cores: Followed by parameter MAKE_CORES
+    - MAKE_CORES: The number of parallel compilations, according to the actual number of CPU of the server running the script. The default is 18.
 
 #### Build in a Docker container
 
@@ -96,18 +96,18 @@ Build script: [build-img-docker.sh](scripts/build-img-docker.sh), which can be s
 
 Caution, before running the script, you need to install Docker.
 
-1. Build with default parameters
+1.  Build with default parameters
 
-`sudo bash build-img-docker.sh`
+    `sudo bash build-img-docker.sh`
 
-2. Build with custom parameters
+2.  Build with custom parameters
 
-`sudo bash build-img-docker.sh DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES`
+    `sudo bash build-img-docker.sh DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES`
 
-or
+    or
 
-`sudo bash build-img-docker.sh DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE`
+    `sudo bash build-img-docker.sh DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE`
 
-In addition to the first parameter DOCKER_FILE, the other parameters are the same as the corresponding parameters in "Build on host":
+    In addition to the first parameter DOCKER_FILE, the other parameters are the same as the corresponding parameters in "Build on host":
 
-- DOCKER_FILE: The URL or name of the Docker image, which defaults to `https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz`. With the default parameter, the script will automatically download the Docker image of openEuler 20.03 LTS and import it into the local system. Caution, if DOCKER_FILE is a file name, please make sure this file in the config directory. Otherwise, if DOCKER_FILE is a URL, please make sure you can get a correct Docker image from this URL.
+    - DOCKER_FILE: The URL or name of the Docker image, which defaults to `https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz`. With the default parameter, the script will automatically download the Docker image of openEuler 20.03 LTS and import it into the local system. Caution, if DOCKER_FILE is a file name, please make sure this file in the config directory. Otherwise, if DOCKER_FILE is a URL, please make sure you can get a correct Docker image from this URL.

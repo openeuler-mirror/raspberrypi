@@ -122,20 +122,19 @@
 
 ### 收集编译结果
 
-1. 内核
+1.  内核
 
-`cp ${WORKDIR}/raspberrypi-kernel/arch/arm64/boot/Image ${WORKDIR}/output/`
+    `cp ${WORKDIR}/raspberrypi-kernel/arch/arm64/boot/Image ${WORKDIR}/output/`
 
-2. 设备树文件等
+2.  设备树文件等
 
-`cp ${WORKDIR}/raspberrypi-kernel/arch/arm64/boot/dts/broadcom/*.dtb ${WORKDIR}/output/`
+    `cp ${WORKDIR}/raspberrypi-kernel/arch/arm64/boot/dts/broadcom/*.dtb ${WORKDIR}/output/`
 
-`mkdir ${WORKDIR}/output/overlays`
+    `mkdir ${WORKDIR}/output/overlays`
 
-`cp ${WORKDIR}/raspberrypi-kernel/arch/arm64/boot/dts/overlays/*.dtb* ${WORKDIR}/output/overlays/`
+    `cp ${WORKDIR}/raspberrypi-kernel/arch/arm64/boot/dts/overlays/*.dtb* ${WORKDIR}/output/overlays/`
 
 至此，所有内核及内核模块相关内容都在 ${WORKDIR}/output 下了。
-
 
 ## 配置引导
 
@@ -179,27 +178,27 @@
 
 ### 下载固件和应用
 
-1. 进入下载目录
+1.  进入下载目录
 
-`cd ${WORKDIR}`
+    `cd ${WORKDIR}`
 
-2. 下载 bluez-firmware
+2.  下载 bluez-firmware
 
-`git clone --depth=1 https://github.com/RPi-Distro/bluez-firmware`
+    `git clone --depth=1 https://github.com/RPi-Distro/bluez-firmware`
 
-得到文件 ${WORKDIR}/bluez-firmware。
+    得到文件 ${WORKDIR}/bluez-firmware。
 
-3. 下载 firmware-nonfree
+3.  下载 firmware-nonfree
 
-`git clone --depth=1 https://github.com/RPi-Distro/firmware-nonfree`
+    `git clone --depth=1 https://github.com/RPi-Distro/firmware-nonfree`
 
-得到文件 ${WORKDIR}/firmware-nonfree。
+    得到文件 ${WORKDIR}/firmware-nonfree。
 
-4. 下载 pi-bluetooth
+4.  下载 pi-bluetooth
 
-`git clone https://github.com/RPi-Distro/pi-bluetooth`
+    `git clone https://github.com/RPi-Distro/pi-bluetooth`
 
-得到文件 ${WORKDIR}/pi-bluetooth。
+    得到文件 ${WORKDIR}/pi-bluetooth。
 
 # 制作 openEuler 的 rootfs
 
@@ -247,46 +246,45 @@ etc/ usr/ var/
 
 ### 网络相关
 
-1. 设置 DNS
+1.  设置 DNS
 
-`cp -L /etc/resolv.conf ${WORKDIR}/rootfs/etc/resolv.conf`
+    `cp -L /etc/resolv.conf ${WORKDIR}/rootfs/etc/resolv.conf`
 
-编辑添加 nameserver：
+    编辑添加 nameserver：
 
-`vim ${WORKDIR}/rootfs/etc/resolv.conf`
+    `vim ${WORKDIR}/rootfs/etc/resolv.conf`
 
-内容：
-```
-nameserver 8.8.8.8
-nameserver 114.114.114.114
-```
+    内容：
+    ```
+    nameserver 8.8.8.8
+    nameserver 114.114.114.114
+    ```
 
-2. 设置 IP 自动获取
+2.  设置 IP 自动获取
 
-`mkdir ${WORKDIR}/rootfs/etc/sysconfig/network-scripts`
+    `mkdir ${WORKDIR}/rootfs/etc/sysconfig/network-scripts`
 
-`vim ${WORKDIR}/rootfs/etc/sysconfig/network-scripts/ifup-eth0`
+    `vim ${WORKDIR}/rootfs/etc/sysconfig/network-scripts/ifup-eth0`
 
-内容：
-```
-TYPE=Ethernet
-PROXY_METHOD=none
-BROWSER_ONLY=no
-BOOTPROTO=dhcp
-DEFROUTE=yes
-IPV4_FAILURE_FATAL=no
-IPV6INIT=yes
-IPV6_AUTOCONF=yes
-IPV6_DEFROUTE=yes
-IPV6_FAILURE_FATAL=no
-IPV6_ADDR_GEN_MODE=stable-privacy
-NAME=eth0
-UUID=851a6f36-e65c-3a43-8f4a-78fd0fc09dc9
-ONBOOT=yes
-AUTOCONNECT_PRIORITY=-999
-DEVICE=eth0
-
-```
+    内容：
+    ```
+    TYPE=Ethernet
+    PROXY_METHOD=none
+    BROWSER_ONLY=no
+    BOOTPROTO=dhcp
+    DEFROUTE=yes
+    IPV4_FAILURE_FATAL=no
+    IPV6INIT=yes
+    IPV6_AUTOCONF=yes
+    IPV6_DEFROUTE=yes
+    IPV6_FAILURE_FATAL=no
+    IPV6_ADDR_GEN_MODE=stable-privacy
+    NAME=eth0
+    UUID=851a6f36-e65c-3a43-8f4a-78fd0fc09dc9
+    ONBOOT=yes
+    AUTOCONNECT_PRIORITY=-999
+    DEVICE=eth0
+    ```
 
 ## rootfs 内容完善
 
@@ -316,51 +314,51 @@ mv ${WORKDIR}/rootfs/lib/firmware/BCM4345C0.hcd ${WORKDIR}/rootfs/lib/firmware/b
 
 ## rootfs设置
 
-1. 挂载必要的路径
+1.  挂载必要的路径
 
-`mount --bind /dev ${WORKDIR}/rootfs/dev`
+    `mount --bind /dev ${WORKDIR}/rootfs/dev`
 
-`mount -t proc /proc ${WORKDIR}/rootfs/proc`
+    `mount -t proc /proc ${WORKDIR}/rootfs/proc`
 
-`mount -t sysfs /sys ${WORKDIR}/rootfs/sys`
+    `mount -t sysfs /sys ${WORKDIR}/rootfs/sys`
 
-2. run chroot
+2.  run chroot
 
-`chroot ${WORKDIR}/rootfs /bin/bash`
+    `chroot ${WORKDIR}/rootfs /bin/bash`
 
-3. 开机自启ssh
+3.  开机自启ssh
 
-`systemctl enable ssh`
+    `systemctl enable ssh`
 
-4. 设置root密码
+4.  设置root密码
  
-`passwd root`
+    `passwd root`
 
-输入要设置的root密码。
+    输入要设置的root密码。
 
-5. 设置主机名
+5.  设置主机名
 
-`echo openEuler > /etc/hostname`
+    `echo openEuler > /etc/hostname`
 
-6. 设置默认时区为东八区
+6.  设置默认时区为东八区
 
-`ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime`
+    `ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime`
 
-7. 开机自启 hciuart
+7.  开机自启 hciuart
 
-`systemctl enable hciuart`
+    `systemctl enable hciuart`
 
-8. 退出
+8.  退出
 
-`exit`
+    `exit`
 
-9. 取消临时挂载的目录
+9.  取消临时挂载的目录
 
-`umount -l ${WORKDIR}/rootfs/dev`
+    `umount -l ${WORKDIR}/rootfs/dev`
 
-`umount -l ${WORKDIR}/rootfs/proc`
+    `umount -l ${WORKDIR}/rootfs/proc`
 
-`umount -l ${WORKDIR}/rootfs/sys`
+    `umount -l ${WORKDIR}/rootfs/sys`
 
 # 制作镜像
 
@@ -406,17 +404,17 @@ add map loop0p3 ...
 
 ### 格式化分区
 
-1. 格式化 boot 分区
+1.  格式化 boot 分区
 
-`mkfs.vfat -n boot /dev/mapper/loop0p1`
+    `mkfs.vfat -n boot /dev/mapper/loop0p1`
 
-2. 格式化交换分区
+2.  格式化交换分区
 
-`mkswap /dev/mapper/loop0p2`
+    `mkswap /dev/mapper/loop0p2`
 
-3. 格式化根目录分区
+3.  格式化根目录分区
 
-`mkfs.ext4 /dev/mapper/loop0p3`
+    `mkfs.ext4 /dev/mapper/loop0p3`
 
 ### 创建要挂载的根目录和 boot 分区路径
 

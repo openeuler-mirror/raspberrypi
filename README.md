@@ -66,50 +66,96 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eu
 
 详细过程参见 [openEuler 镜像的构建](documents/openEuler镜像的构建.md)。
 
-#### 主机上构建
+#### 快速构建（无需编译内核，推荐）
 
-构建脚本 [build-img.sh](scripts/build-img.sh)，其后可设置 0/5/7 个参数。
+使用已有的树莓派内核、固件、蓝牙等 RPM 包构建镜像。
 
-1.  使用脚本默认参数构建
+构建镜像需执行命令：
 
-    `sudo bash build-img.sh`
+`sudo bash build-img-quick.sh -d DIR -r REPO -n IMAGE_NAME`
 
-2.  自行设置参数构建
+各个参数意义：
 
-    `sudo bash build-img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES`
+1.  -d, --dir DIR
 
-    或
+    构建镜像和临时文件的输出目录，默认为脚本所在目录。如果 `DIR` 不存在则会自动创建。
+    
+    脚本运行结束后，会提示镜像的存储位置，默认保存在 `DIR/raspi_output/img/` 下。
 
-    `sudo bash build-img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE`
+2.  -r, --repo REPO_INFO
 
-    其中，各个参数意义：
+    开发源 repo 文件的 URL 或者路径，也可以是开发源中资源库的 baseurl 列表。注意，如果该参数为资源库的 baseurl 列表，该参数需要使用双引号，各个 baseurl 之间以空格隔开。
+    
+    默认使用脚本所在目录的 openEuler 文件夹下的 repo 文件。下面分别举例：
+    - 开发源 repo 文件的 URL：`https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
+    - 开发源的 repo 文件路径：`/opt/raspi-image-build/openEuler/openEuler-20.03-LTS.repo`
+    - 资源库的 baseurl 列表：`"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
 
-    - KERNEL_URL：内核源码的项目地址，默认为 `https://gitee.com/openeuler/raspberrypi-kernel.git`。
-    - KERNEL_BRANCH：内核源码的对应分支，默认为 `master`。
-    - KERNEL_DEFCONFIG：内核编译使用的配置文件名称，默认为 `openeuler-raspi_defconfig`，在本目录的 config 目录下或内核源码的目录 arch/arm64/configs 下。如果该文件不存在则使用配置文件 DEFAULT_DEFCONFIG。
-    - DEFAULT_DEFCONFIG：内核默认配置文件名称，默认为 `openeuler-raspi_defconfig`，在内核源码的目录 arch/arm64/configs 下。如果 KERNEL_DEFCONFIG 和该文件均不存在则退出镜像构建过程。
-    - REPO_FILE：openEuler 开发源的 repo 文件的 URL 或者文件名称， 默认为 `openEuler-20.03-LTS.repo`。注意，如果 REPO_FILE 为文件名称，需要保证该文件在本目录的 config 文件夹下。否则，如果 REPO_FILE 为 URL，请保证可以通过该链接获取到该 repo 文件。
-    - --cores：其后跟参数 MAKE_CORES。
-    - MAKE_CORES：并行编译的数量，根据运行脚本的服务器CPU实际数目设定，默认为 18。
+3.  -n, --name IMAGE_NAME
+    
+    构建的镜像名称。
+    
+    例如，`openEuler-20.03-LTS.img`。默认为`openEuler-20.09-aarch64-raspi.img`，或者根据 `-r, --repo REPO_INFO` 参数自动生成。
 
-#### Docker 容器内构建
+4.  -h, --help
+    
+    显示帮助信息。
 
-构建脚本 [build-img-docker.sh](scripts/build-img-docker.sh)，其后可设置 0/6/8 个参数。该脚本会自动下载 openEuler 的 Docker 镜像，并导入本机系统中，下载并导入的 Docker 镜像版本由该脚本参数 DOCKER_FILE 决定。
+#### 完全构建（包括编译内核）
 
-注意！！！运行该脚本前，需安装 Docker 运行环境。
+包含编译内核、下载树莓派相关固件等过程，速度相对较慢。
 
-1.  使用脚本默认参数构建
+这里，提供两种构建方式。
 
-    `sudo bash build-img-docker.sh`
+##### 主机上构建
 
-2.  自行设置参数构建
+构建镜像需执行命令：
 
-    `sudo bash build-img-docker.sh DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES`
+`sudo bash build-img.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
 
-    或
+各个参数意义：
 
-    `sudo bash build-img-docker.sh DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE`
+1.  -n, --name IMAGE_NAME
+    
+    构建的镜像名称。
+    
+    例如，`openEuler-20.03-LTS.img`。默认为`openEuler-20.03-LTS-aarch64-raspi.img`，或者根据 `-r, --repo REPO_INFO` 参数自动生成。
 
-    其中，除第一个参数 DOCKER_FILE 外，剩余参数与`主机上构建`中对应参数一致：
+2.  -k, --kernel KERNEL_URL
+    
+    内核源码仓库的项目地址，默认为 `https://gitee.com/openeuler/raspberrypi-kernel.git`。
 
-    - DOCKER_FILE：Docker 镜像的 URL 或者文件名称， 默认为 `https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz`。使用该默认参数时，脚本会自动下载 openEuler 20.03 LTS 的 Docker 镜像，并导入本机系统中。注意，如果 DOCKER_FILE 为文件名称，需要保证该文件在本目录的 config 文件夹下。否则，如果 DOCKER_FILE 为 URL，请保证可以通过该链接获取到该 Docker 镜像。
+3.  -b, --branch KERNEL_BRANCH
+
+    内核源码的对应分支，默认为 `master`。
+
+4.  -c, --config KERNEL_DEFCONFIG
+    
+    内核编译使用的配置文件名称或路径，默认为 `openeuler-raspi_defconfig`。如果该参数为配置文件名称，请确保该文件在内核源码的目录 arch/arm64/configs 下。
+
+5.  -r, --repo REPO_INFO
+
+    开发源 repo 文件的 URL 或者路径，也可以是开发源中资源库的 baseurl 列表。注意，如果该参数为资源库的 baseurl 列表，该参数需要使用双引号，各个 baseurl 之间以空格隔开。
+    
+    默认使用脚本所在目录的 openEuler 文件夹下的 repo 文件。下面分别举例：
+    - 开发源 repo 文件的 URL：`https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
+    - 开发源的 repo 文件路径：`/opt/raspi-image-build/openEuler/openEuler-20.03-LTS.repo`
+    - 资源库的 baseurl 列表：`"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
+
+6.  --cores N
+
+    并行编译的数量，根据运行脚本的宿主机 CPU 实际数目设定，默认为可用的 CPU 总数。
+
+##### Docker 容器内构建
+
+构建镜像需执行命令：
+
+`sudo bash build-img-docker.sh -d DOCKER_FILE -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
+
+注意！！！运行该脚本前，需安装 Docker 运行环境。该脚本会自动将 DOCKER_FILE 参数对应的 Docker 镜像导入本机系统中。
+
+除参数 DOCKER_FILE 外，剩余参数与[主机上构建](#主机上构建)中对应参数一致：
+
+1.  -d, --docker DOCKER_FILE
+
+    Docker 镜像的 URL 或者路径， 默认为 `https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz`。使用该默认参数时，脚本会自动下载 openEuler 20.03 LTS 的 Docker 镜像，并导入本机系统中。

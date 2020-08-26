@@ -1,55 +1,64 @@
 #!/bin/bash
 set -e
 
-if [[ $# -ne 0 && $# -ne 5 && $# -ne 7 ]]; then
-    echo "params length: $# is not 0/5/7."
-    echo Example1: bash $0
-    echo Example2: bash $0 KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES
-    echo Example3: bash $0 KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE
-    exit 1
-fi
-cur_dir=$(cd $(dirname $0);pwd)
-run_dir=${cur_dir}
-kernel_url="https://gitee.com/openeuler/raspberrypi-kernel.git"
-kernel_branch="master"
-kernel_defconfig="openeuler-raspi_defconfig"
-default_defconfig="openeuler-raspi_defconfig"
-repo_file=openEuler-20.03-LTS.repo
+__usage="
+Usage: build-img [OPTIONS]
+Build raspberrypi image. 
 
-buildid=$(date +%Y%m%d%H%M%S)
-builddate=${buildid:0:8}
-output_dir=${run_dir}/output
-rootfs_dir=${run_dir}/rootfs_${builddate}
-root_mnt=${run_dir}/root
-boot_mnt=${run_dir}/boot
-make_cores=18
-if [[ $# -eq 5 || $# -eq 7 ]]; then
-    if [[ $1 != "" ]]; then
-        kernel_url=$1
-    fi
-    if [[ $2 != "" ]]; then
-        kernel_branch=$2
-    fi
-    if [[ $3 != "" ]]; then
-        kernel_defconfig=$3
-    fi
-    if [[ $4 != "" ]]; then
-        default_defconfig=$4
-    fi
-    if [[ $5 != "" ]]; then
-        repo_file=$5
-    fi
-fi
-if [[ $# -eq 7 && $6 == "--cores" && $7 -ne 0 ]]; then
-    make_cores=$7
-fi
-kernel_name=${kernel_url##*/}
-kernel_name=${kernel_name%.*}
-repo_file_name=${repo_file##*/}
-img_suffix=${repo_file_name%%-*}
-img_suffix=`echo $img_suffix | grep -Eo "^[a-zA-Z ]*"`
-os_release_name=${img_suffix}-release
-img_file=${run_dir}/img/${builddate}/${repo_file_name%.*}-aarch64-raspi-${buildid}.img
+Options:
+  -n, --name IMAGE_NAME            The raspberrypi image name to be built.
+  -k, --kernel KERNEL_URL          The URL of kernel source's repository, which defaults to https://gitee.com/openeuler/raspberrypi-kernel.git.
+  -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
+  -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
+  -r, --repo REPO_INFO             The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
+  --cores N                        The number of cpu cores to be used during making.
+  -h, --help                       Show command help.
+"
+
+help()
+{
+    echo "$__usage"
+    exit $1
+}
+
+parseargs()
+{
+    while [ "x$#" != "x0" ];
+    do
+        if [ "x$1" == "x-h" -o "x$1" == "x--help" ]; then
+            return 1
+        elif [ "x$1" == "x" ]; then
+            shift
+        elif [ "x$1" == "x-n" -o "x$1" == "x--name" ]; then
+            img_name=`echo $2`
+            shift
+            shift
+        elif [ "x$1" == "x-k" -o "x$1" == "x--kernel" ]; then
+            kernel_url=`echo $2`
+            shift
+            shift
+        elif [ "x$1" == "x-b" -o "x$1" == "x--branch" ]; then
+            kernel_branch=`echo $2`
+            shift
+            shift
+        elif [ "x$1" == "x-c" -o "x$1" == "x--config" ]; then
+            default_defconfig=`echo $2`
+            shift
+            shift
+        elif [ "x$1" == "x-r" -o "x$1" == "x--repo" ]; then
+            repo_file=`echo $2`
+            shift
+            shift
+        elif [ "x$1" == "x--cores" ]; then
+            make_cores=`echo $2`
+            shift
+            shift
+        else
+            echo `date` - ERROR, UNKNOWN params "$@"
+            return 2
+        fi
+    done
+}
 
 ERROR(){
     echo `date` - ERROR, $* | tee -a ${cur_dir}/log/log_${builddate}.log
@@ -60,6 +69,75 @@ LOG(){
 }
 
 prepare(){
+    if [ ! -d ${tmp_dir} ]; then
+        mkdir -p ${tmp_dir}
+    else
+        rm -rf ${tmp_dir}/*
+    fi
+
+    kernel_name=${kernel_url##*/}
+    kernel_name=${kernel_name%.*}
+
+    if [ "x$default_defconfig" == "x" ] ; then
+        default_defconfig=$kernel_defconfig
+    elif [ -f $default_defconfig ]; then
+        cp $default_defconfig ${tmp_dir}/
+        kernel_defconfig=${tmp_dir}/${default_defconfig##*/}
+    else
+        echo `date` - ERROR, config file $default_defconfig can not be found.
+        exit 2
+    fi
+
+    if [ "x${repo_file:0:4}" = "xhttp" ]; then
+        if [ "x${repo_file:0-5}" == "x.repo" ]; then
+            wget ${repo_file} -P ${tmp_dir}/
+            repo_file_name=${repo_file##*/}
+            repo_file=${tmp_dir}/${repo_file_name}
+        else
+            repo_file_name=tmp.repo
+            repo_file_tmp=${tmp_dir}/${repo_file_name}
+            index=1
+            for baseurl in ${repo_file// / }
+            do
+                echo [repo${index}] >> ${repo_file_tmp}
+                echo name=repo${index} to build raspi image >> ${repo_file_tmp}
+                echo baseurl=${baseurl} >> ${repo_file_tmp}
+                echo enabled=1 >> ${repo_file_tmp}
+                echo gpgcheck=0 >> ${repo_file_tmp}
+                echo >> ${repo_file_tmp}
+                index=$(($index+1))
+            done
+            repo_file=${repo_file_tmp}
+        fi
+    else
+        if [ "x$repo_file" == "x" ] ; then
+            repo_file=`ls ${euler_dir}/*.repo 2>/dev/null| head -n 1`
+        fi
+        if [ ! -f $repo_file ]; then
+            echo `date` - ERROR, repo file $repo_file can not be found.
+            exit 2
+        else
+            cp $repo_file ${tmp_dir}/
+            repo_file_name=${repo_file##*/}
+            repo_file=${tmp_dir}/${repo_file_name}
+        fi
+    fi
+    
+    repo_suffix=${repo_file_name%.*}
+    if [ "x$img_name" == "x" ]; then
+        if [[ "${repo_suffix}" =~ ^${OS_NAME}.* ]]; then
+            img_name=${repo_suffix}
+        else
+            img_name=${OS_NAME}
+        fi
+        img_name=${img_name}-aarch64-raspi-${buildid}.img
+    else
+        if [ "x${img_name:0-4}" != "x.img" ]; then
+            img_name=${img_name}.img
+        fi
+    fi
+    img_file=${run_dir}/img/${builddate}/${img_name}
+
     if [ ! -d ${cur_dir}/log ]; then
         mkdir ${cur_dir}/log
     fi
@@ -71,40 +149,45 @@ prepare(){
     do
         rpm -qa | grep ${rmp_names[i]} &> /dev/null
         [ $? -eq 0 ] || yum install -y ${rmp_install_names[i]} &> /dev/null
-        [ $? -ne 0 ] && echo "yum install ${rmp_install_names[i]} failed." && ERROR "yum install ${rmp_install_names[i]} failed." && yum_right=3
+        [ $? -ne 0 ] && ERROR "yum install ${rmp_install_names[i]} failed." && yum_right=3
     done
     [ $yum_right ] && exit 3
     if [ ! -d ${run_dir}/img ]; then
         mkdir ${run_dir}/img
     fi
-    if [ ! -d ${cur_dir}/tmp ]; then
-        mkdir ${cur_dir}/tmp
-    fi
     
-    if [ "${repo_file:0:4}" = "http" ]; then
-        # rpm_url=`wget -q -O - ${repo_file} | grep "^baseurl=" | cut -d '=' -f 2 | xargs`
-        rm -f ${cur_dir}/tmp/*.repo
-        wget ${repo_file} -P ${cur_dir}/tmp/
-    else
-        # rpm_url=`cat ${repo_file} | grep "^baseurl=" | grep "everything" | cut -d '=' -f 2 | xargs`
-        cp ${cur_dir}/config/${repo_file} ${cur_dir}/tmp/${repo_file_name}
+    repo_info_names=`cat ${repo_file} | grep "^\["`
+    repo_baseurls=`cat ${repo_file} | grep "^baseurl="`
+    index=1
+    for repo_name in ${repo_info_names}
+    do
+        repo_name_list[$index]=${repo_name:1:-1}
+        index=$((index+1))
+    done
+    index=1
+    for baseurl in ${repo_baseurls}
+    do
+        repo_info="${repo_info} --repofrompath ${repo_name_list[$index]}-tmp,${baseurl:8}"
+        index=$((index+1))
+    done
+    set +e
+    os_release_name=${OS_NAME}-release
+    # yumdownloader --downloaddir=${tmp_dir} ${os_release_name} -c ${repo_file}
+    dnf ${repo_info} --disablerepo="*" --downloaddir=${tmp_dir}/ download ${os_release_name}
+    if [ $? != 0 ]; then
+        ERROR "Fail to download ${os_release_name}!"
+        exit 2
     fi
-    if [ $? -ne 0 ]; then
-        ERROR ${repo_file} not found.
-        exit 1
-    else
-        yumdownloader --downloaddir=${cur_dir}/tmp/ $os_release_name -c ${cur_dir}/tmp/${repo_file_name}
-        os_release_name=`ls -r ${cur_dir}/tmp/${os_release_name}*.rpm | head -n 1`
-        if [ -z "${os_release_name}" ]; then
-            ERROR "Fail to download ${os_release_name}!"
-            exit 1
-        fi
+    os_release_name=`ls -r ${tmp_dir}/${os_release_name}*.rpm 2>/dev/null| head -n 1`
+    if [ -z "${os_release_name}" ]; then
+        ERROR "${os_release_name} can not be found!"
+        exit 2
     fi
-    rm -f ${cur_dir}/tmp/*.rules
-    wget https://raw.githubusercontent.com/RPi-Distro/raspberrypi-sys-mods/master/etc.armhf/udev/rules.d/99-com.rules -P ${cur_dir}/tmp/
-    rm -f ${cur_dir}/tmp/regulatory.db*
-    wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/regulatory.db.p7s -P ${cur_dir}/tmp/
-    wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/regulatory.db -P ${cur_dir}/tmp/
+    set -e
+
+    wget https://raw.githubusercontent.com/RPi-Distro/raspberrypi-sys-mods/master/etc.armhf/udev/rules.d/99-com.rules -P ${tmp_dir}/
+    wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/regulatory.db.p7s -P ${tmp_dir}/
+    wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/regulatory.db -P ${tmp_dir}/
     if [ ! -d ${run_dir}/img/${builddate} ]; then
         mkdir -p ${run_dir}/img/${builddate}
     fi
@@ -174,41 +257,26 @@ update_firmware_app(){
 }
 
 make_kernel(){
-    LOG "make kernel begin..."
+    LOG "make kernel(${default_defconfig}) begin..."
     kernel_dir_tmp=$1
     cd "${kernel_dir_tmp}"
-    if [[ ${kernel_defconfig} != "" ]]; then
-        if [[ -f ${cur_dir}/config/${kernel_defconfig} ]]; then
-            cur_config=${cur_dir}/config/${kernel_defconfig}
-        elif [[ -f arch/arm64/configs/${kernel_defconfig} ]]; then
-            cur_config=arch/arm64/configs/${kernel_defconfig}
-        else
-            ERROR "kernel config: ${kernel_defconfig} not found."
-            exit 1
+    if [ "x${kernel_defconfig:0:1}" != "x/" ]; then
+        if [ ! -f arch/arm64/configs/${kernel_defconfig} ]; then
+            ERROR "config file ${kernel_defconfig} can not be found in kernel source".
+            exit 2
         fi
-    elif [[ -f arch/arm64/configs/${default_defconfig} ]]; then
-        cur_config=arch/arm64/configs/${default_defconfig}
-        kernel_defconfig=${default_defconfig}
-    else
-        ERROR "kernel config: ${default_defconfig} not found."
-        exit 1
-    fi
-    # make ARCH=arm64 ${kernel_defconfig}
-    # if [[ $? -eq 0 ]]; then
-    #     ####
-    # else
-    #     ERROR "make ARCH=arm64 ${kernel_defconfig} failed!"
-    #     exit 1
-    # fi
-    kernel_commitid=$(git rev-parse HEAD)
-    output_dir=${output_dir}/${kernel_commitid}
-    if [ -f ${output_dir}/.${kernel_defconfig}.DONE ] ; then
-        echo This kernel has already been built successfully before. Use the last built kernel image.
-        return 0
+        kernel_commitid=$(git rev-parse HEAD)
+        output_dir=${output_dir}/${kernel_commitid}
+        if [ -f ${output_dir}/.${kernel_defconfig}.DONE ] ; then
+            LOG This kernel has already been built successfully before. Use the last built kernel image.
+            return 0
+        fi
+        kernel_defconfig=arch/arm64/configs/${kernel_defconfig}
     fi
     find ${output_dir}/ -mindepth 1 -maxdepth 1 -print0 | xargs -0 rm -rf
     make distclean
-    cp ${cur_config} .config
+    cp ${kernel_defconfig} .config
+    kernel_defconfig=${kernel_defconfig##*/}
     make ARCH=arm64 -j${make_cores}
     if [[ $? -eq 0 ]]; then
         mkdir -p ${output_dir}
@@ -228,7 +296,7 @@ make_kernel(){
         exit 1
     fi
     touch ${output_dir}/.${kernel_defconfig}.DONE
-    LOG "make kernel end."
+    LOG "make kernel(${default_defconfig}) end."
 }
 
 update_kernel(){
@@ -291,8 +359,6 @@ update_kernel(){
                 branch=${branch##*\ }
                 if [[ ${branch} = "remotes/origin/${kernel_branch}" ]]; then
                     git checkout remotes/origin/${kernel_branch}
-                    # git config --global user.name "yafen"
-                    # git config --global user.email "yafen@iscas.ac.cn"
                     git checkout -b ${kernel_branch}
                     LOG "git checkout -b ${kernel_branch} done."
                     exist_branch=1
@@ -345,14 +411,26 @@ make_rootfs(){
     mkdir -p ${rootfs_dir}/var/lib/rpm
     rpm --root ${rootfs_dir} --initdb
     rpm -ivh --nodeps --root ${rootfs_dir}/ ${os_release_name}
+    mkdir -p ${rootfs_dir}/etc/rpm
+    chmod a+rX ${rootfs_dir}/etc/rpm
+    echo "%_install_langs en_US" > ${rootfs_dir}/etc/rpm/macros.image-language-conf
     if [[ ! -d ${rootfs_dir}/etc/yum.repos.d ]]; then
         mkdir -p ${rootfs_dir}/etc/yum.repos.d
     fi
-    cp ${cur_dir}/tmp/*.repo $rootfs_dir/etc/yum.repos.d/
-    dnf --installroot=${rootfs_dir}/ install dnf --nogpgcheck -y #--repofrompath=${repo_file_name},${rootfs_dir}/etc/yum.repos.d/${repo_file_name}
-    dnf --installroot=${rootfs_dir}/ makecache
-    dnf --installroot=${rootfs_dir}/ install -y alsa-utils wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp bluez pulseaudio-module-bluetooth
+    cp ${repo_file} ${rootfs_dir}/etc/yum.repos.d/tmp.repo
+    # dnf --installroot=${rootfs_dir}/ install dnf --nogpgcheck -y #--repofrompath=${repo_file_name},${rootfs_dir}/etc/yum.repos.d/${repo_file_name}
+    # dnf --installroot=${rootfs_dir}/ makecache
+    # dnf --installroot=${rootfs_dir}/ install -y alsa-utils wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp bluez pulseaudio-module-bluetooth
     set +e
+    for item in $(cat $CONFIG_RPM_LIST)
+    do
+        dnf --installroot=${rootfs_dir}/ install -y $item
+        if [ $? == 0 ]; then
+            LOG install $item.
+        else
+            ERROR can not install $item.
+        fi
+    done
     cat ${rootfs_dir}/etc/ntp.conf | grep "^server*"
     if [ $? -ne 0 ]; then
         echo -e "\nserver 0.cn.pool.ntp.org\nserver 1.asia.pool.ntp.org\nserver 2.asia.pool.ntp.org\nserver 127.0.0.1">>${rootfs_dir}/etc/ntp.conf
@@ -362,25 +440,26 @@ make_rootfs(){
         echo -e "\nfudge 127.0.0.1 stratum 10">>${rootfs_dir}/etc/ntp.conf
     fi
     set -e
-    cp ${cur_dir}/config/hosts ${rootfs_dir}/etc/hosts
-    # cp ${cur_dir}/config/resolv.conf $rootfs_dir/etc/resolv.conf
+    cp ${euler_dir}/hosts ${rootfs_dir}/etc/hosts
     if [ ! -d $rootfs_dir/etc/sysconfig/network-scripts ]; then
         mkdir -p $rootfs_dir/etc/sysconfig/network-scripts
     fi
-    cp ${cur_dir}/config/ifup-eth0 $rootfs_dir/etc/sysconfig/network-scripts/ifup-eth0
+    cp ${euler_dir}/ifup-eth0 $rootfs_dir/etc/sysconfig/network-scripts/ifup-eth0
     mkdir -p ${rootfs_dir}/lib/firmware ${rootfs_dir}/usr/bin ${rootfs_dir}/lib/udev/rules.d ${rootfs_dir}/lib/systemd/system
     cp bluez-firmware/broadcom/* ${rootfs_dir}/lib/firmware/
     cp -r firmware-nonfree/brcm/ ${rootfs_dir}/lib/firmware/
     mv ${rootfs_dir}/lib/firmware/BCM43430A1.hcd ${rootfs_dir}/lib/firmware/brcm/
     mv ${rootfs_dir}/lib/firmware/BCM4345C0.hcd ${rootfs_dir}/lib/firmware/brcm/
-    cp ${cur_dir}/tmp/regulatory.db* ${rootfs_dir}/lib/firmware/
-    cp ${cur_dir}/tmp/*.rules ${rootfs_dir}/lib/udev/rules.d/
+    cp ${tmp_dir}/regulatory.db* ${rootfs_dir}/lib/firmware/
+    cp ${tmp_dir}/*.rules ${rootfs_dir}/lib/udev/rules.d/
     cp pi-bluetooth/usr/bin/* ${rootfs_dir}/usr/bin/
     cp pi-bluetooth/lib/udev/rules.d/90-pi-bluetooth.rules ${rootfs_dir}/lib/udev/rules.d/
     cp pi-bluetooth/debian/pi-bluetooth.bthelper\@.service ${rootfs_dir}/lib/systemd/system/bthelper\@.service
     cp pi-bluetooth/debian/pi-bluetooth.hciuart.service ${rootfs_dir}/lib/systemd/system/hciuart.service
     cp -r ${output_dir}/lib/modules ${rootfs_dir}/lib/
-    cp ${cur_dir}/scripts/chroot.sh ${rootfs_dir}/chroot.sh
+    mkdir -p /usr/share/licenses/raspi
+    cp -a ${euler_dir}/License/* /usr/share/licenses/raspi/
+    cp ${euler_dir}/chroot.sh ${rootfs_dir}/chroot.sh
     chmod +x ${rootfs_dir}/chroot.sh
     mount --bind /dev ${rootfs_dir}/dev
     mount -t proc /proc ${rootfs_dir}/proc
@@ -389,6 +468,7 @@ make_rootfs(){
     umount -l ${rootfs_dir}/dev
     umount -l ${rootfs_dir}/proc
     umount -l ${rootfs_dir}/sys
+    rm ${rootfs_dir}/etc/yum.repos.d/tmp.repo
     rm ${rootfs_dir}/chroot.sh
     LOG "make rootfs for ${repo_file} end."
 }
@@ -451,7 +531,7 @@ make_img(){
     cp -rf --preserve=mode,timestamps --no-preserve=ownership ${run_dir}/firmware/boot/* ${boot_mnt}/
     pushd ${boot_mnt}/
     rm -f *.dtb cmdline.txt kernel.img kernel7.img kernel7l.img
-    cp ${cur_dir}/config/config.txt ./
+    cp ${euler_dir}/config.txt ./
     echo "console=serial0,115200 console=tty1 root=/dev/mmcblk0p3 rootfstype=ext4 elevator=deadline rootwait" > cmdline.txt
     popd
     cp --preserve=mode,timestamps --no-preserve=ownership ${output_dir}/Image ${boot_mnt}/kernel8.img
@@ -499,11 +579,39 @@ make_img(){
     LOG "make ${img_file} end."
 }
 
-IFS=$'\n'
+if [ "$EUID" -ne 0 ]; then
+    echo `date` - ERROR, Please run as root!
+    exit
+fi
+
+kernel_url="https://gitee.com/openeuler/raspberrypi-kernel.git"
+kernel_branch="master"
+kernel_defconfig="openeuler-raspi_defconfig"
+default_defconfig=""
+make_cores=$(nproc)
+
+parseargs "$@" || help $?
+
+OS_NAME=openEuler
+
+cur_dir=$(cd $(dirname $0);pwd)
+
+run_dir=${cur_dir}
+tmp_dir=${cur_dir}/tmp
+
+buildid=$(date +%Y%m%d%H%M%S)
+builddate=${buildid:0:8}
+output_dir=${run_dir}/output
+rootfs_dir=${run_dir}/rootfs_${builddate}
+root_mnt=${run_dir}/root
+boot_mnt=${run_dir}/boot
+euler_dir=${cur_dir}/config
+CONFIG_RPM_LIST=${euler_dir}/rpmlist
+
 prepare
+IFS=$'\n'
 update_firmware_app
 update_kernel
 
 make_rootfs
 make_img
-

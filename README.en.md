@@ -64,50 +64,96 @@ For other architecture hardware, you can use [QEMU](https://www.qemu.org/) to bu
 
 Refer to [Script for building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md) for details.
 
-#### Build on host
+#### Quickly Build without kernel compilation(Recommended)
 
-Build script: [build-img.sh](scripts/build-img.sh), which can be set 0/5/7 parameters.
+Build images with packages of raspberrypi-kernel, raspberrypi-firmware, and raspberrypi-bluetooth.
 
-1.  Build with default parameters
+Run the following command to build an image:
 
-    `sudo bash build-img.sh`
+`sudo bash build-img-quick.sh -d DIR -r REPO -n IMAGE_NAME`
 
-2.  Build with custom parameters
+The meaning of each parameter:
 
-    `sudo bash build-img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES`
+1.  -d, --dir DIR
 
-    or
+    The directory for storing the image and other temporary files, which defaults to be the directory in which the script resides. If the `DIR` does not exist, it will be created automatically.
 
-    `sudo bash build-img.sh KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE`
+    After building the image, you can find the image in `DIR/raspi_output/img/` as shown in the script output.
 
-    The meaning of each parameter:
+2.  -r, --repo REPO_INFO
 
-    - KERNEL_URL: The URL of kernel source's repository, which defaults to `https://gitee.com/openeuler/raspberrypi-kernel.git`.
-    - KERNEL_BRANCH: The branch name of kernel source's repository, which defaults to `master`.
-    - KERNEL_DEFCONFIG: The filename of configuration for compiling kernel, which defaults to `openeuler-raspi_defconfig`. The configuration file should be in the config directory or in arch/arm64/configs of the kernel source. If this configuration file does not exist, the script uses the next parameter: DEFAULT_DEFCONFIG.
-    - DEFAULT_DEFCONFIG: The filename of configuration for kernel, which defaults to `openeuler-raspi_defconfig`. The configuration file should be in arch/arm64/configs of the kernel source. If both KERNEL_DEFCONFIG and this file do not exist, the process of building image will exit.
-    - REPO_FILE: The URL or name of openEuler's file, which defaults to `openEuler-20.03-LTS.repo`. Caution, if REPO_FILE is a file name, please make sure this file in the config directory. Otherwise, if REPO_FILE is a URL, please make sure you can get a correct repo file from this URL.
-    - --cores: Followed by parameter MAKE_CORES
-    - MAKE_CORES: The number of parallel compilations, according to the actual number of CPU of the server running the script. The default is 18.
+    The URL/path of target repo file, or the list of repositories' baseurls. Note that, the baseurls should be separated by space and enclosed in double quotes.
+    
+    By default, the parameter is the path of the repo file which should be in the `openEuler` directory. Examples are as follows:
+    
+    - The URL of target repo file: `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
+    - The path of target repo file: `/opt/raspi-image-build/openEuler/openEuler-20.03-LTS.repo`
+    - List of repo's baseurls: `"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
 
-#### Build in a Docker container
+3.  -n, --name IMAGE_NAME
 
-Build script: [build-img-docker.sh](scripts/build-img-docker.sh), which can be set 0/6/8 parameters. The script will automatically download a Docker image of openEuler and import it into the local system. The Docker image version is determined by the script's parameter: DOCKER_FILE.
+    The image name to be built.
+    
+    For example, `openEuler-20.03-LTS.img`. The default is `openEuler-20.09-aarch64-raspi.img`, or it is automatically generated based on parameter: `-r, --repo REPO_INFO`.
 
-Caution, before running the script, you need to install Docker.
+4.  -h, --help
+    
+    Display help information.
 
-1.  Build with default parameters
+#### Build with kernel compilation
 
-    `sudo bash build-img-docker.sh`
+Here, we provide two approaches to build an image, which both include compiling kernel and downloading firmware files of Raspberry Pi. These approaches will take considerably longer.
 
-2.  Build with custom parameters
+##### Build on host
 
-    `sudo bash build-img-docker.sh DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES`
+Run the following command to build an image:
 
-    or
+`sudo bash build-img.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
 
-    `sudo bash build-img-docker.sh DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE`
+The meaning of each parameter:
 
-    In addition to the first parameter DOCKER_FILE, the other parameters are the same as the corresponding parameters in "Build on host":
+1.  -n, --name IMAGE_NAME
 
-    - DOCKER_FILE: The URL or name of the Docker image, which defaults to `https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz`. With the default parameter, the script will automatically download the Docker image of openEuler 20.03 LTS and import it into the local system. Caution, if DOCKER_FILE is a file name, please make sure this file in the config directory. Otherwise, if DOCKER_FILE is a URL, please make sure you can get a correct Docker image from this URL.
+    The image name to be built.
+    
+    For example, `openEuler-20.03-LTS.img`. The default is `openEuler-20.03-LTS-aarch64-raspi.img`, or it is automatically generated based on parameter: `-r, --repo REPO_INFO`.
+
+2.  -k, --kernel KERNEL_URL
+    
+    The URL of kernel source's repository, which defaults to `https://gitee.com/openeuler/raspberrypi-kernel.git`.
+
+3.  -b, --branch KERNEL_BRANCH
+
+    The branch name of kernel source's repository, which defaults to `master`.
+
+4.  -c, --config KERNEL_DEFCONFIG
+
+    The filename/path of configuration for compiling kernel, which defaults to `openeuler-raspi_defconfig`. If this parameter is the filename of configuration, please make sure the configuration file in arch/arm64/configs of the kernel source. 
+
+5.  -r, --repo REPO_INFO
+
+    The URL/path of target repo file, or the list of repositories' baseurls. Note that, the baseurls should be separated by space and enclosed in double quotes.
+    
+    By default, the parameter is the path of the repo file which should be in the `openEuler` directory. Examples are as follows:
+    
+    - The URL of target repo file: `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
+    - The path of target repo file: `/opt/raspi-image-build/openEuler/openEuler-20.03-LTS.repo`
+    - List of repo's baseurls: `"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
+    
+6.  --cores N
+    
+    The number of parallel compilations, according to the actual number of CPU of the host running the script. The default is the number of processing units available.
+
+##### Build in a Docker container
+
+Run the following command to build an image:
+
+`sudo bash build-img-docker.sh -d DOCKER_FILE -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
+
+Caution, before running the script, you need to install Docker. The script will automatically import the Docker image into the local system according to the script's parameter: DOCKER_FILE.
+
+In addition to the parameter DOCKER_FILE, the other parameters are the same as the corresponding parameters in [Build on host](#Build-on-host):
+
+1.  -d, --docker DOCKER_FILE
+
+    The URL/path of the Docker image, which defaults to `https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz`. With the default parameter, the script will automatically download the Docker image of openEuler 20.03 LTS and import it into the local system.

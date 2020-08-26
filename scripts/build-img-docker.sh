@@ -2,58 +2,95 @@
 
 set -e
 
-cur_dir=$(cd $(dirname $0);pwd)
-cd "${cur_dir}"
+__usage="
+Usage: build-img-docker [OPTIONS]
+Build raspberrypi image. 
 
-if [[ $# -ne 0 && $# -ne 6 && $# -ne 8 ]]; then
-    echo Error: params length: $# is not 0/6/8.
-    echo Example1: bash $0
-    echo Example2: bash $0 DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE --cores MAKE_CORES
-    echo Example3: bash $0 DOCKER_FILE KERNEL_URL KERNEL_BRANCH KERNEL_DEFCONFIG DEFAULT_DEFCONFIG REPO_FILE
-    exit 1
-fi
+Options:
+  -d, --docker DOCKER_FILE         The URL/path of the Docker image, which defaults to https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz.
+  -n, --name IMAGE_NAME            The raspberrypi image name to be built.
+  -k, --kernel KERNEL_URL          The URL of kernel source's repository, which defaults to https://gitee.com/openeuler/raspberrypi-kernel.git.
+  -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
+  -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
+  -r, --repo REPO_INFO             The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
+  --cores N                        The number of cpu cores to be used during making.
+  -h, --help                       Show command help.
+"
 
-docker_file="https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz"
-kernel_url="https://gitee.com/openeuler/raspberrypi-kernel.git"
-kernel_branch="master"
-kernel_defconfig="openeuler-raspi_defconfig"
-default_defconfig="openeuler-raspi_defconfig"
-repo_file=openEuler-20.03-LTS.repo
+help()
+{
+    echo "$__usage"
+    exit $1
+}
 
-make_cores=18
-if [[ $# -eq 6 || $# -eq 8 ]]; then
-    if [[ $1 != "" ]]; then
-        docker_file=$1
-    fi
-    if [[ $2 != "" ]]; then
-        kernel_url=$2
-    fi
-    if [[ $3 != "" ]]; then
-        kernel_branch=$3
-    fi
-    if [[ $4 != "" ]]; then
-        kernel_defconfig=$4
-    fi
-    if [[ $5 != "" ]]; then
-        default_defconfig=$5
-    fi
-    if [[ $6 != "" ]]; then
-        repo_file=$6
-    fi
-fi
-if [[ $# -eq 8 && $7 == "--cores" && $8 -ne 0 ]]; then
-    make_cores=$8
-fi
-
-buildid=$(date +%Y%m%d%H%M%S)
-builddate=${buildid:0:8}
-
-if [ ! -d ${cur_dir}/log ]; then
-    mkdir ${cur_dir}/log
-fi
-if [ ! -d ${cur_dir}/tmp ]; then
-    mkdir ${cur_dir}/tmp
-fi
+parseargs()
+{
+    while [ "x$#" != "x0" ];
+    do
+        if [ "x$1" == "x-h" -o "x$1" == "x--help" ]; then
+            return 1
+        elif [ "x$1" == "x" ]; then
+            shift
+        elif [ "x$1" == "x-d" -o "x$1" == "x--docker" ]; then
+            docker_file=`echo $2`
+            shift
+            shift
+        elif [ "x$1" == "x-n" -o "x$1" == "x--name" ]; then
+            img_name=`echo $2`
+            params="${params} -n ${img_name}"
+            shift
+            shift
+        elif [ "x$1" == "x-k" -o "x$1" == "x--kernel" ]; then
+            kernel_url=`echo $2`
+            params="${params} -k ${kernel_url}"
+            shift
+            shift
+        elif [ "x$1" == "x-b" -o "x$1" == "x--branch" ]; then
+            kernel_branch=`echo $2`
+            params="${params} -b ${kernel_branch}"
+            shift
+            shift
+        elif [ "x$1" == "x-c" -o "x$1" == "x--config" ]; then
+            default_defconfig=`echo $2`
+            if [ "x$default_defconfig" != "x" ]; then
+                if [ ! -f $default_defconfig ]; then
+                    echo `date` - ERROR, config file $default_defconfig can not be found.
+                    exit 2
+                else
+                    cp $default_defconfig ${cur_dir}/params/
+                    defconfig_name=${default_defconfig##*/}
+                    default_defconfig=/work/params/${defconfig_name}
+                fi
+            fi
+            params="${params} -c ${default_defconfig}"
+            shift
+            shift
+        elif [ "x$1" == "x-r" -o "x$1" == "x--repo" ]; then
+            repo_file=`echo $2`
+            if [ "x$repo_file" != "x" -a "x${repo_file:0:4}" != "xhttp" ]; then
+                if [ ! -f $repo_file ]; then
+                    echo `date` - ERROR, repo file $repo_file can not be found.
+                    exit 2
+                else
+                    cp $repo_file ${cur_dir}/params/
+                    repo_file_name=${repo_file##*/}
+                    repo_file=/work/params/${repo_file_name}
+                fi
+            fi
+            params="${params} -r ${repo_file}"
+            shift
+            shift
+        elif [ "x$1" == "x--cores" ]; then
+            make_cores=`echo $2`
+            params="${params} --cores ${make_cores}"
+            shift
+            shift
+        else
+            echo `date` - ERROR, UNKNOWN params "$@"
+            return 2
+        fi
+    done
+}
 
 ERROR(){
     echo `date` - ERROR, $* | tee -a ${cur_dir}/log/log_${builddate}.log
@@ -63,21 +100,45 @@ LOG(){
     echo `date` - INFO, $* | tee -a ${cur_dir}/log/log_${builddate}.log
 }
 
-docker_file_name=${docker_file##*/}
-if [ "${docker_file:0:4}" = "http" ]; then
-    if [ ! -f ${cur_dir}/tmp/${docker_file_name} ]; then
-        wget ${docker_file} -P ${cur_dir}/tmp/
-    fi
-else
-    cp ${cur_dir}/config/${docker_file} ${cur_dir}/tmp/
+cur_dir=$(cd $(dirname $0);pwd)
+
+docker_file="https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz"
+
+if [ -d ${cur_dir}/tmp ]; then
+    rm -rf ${cur_dir}/tmp
 fi
+mkdir ${cur_dir}/tmp
+
+if [ -d ${cur_dir}/params ]; then
+    rm -rf ${cur_dir}/params
+fi
+mkdir ${cur_dir}/params
+
+parseargs "$@" || help $?
+
+if [ "x${docker_file:0:4}" == "xhttp" ]; then
+    wget ${docker_file} -P ${cur_dir}/tmp/
+elif [ -f $docker_file ]; then
+    cp ${docker_file} ${cur_dir}/tmp/
+else
+    echo `date` - ERROR, docker file $docker_file can not be found.
+    exit 2
+fi
+
+buildid=$(date +%Y%m%d%H%M%S)
+builddate=${buildid:0:8}
+
+if [ ! -d ${cur_dir}/log ]; then
+    mkdir ${cur_dir}/log
+fi
+
+docker_file_name=${docker_file##*/}
 docker_img_name=`docker load --input ${cur_dir}/tmp/${docker_file_name}`
 docker_img_name=${docker_img_name##*: }
 
-(echo "FROM $docker_img_name" && grep -v FROM config/Dockerfile_makeraspi) | docker build -t ${docker_img_name}-${buildid} --no-cache -f- .
-echo docker run --rm --privileged=true -v ${cur_dir}:/work ${docker_img_name}-${buildid} $kernel_url $kernel_branch $kernel_defconfig $default_defconfig $repo_file --cores $make_cores
-docker run --rm --privileged=true -v ${cur_dir}:/work ${docker_img_name}-${buildid} $kernel_url $kernel_branch $kernel_defconfig $default_defconfig $repo_file --cores $make_cores
-
+(echo "FROM $docker_img_name" && grep -v FROM ${cur_dir}/config/Dockerfile_makeraspi) | docker build -t ${docker_img_name}-${buildid} --no-cache -f- .
+echo docker run --rm --privileged=true -v ${cur_dir}:/work ${docker_img_name}-${buildid} ${params}
+docker run --rm --privileged=true -v ${cur_dir}:/work ${docker_img_name}-${buildid} ${params}
 chmod -R a+r ${cur_dir}/img
 docker image rm ${docker_img_name}-${buildid}
 echo

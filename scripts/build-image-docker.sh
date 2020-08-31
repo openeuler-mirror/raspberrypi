@@ -3,7 +3,7 @@
 set -e
 
 __usage="
-Usage: build-img-docker [OPTIONS]
+Usage: build-image-docker [OPTIONS]
 Build raspberrypi image. 
 
 Options:
@@ -136,7 +136,7 @@ docker_file_name=${docker_file##*/}
 docker_img_name=`docker load --input ${cur_dir}/tmp/${docker_file_name}`
 docker_img_name=${docker_img_name##*: }
 
-(echo "FROM $docker_img_name" && grep -v FROM ${cur_dir}/config/Dockerfile_makeraspi) | docker build -t ${docker_img_name}-${buildid} --no-cache -f- .
+(echo "FROM $docker_img_name" && grep -v FROM ${cur_dir}/config-common/Dockerfile_makeraspi) | docker build -t ${docker_img_name}-${buildid} --no-cache -f- .
 echo docker run --rm --privileged=true -v ${cur_dir}:/work ${docker_img_name}-${buildid} ${params}
 docker run --rm --privileged=true -v ${cur_dir}:/work ${docker_img_name}-${buildid} ${params}
 chmod -R a+r ${cur_dir}/img

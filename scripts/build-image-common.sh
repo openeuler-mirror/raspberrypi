@@ -2,7 +2,7 @@
 set -e
 
 __usage="
-Usage: build-img [OPTIONS]
+Usage: build-image-common [OPTIONS]
 Build raspberrypi image. 
 
 Options:
@@ -142,16 +142,9 @@ prepare(){
         mkdir ${cur_dir}/log
     fi
     LOG "prepare begin..."
-    rmp_names=("bison" "flex" "parted" "wget" "multipath-tools")
-    rmp_install_names=("bison" "flex" "parted" "wget" "kpartx")
-    rmp_len=${#rmp_names[@]}
-    for (( i=0; i<${rmp_len}; i++ ))
-    do
-        rpm -qa | grep ${rmp_names[i]} &> /dev/null
-        [ $? -eq 0 ] || yum install -y ${rmp_install_names[i]} &> /dev/null
-        [ $? -ne 0 ] && ERROR "yum install ${rmp_install_names[i]} failed." && yum_right=3
-    done
-    [ $yum_right ] && exit 3
+    dnf makecache
+    dnf install -y git bison flex wget dnf-plugins-core tar parted dosfstools grep bash xz kpartx
+
     if [ ! -d ${run_dir}/img ]; then
         mkdir ${run_dir}/img
     fi
@@ -605,7 +598,7 @@ output_dir=${run_dir}/output
 rootfs_dir=${run_dir}/rootfs_${builddate}
 root_mnt=${run_dir}/root
 boot_mnt=${run_dir}/boot
-euler_dir=${cur_dir}/config
+euler_dir=${cur_dir}/config-common
 CONFIG_RPM_LIST=${euler_dir}/rpmlist
 
 prepare

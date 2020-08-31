@@ -19,8 +19,9 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 ## 仓库目录
 
 - [scripts](./scripts): 构建 openEuler 树莓派镜像的脚本
-  - [主机上构建](scripts/build-img.sh)
-  - [Docker 容器中构建](scripts/build-img-docker.sh)
+  - [快速构建（不编译内核）](scripts/build-image.sh)
+  - [主机上构建（编译内核）](scripts/build-image-common.sh)
+  - [Docker 容器中构建（编译内核）](scripts/build-image-docker.sh)
 - [documents](./documents/): 使用文档
   - [openEuler 镜像的构建](documents/openEuler镜像的构建.md)
   - [交叉编译内核](documents/交叉编译内核.md)
@@ -42,7 +43,7 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eu
 - 内核版本：4.19.90-2005.2.0.0002
 - 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
 - 构建文件系统的源仓库：[openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
-- 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config/openEuler-20.03-LTS.repo)
+- 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config-common/openEuler-20.03-LTS.repo)
 
 ## 使用镜像
 
@@ -72,7 +73,7 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eu
 
 构建镜像需执行命令：
 
-`sudo bash build-img-quick.sh -d DIR -r REPO -n IMAGE_NAME`
+`sudo bash build-image.sh -d DIR -r REPO -n IMAGE_NAME`
 
 各个参数意义：
 
@@ -86,9 +87,9 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eu
 
     开发源 repo 文件的 URL 或者路径，也可以是开发源中资源库的 baseurl 列表。注意，如果该参数为资源库的 baseurl 列表，该参数需要使用双引号，各个 baseurl 之间以空格隔开。
     
-    默认使用脚本所在目录的 openEuler 文件夹下的 repo 文件。下面分别举例：
+    默认使用脚本所在目录的 config 文件夹下的 repo 文件。下面分别举例：
     - 开发源 repo 文件的 URL：`https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
-    - 开发源的 repo 文件路径：`/opt/raspi-image-build/openEuler/openEuler-20.03-LTS.repo`
+    - 开发源的 repo 文件路径：`./config/openEuler-20.09.repo`
     - 资源库的 baseurl 列表：`"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
 
 3.  -n, --name IMAGE_NAME
@@ -111,7 +112,7 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eu
 
 构建镜像需执行命令：
 
-`sudo bash build-img.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
+`sudo bash build-image-common.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
 
 各个参数意义：
 
@@ -137,9 +138,9 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eu
 
     开发源 repo 文件的 URL 或者路径，也可以是开发源中资源库的 baseurl 列表。注意，如果该参数为资源库的 baseurl 列表，该参数需要使用双引号，各个 baseurl 之间以空格隔开。
     
-    默认使用脚本所在目录的 openEuler 文件夹下的 repo 文件。下面分别举例：
+    默认使用脚本所在目录的 config-common 文件夹下的 repo 文件。下面分别举例：
     - 开发源 repo 文件的 URL：`https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
-    - 开发源的 repo 文件路径：`/opt/raspi-image-build/openEuler/openEuler-20.03-LTS.repo`
+    - 开发源的 repo 文件路径：`./config-common/openEuler-20.03-LTS.repo`
     - 资源库的 baseurl 列表：`"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
 
 6.  --cores N
@@ -150,7 +151,7 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eu
 
 构建镜像需执行命令：
 
-`sudo bash build-img-docker.sh -d DOCKER_FILE -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
+`sudo bash build-image-docker.sh -d DOCKER_FILE -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
 
 注意！！！运行该脚本前，需安装 Docker 运行环境。该脚本会自动将 DOCKER_FILE 参数对应的 Docker 镜像导入本机系统中。
 

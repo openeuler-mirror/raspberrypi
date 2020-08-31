@@ -21,8 +21,9 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
 ## Files and Directories
 
 - [scripts](./scripts): Script for building openEuler image for Raspberry Pi
-  - [Build on host](scripts/build-img.sh)
-  - [Build in a Docker container](scripts/build-img-docker.sh)
+  - [Quickly Build(without kernel compilation)](scripts/build-image.sh)
+  - [Build on host(with kernel compilation)](scripts/build-image-common.sh)
+  - [Build in a Docker container(with kernel compilation)](scripts/build-image-docker.sh)
 - [documents](./documents/):
   - [Building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md)
   - [Cross-compile the kernel](documents/交叉编译内核.md)
@@ -43,7 +44,7 @@ Basic information of the above image:
 - Kernel version: 4.19.90-2005.2.0.0002
 - Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
 - Repository of rootfs: [openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
-- Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config/openEuler-20.03-LTS.repo)
+- Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config-common/openEuler-20.03-LTS.repo)
 
 ## How to Use image
 
@@ -70,7 +71,7 @@ Build images with packages of raspberrypi-kernel, raspberrypi-firmware, and rasp
 
 Run the following command to build an image:
 
-`sudo bash build-img-quick.sh -d DIR -r REPO -n IMAGE_NAME`
+`sudo bash build-image.sh -d DIR -r REPO -n IMAGE_NAME`
 
 The meaning of each parameter:
 
@@ -84,10 +85,10 @@ The meaning of each parameter:
 
     The URL/path of target repo file, or the list of repositories' baseurls. Note that, the baseurls should be separated by space and enclosed in double quotes.
     
-    By default, the parameter is the path of the repo file which should be in the `openEuler` directory. Examples are as follows:
+    By default, the parameter is the path of the repo file which should be in the `config` directory. Examples are as follows:
     
     - The URL of target repo file: `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
-    - The path of target repo file: `/opt/raspi-image-build/openEuler/openEuler-20.03-LTS.repo`
+    - The path of target repo file: `./config/openEuler-20.09.repo`
     - List of repo's baseurls: `"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
 
 3.  -n, --name IMAGE_NAME
@@ -108,7 +109,7 @@ Here, we provide two approaches to build an image, which both include compiling 
 
 Run the following command to build an image:
 
-`sudo bash build-img.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
+`sudo bash build-image-common.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
 
 The meaning of each parameter:
 
@@ -134,10 +135,10 @@ The meaning of each parameter:
 
     The URL/path of target repo file, or the list of repositories' baseurls. Note that, the baseurls should be separated by space and enclosed in double quotes.
     
-    By default, the parameter is the path of the repo file which should be in the `openEuler` directory. Examples are as follows:
+    By default, the parameter is the path of the repo file which should be in the `config-common` directory. Examples are as follows:
     
     - The URL of target repo file: `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
-    - The path of target repo file: `/opt/raspi-image-build/openEuler/openEuler-20.03-LTS.repo`
+    - The path of target repo file: `./config-common/openEuler-20.03-LTS.repo`
     - List of repo's baseurls: `"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
     
 6.  --cores N
@@ -148,7 +149,7 @@ The meaning of each parameter:
 
 Run the following command to build an image:
 
-`sudo bash build-img-docker.sh -d DOCKER_FILE -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
+`sudo bash build-image-docker.sh -d DOCKER_FILE -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
 
 Caution, before running the script, you need to install Docker. The script will automatically import the Docker image into the local system according to the script's parameter: DOCKER_FILE.
 

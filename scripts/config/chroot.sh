@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 systemctl enable sshd
 systemctl enable ntpd
 systemctl enable hciuart

@@ -27,23 +27,40 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
   - [交叉编译内核](documents/交叉编译内核.md)
   - [刷写镜像](documents/刷写镜像.md)
   - [树莓派使用](documents/树莓派使用.md)
-  - [更新日志](documents/changelog.md)
+  - [openEuler 20.03 LTS 更新日志](documents/changelog.md)
+  - [openEuler 20.09 更新日志](documents/changelog-20.09.md)
 
 ## 最新镜像
 
-openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-aarch64-raspi.img.xz)。
+1.  openEuler 20.03 LTS
 
+    openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-aarch64-raspi.img.xz)。
 
-该镜像的基本信息：
+    该镜像的基本信息：
 
-- [更新日志](documents/changelog.md)
-- 发布时间：2020-08-10
-- 大小：259 MiB
-- 操作系统版本：openEuler 20.03 LTS
-- 内核版本：4.19.90-2005.2.0.0002
-- 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
-- 构建文件系统的源仓库：[openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
-- 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config-common/openEuler-20.03-LTS.repo)
+    - [更新日志](documents/changelog.md)
+    - 发布时间：2020-08-10
+    - 大小：259 MiB
+    - 操作系统版本：openEuler 20.03 LTS
+    - 内核版本：4.19.90-2005.2.0.0002
+    - 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+    - 构建文件系统的源仓库：[openEuler 20.03 LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
+    - 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo)
+
+2.  openEuler 20.09
+
+    openEuler 20.09 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-aarch64-raspi.img.xz)。
+
+    该镜像的基本信息：
+
+    - [更新日志](documents/changelog-20.09.md)
+    - 发布时间：2020-09-04
+    - 大小：237 MiB
+    - 操作系统版本：openEuler 20.09
+    - 内核版本：4.19.140-2008.3.0.0001
+    - 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+    - 构建文件系统的源仓库：[openEuler 20.09 每日构建的源仓库](http://119.3.219.20:82/openEuler:/Mainline/standard_aarch64/)
+    - 镜像内置源仓库：[openEuler 20.09 源仓库](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.09/generic.repo)
 
 ## 使用镜像
 
@@ -69,6 +86,9 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eu
 
 #### 快速构建（无需编译内核，推荐）
 
+>![](public_sys-resources/icon-notice.gif) **须知：**   
+>当前只支持 openEuler 20.09 版本。
+
 使用已有的树莓派内核、固件、蓝牙等 RPM 包构建镜像。
 
 构建镜像需执行命令：
@@ -87,16 +107,31 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eu
 
     开发源 repo 文件的 URL 或者路径，也可以是开发源中资源库的 baseurl 列表。注意，如果该参数为资源库的 baseurl 列表，该参数需要使用双引号，各个 baseurl 之间以空格隔开。
     
-    默认使用脚本所在目录的 config 文件夹下的 repo 文件。下面分别举例：
-    - 开发源 repo 文件的 URL：`https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
-    - 开发源的 repo 文件路径：`./config/openEuler-20.09.repo`
-    - 资源库的 baseurl 列表：`"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
+    下面分别举例：
+    - 开发源 repo 文件的 URL：*暂无*
+    - 开发源的 repo 文件路径：`./openEuler-20.09.repo`
+
+        该文件的内容如下：
+        ```
+        [MAINLINE]
+        name=MAINLINE
+        baseurl=http://119.3.219.20:82/openEuler:/Mainline/standard_aarch64/
+        enabled=1
+        gpgcheck=0
+
+        [EPOL]
+        name=EPOL
+        baseurl=http://119.3.219.20:82/openEuler:/Epol/standard_aarch64/
+        enabled=1
+        gpgcheck=0
+        ```
+    - 资源库的 baseurl 列表：`"http://119.3.219.20:82/openEuler:/Mainline/standard_aarch64/ http://119.3.219.20:82/openEuler:/Epol/standard_aarch64/"`
 
 3.  -n, --name IMAGE_NAME
     
     构建的镜像名称。
     
-    例如，`openEuler-20.03-LTS.img`。默认为`openEuler-20.09-aarch64-raspi.img`，或者根据 `-r, --repo REPO_INFO` 参数自动生成。
+    例如，`openEuler-20.09.img`。默认为`openEuler-aarch64-raspi.img`，或者根据 `-r, --repo REPO_INFO` 参数自动生成。
 
 4.  -h, --help
     
@@ -120,7 +155,7 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eu
     
     构建的镜像名称。
     
-    例如，`openEuler-20.03-LTS.img`。默认为`openEuler-20.03-LTS-aarch64-raspi.img`，或者根据 `-r, --repo REPO_INFO` 参数自动生成。
+    例如，`openEuler-20.03-LTS.img`。默认为`openEuler-aarch64-raspi.img`，或者根据 `-r, --repo REPO_INFO` 参数自动生成。
 
 2.  -k, --kernel KERNEL_URL
     
@@ -138,9 +173,11 @@ openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eu
 
     开发源 repo 文件的 URL 或者路径，也可以是开发源中资源库的 baseurl 列表。注意，如果该参数为资源库的 baseurl 列表，该参数需要使用双引号，各个 baseurl 之间以空格隔开。
     
-    默认使用脚本所在目录的 config-common 文件夹下的 repo 文件。下面分别举例：
+    下面分别举例：
     - 开发源 repo 文件的 URL：`https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
-    - 开发源的 repo 文件路径：`./config-common/openEuler-20.03-LTS.repo`
+    - 开发源的 repo 文件路径：`./openEuler-20.03-LTS.repo`
+
+        该文件内容参考 `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`。
     - 资源库的 baseurl 列表：`"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
 
 6.  --cores N

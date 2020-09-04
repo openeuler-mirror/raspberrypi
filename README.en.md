@@ -29,22 +29,40 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
   - [Cross-compile the kernel](documents/交叉编译内核.md)
   - [Install openEuler on a SD card](documents/刷写镜像.md)
   - [How to use Raspberry Pi](documents/树莓派使用.md)
-  - [ChangeLog](documents/changelog.en.md)
+  - [openEuler 20.03 LTS ChangeLog](documents/changelog.en.md)
+  - [openEuler 20.09 ChangeLog](documents/changelog-20.09.en.md)
 
 ## How to download latest image
 
-Alpha version of openEuler 20.03 LTS image for Raspberry Pi, [download](https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-aarch64-raspi.img.xz).
+1.  openEuler 20.03 LTS
 
-Basic information of the above image:
+    Alpha version of openEuler 20.03 LTS image for Raspberry Pi, [download](https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-aarch64-raspi.img.xz).
 
-- [ChangeLog](documents/changelog.en.md)
-- Release date: 2020-08-10
-- Size: 259 MiB
-- OS version: openEuler 20.03 LTS
-- Kernel version: 4.19.90-2005.2.0.0002
-- Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
-- Repository of rootfs: [openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
-- Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config-common/openEuler-20.03-LTS.repo)
+    Basic information of the above image:
+
+    - [ChangeLog](documents/changelog.en.md)
+    - Release date: 2020-08-10
+    - Size: 259 MiB
+    - OS version: openEuler 20.03 LTS
+    - Kernel version: 4.19.90-2005.2.0.0002
+    - Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+    - Repository of rootfs: [openEuler 20.03 LTS](rhttp://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
+    - Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config-common/openEuler-20.03-LTS.repo)
+
+2.  openEuler 20.09
+
+    Alpha version of openEuler 20.09 image for Raspberry Pi, [download](https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-aarch64-raspi.img.xz).
+
+    Basic information of the above image:
+
+    - [ChangeLog](documents/changelog-20.09.en.md)
+    - Release date: 2020-09-04
+    - Size: 237 MiB
+    - OS version: openEuler 20.09
+    - Kernel version: 4.19.140-2008.3.0.0001
+    - Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+    - Repository of rootfs: [openEuler 20.09 repository built daily](http://119.3.219.20:82/openEuler:/Mainline/standard_aarch64/)
+    - Repository inside the image: [openEuler 20.09 repository](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.09/generic.repo)
 
 ## How to Use image
 
@@ -67,6 +85,9 @@ Refer to [Script for building openEuler image for Raspberry Pi](documents/openEu
 
 #### Quickly Build without kernel compilation(Recommended)
 
+>![](public_sys-resources/icon-notice.gif) **NOTICE:**   
+>Only openEuler 20.09 is supported currently.
+
 Build images with packages of raspberrypi-kernel, raspberrypi-firmware, and raspberrypi-bluetooth.
 
 Run the following command to build an image:
@@ -85,17 +106,32 @@ The meaning of each parameter:
 
     The URL/path of target repo file, or the list of repositories' baseurls. Note that, the baseurls should be separated by space and enclosed in double quotes.
     
-    By default, the parameter is the path of the repo file which should be in the `config` directory. Examples are as follows:
+    Examples are as follows:
     
-    - The URL of target repo file: `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
-    - The path of target repo file: `./config/openEuler-20.09.repo`
-    - List of repo's baseurls: `"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
+    - The URL of target repo file: *currently unavailable*
+    - The path of target repo file: `./openEuler-20.09.repo`
+
+        The content of the repo file is as follows:
+        ```
+        [MAINLINE]
+        name=MAINLINE
+        baseurl=http://119.3.219.20:82/openEuler:/Mainline/standard_aarch64/
+        enabled=1
+        gpgcheck=0
+
+        [EPOL]
+        name=EPOL
+        baseurl=http://119.3.219.20:82/openEuler:/Epol/standard_aarch64/
+        enabled=1
+        gpgcheck=0
+        ```
+    - List of repo's baseurls: `"http://119.3.219.20:82/openEuler:/Mainline/standard_aarch64/ http://119.3.219.20:82/openEuler:/Epol/standard_aarch64/"`
 
 3.  -n, --name IMAGE_NAME
 
     The image name to be built.
     
-    For example, `openEuler-20.03-LTS.img`. The default is `openEuler-20.09-aarch64-raspi.img`, or it is automatically generated based on parameter: `-r, --repo REPO_INFO`.
+    For example, `openEuler-20.09.img`. The default is `openEuler-aarch64-raspi.img`, or it is automatically generated based on parameter: `-r, --repo REPO_INFO`.
 
 4.  -h, --help
     
@@ -117,7 +153,7 @@ The meaning of each parameter:
 
     The image name to be built.
     
-    For example, `openEuler-20.03-LTS.img`. The default is `openEuler-20.03-LTS-aarch64-raspi.img`, or it is automatically generated based on parameter: `-r, --repo REPO_INFO`.
+    For example, `openEuler-20.03-LTS.img`. The default is `openEuler-aarch64-raspi.img`, or it is automatically generated based on parameter: `-r, --repo REPO_INFO`.
 
 2.  -k, --kernel KERNEL_URL
     
@@ -135,10 +171,12 @@ The meaning of each parameter:
 
     The URL/path of target repo file, or the list of repositories' baseurls. Note that, the baseurls should be separated by space and enclosed in double quotes.
     
-    By default, the parameter is the path of the repo file which should be in the `config-common` directory. Examples are as follows:
+    Examples are as follows:
     
     - The URL of target repo file: `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
-    - The path of target repo file: `./config-common/openEuler-20.03-LTS.repo`
+    - The path of target repo file: `./openEuler-20.03-LTS.repo`
+    
+        Refer to `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo` for details about the content of the repo file.
     - List of repo's baseurls: `"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
     
 6.  --cores N

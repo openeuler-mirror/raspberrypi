@@ -4,11 +4,11 @@ set -e
 
 __usage="
 Usage: build-image [OPTIONS]
-Build raspberrypi image. 
+Build raspberrypi image.
 
 Options:
-  -d, --dir DIR              The directory for storing the image and other temporary files, which defaults to be the directory in which the script resides. If the DIR does not exist, it will be created automatically.
-  -r, --repo REPO_INFO       The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
+  -d, --dir  DIR             The directory for storing the image and other temporary files, which defaults to be the directory in which the script resides. If the DIR does not exist, it will be created automatically.
+  -r, --repo REPO_INFO       Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
   -n, --name IMAGE_NAME      The raspberrypi image name to be built.
   -h, --help                 Show command help.
 "
@@ -21,6 +21,10 @@ help()
 
 parseargs()
 {
+    if [ "x$#" == "x0" ]; then
+        return 1
+    fi
+
     while [ "x$#" != "x0" ];
     do
         if [ "x$1" == "x-h" -o "x$1" == "x--help" ]; then
@@ -60,7 +64,10 @@ prepare(){
     else
         rm -rf ${tmp_dir}/*
     fi
-    if [ "x${repo_file:0:4}" = "xhttp" ]; then
+    if [ "x$repo_file" == "x" ] ; then
+        echo `date` - ERROR, \"-r REPO_INFO or --repo REPO_INFO\" missing.
+        help 2
+    elif [ "x${repo_file:0:4}" == "xhttp" ]; then
         if [ "x${repo_file:0-5}" == "x.repo" ]; then
             wget ${repo_file} -P ${tmp_dir}/
             repo_file_name=${repo_file##*/}
@@ -82,9 +89,6 @@ prepare(){
             repo_file=${repo_file_tmp}
         fi
     else
-        if [ "x$repo_file" == "x" ] ; then
-            repo_file=`ls ${euler_dir}/*.repo 2>/dev/null| head -n 1`
-        fi
         if [ ! -f $repo_file ]; then
             echo `date` - ERROR, repo file $repo_file can not be found.
             exit 2

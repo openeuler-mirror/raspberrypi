@@ -12,7 +12,7 @@ Options:
   -k, --kernel KERNEL_URL          The URL of kernel source's repository, which defaults to https://gitee.com/openeuler/raspberrypi-kernel.git.
   -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
   -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
-  -r, --repo REPO_INFO             The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
+  -r, --repo REPO_INFO             Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
   --cores N                        The number of cpu cores to be used during making.
   -h, --help                       Show command help.
 "
@@ -25,6 +25,10 @@ help()
 
 parseargs()
 {
+    if [ "x$#" == "x0" ]; then
+        return 1
+    fi
+
     while [ "x$#" != "x0" ];
     do
         if [ "x$1" == "x-h" -o "x$1" == "x--help" ]; then
@@ -123,6 +127,11 @@ elif [ -f $docker_file ]; then
 else
     echo `date` - ERROR, docker file $docker_file can not be found.
     exit 2
+fi
+
+if [ "x$repo_file" == "x" ] ; then
+    echo `date` - ERROR, \"-r REPO_INFO or --repo REPO_INFO\" missing.
+    help 2
 fi
 
 buildid=$(date +%Y%m%d%H%M%S)

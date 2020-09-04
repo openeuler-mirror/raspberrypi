@@ -10,7 +10,7 @@ Options:
   -k, --kernel KERNEL_URL          The URL of kernel source's repository, which defaults to https://gitee.com/openeuler/raspberrypi-kernel.git.
   -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
   -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
-  -r, --repo REPO_INFO             The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
+  -r, --repo REPO_INFO             Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
   --cores N                        The number of cpu cores to be used during making.
   -h, --help                       Show command help.
 "
@@ -23,6 +23,10 @@ help()
 
 parseargs()
 {
+    if [ "x$#" == "x0" ]; then
+        return 1
+    fi
+
     while [ "x$#" != "x0" ];
     do
         if [ "x$1" == "x-h" -o "x$1" == "x--help" ]; then
@@ -87,8 +91,10 @@ prepare(){
         echo `date` - ERROR, config file $default_defconfig can not be found.
         exit 2
     fi
-
-    if [ "x${repo_file:0:4}" = "xhttp" ]; then
+    if [ "x$repo_file" == "x" ] ; then
+        echo `date` - ERROR, \"-r REPO_INFO or --repo REPO_INFO\" missing.
+        help 2
+    elif [ "x${repo_file:0:4}" = "xhttp" ]; then
         if [ "x${repo_file:0-5}" == "x.repo" ]; then
             wget ${repo_file} -P ${tmp_dir}/
             repo_file_name=${repo_file##*/}
@@ -110,9 +116,6 @@ prepare(){
             repo_file=${repo_file_tmp}
         fi
     else
-        if [ "x$repo_file" == "x" ] ; then
-            repo_file=`ls ${euler_dir}/*.repo 2>/dev/null| head -n 1`
-        fi
         if [ ! -f $repo_file ]; then
             echo `date` - ERROR, repo file $repo_file can not be found.
             exit 2
@@ -143,7 +146,7 @@ prepare(){
     fi
     LOG "prepare begin..."
     dnf makecache
-    dnf install -y git bison flex wget dnf-plugins-core tar parted dosfstools grep bash xz kpartx
+    dnf install -y bison flex wget dnf-plugins-core tar parted dosfstools grep bash xz kpartx
 
     if [ ! -d ${run_dir}/img ]; then
         mkdir ${run_dir}/img

@@ -2,7 +2,7 @@
 set -e
 
 __usage="
-Usage: build-img [OPTIONS]
+Usage: build-image-common [OPTIONS]
 Build raspberrypi image. 
 
 Options:
@@ -10,7 +10,7 @@ Options:
   -k, --kernel KERNEL_URL          The URL of kernel source's repository, which defaults to https://gitee.com/openeuler/raspberrypi-kernel.git.
   -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
   -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
-  -r, --repo REPO_INFO             The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
+  -r, --repo REPO_INFO             Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
   --cores N                        The number of cpu cores to be used during making.
   -h, --help                       Show command help.
 "
@@ -23,6 +23,10 @@ help()
 
 parseargs()
 {
+    if [ "x$#" == "x0" ]; then
+        return 1
+    fi
+
     while [ "x$#" != "x0" ];
     do
         if [ "x$1" == "x-h" -o "x$1" == "x--help" ]; then
@@ -87,8 +91,10 @@ prepare(){
         echo `date` - ERROR, config file $default_defconfig can not be found.
         exit 2
     fi
-
-    if [ "x${repo_file:0:4}" = "xhttp" ]; then
+    if [ "x$repo_file" == "x" ] ; then
+        echo `date` - ERROR, \"-r REPO_INFO or --repo REPO_INFO\" missing.
+        help 2
+    elif [ "x${repo_file:0:4}" = "xhttp" ]; then
         if [ "x${repo_file:0-5}" == "x.repo" ]; then
             wget ${repo_file} -P ${tmp_dir}/
             repo_file_name=${repo_file##*/}
@@ -110,9 +116,6 @@ prepare(){
             repo_file=${repo_file_tmp}
         fi
     else
-        if [ "x$repo_file" == "x" ] ; then
-            repo_file=`ls ${euler_dir}/*.repo 2>/dev/null| head -n 1`
-        fi
         if [ ! -f $repo_file ]; then
             echo `date` - ERROR, repo file $repo_file can not be found.
             exit 2
@@ -142,16 +145,9 @@ prepare(){
         mkdir ${cur_dir}/log
     fi
     LOG "prepare begin..."
-    rmp_names=("bison" "flex" "parted" "wget" "multipath-tools")
-    rmp_install_names=("bison" "flex" "parted" "wget" "kpartx")
-    rmp_len=${#rmp_names[@]}
-    for (( i=0; i<${rmp_len}; i++ ))
-    do
-        rpm -qa | grep ${rmp_names[i]} &> /dev/null
-        [ $? -eq 0 ] || yum install -y ${rmp_install_names[i]} &> /dev/null
-        [ $? -ne 0 ] && ERROR "yum install ${rmp_install_names[i]} failed." && yum_right=3
-    done
-    [ $yum_right ] && exit 3
+    dnf makecache
+    dnf install -y bison flex wget dnf-plugins-core tar parted dosfstools grep bash xz kpartx
+
     if [ ! -d ${run_dir}/img ]; then
         mkdir ${run_dir}/img
     fi
@@ -457,8 +453,8 @@ make_rootfs(){
     cp pi-bluetooth/debian/pi-bluetooth.bthelper\@.service ${rootfs_dir}/lib/systemd/system/bthelper\@.service
     cp pi-bluetooth/debian/pi-bluetooth.hciuart.service ${rootfs_dir}/lib/systemd/system/hciuart.service
     cp -r ${output_dir}/lib/modules ${rootfs_dir}/lib/
-    mkdir -p /usr/share/licenses/raspi
-    cp -a ${euler_dir}/License/* /usr/share/licenses/raspi/
+    mkdir -p ${rootfs_dir}/usr/share/licenses/raspi
+    cp -a ${euler_dir}/License/* ${rootfs_dir}/usr/share/licenses/raspi/
     cp ${euler_dir}/chroot.sh ${rootfs_dir}/chroot.sh
     chmod +x ${rootfs_dir}/chroot.sh
     mount --bind /dev ${rootfs_dir}/dev
@@ -605,7 +601,7 @@ output_dir=${run_dir}/output
 rootfs_dir=${run_dir}/rootfs_${builddate}
 root_mnt=${run_dir}/root
 boot_mnt=${run_dir}/boot
-euler_dir=${cur_dir}/config
+euler_dir=${cur_dir}/config-common
 CONFIG_RPM_LIST=${euler_dir}/rpmlist
 
 prepare

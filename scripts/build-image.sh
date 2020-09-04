@@ -3,12 +3,12 @@
 set -e
 
 __usage="
-Usage: build-img-quick [OPTIONS]
-Build raspberrypi image. 
+Usage: build-image [OPTIONS]
+Build raspberrypi image.
 
 Options:
-  -d, --dir DIR              The directory for storing the image and other temporary files. If the DIR does not exist, it will be created automatically.
-  -r, --repo REPO_INFO       The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
+  -d, --dir  DIR             The directory for storing the image and other temporary files, which defaults to be the directory in which the script resides. If the DIR does not exist, it will be created automatically.
+  -r, --repo REPO_INFO       Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
   -n, --name IMAGE_NAME      The raspberrypi image name to be built.
   -h, --help                 Show command help.
 "
@@ -21,6 +21,10 @@ help()
 
 parseargs()
 {
+    if [ "x$#" == "x0" ]; then
+        return 1
+    fi
+
     while [ "x$#" != "x0" ];
     do
         if [ "x$1" == "x-h" -o "x$1" == "x--help" ]; then
@@ -60,7 +64,10 @@ prepare(){
     else
         rm -rf ${tmp_dir}/*
     fi
-    if [ "x${repo_file:0:4}" = "xhttp" ]; then
+    if [ "x$repo_file" == "x" ] ; then
+        echo `date` - ERROR, \"-r REPO_INFO or --repo REPO_INFO\" missing.
+        help 2
+    elif [ "x${repo_file:0:4}" == "xhttp" ]; then
         if [ "x${repo_file:0-5}" == "x.repo" ]; then
             wget ${repo_file} -P ${tmp_dir}/
             repo_file_name=${repo_file##*/}
@@ -82,9 +89,6 @@ prepare(){
             repo_file=${repo_file_tmp}
         fi
     else
-        if [ "x$repo_file" == "x" ] ; then
-            repo_file=`ls ${euler_dir}/*.repo 2>/dev/null| head -n 1`
-        fi
         if [ ! -f $repo_file ]; then
             echo `date` - ERROR, repo file $repo_file can not be found.
             exit 2
@@ -114,8 +118,8 @@ prepare(){
         mkdir -p ${log_dir}
     fi
     LOG "prepare begin..."
-    # dnf makecache
-    # dnf install -y dnf-plugins-core tar parted dosfstools
+    dnf makecache
+    dnf install -y dnf-plugins-core tar parted dosfstools grep bash xz kpartx
 
     if [ -d ${rootfs_dir} ]; then
         rm -rf ${rootfs_dir}
@@ -320,14 +324,15 @@ if [ "$EUID" -ne 0 ]; then
     exit
 fi
 
-workdir=$(cd $(dirname $0);pwd)
+cur_dir=$(cd $(dirname $0);pwd)
+workdir=${cur_dir}
 
 parseargs "$@" || help $?
 
-if [ "x$workdir" == "x" ] ; then
+if [ "x$workdir" == "x" ]; then
     echo `date` - ERROR, \"-d DIR or --dir DIR\" missing.
     help 2
-elif [ ! -d ${workdir} ] ; then
+elif [ ! -d ${workdir} ]; then
     echo `date` - INFO, output dir ${workdir} does not exists.
     mkdir -p ${workdir}
     echo `date` - INFO, output dir: ${workdir} created.
@@ -335,7 +340,6 @@ fi
 
 OS_NAME=openEuler
 
-cur_dir=$(cd $(dirname $0);pwd)
 workdir=$(cd "$(dirname $workdir)"; pwd)/$(basename $workdir)
 rootfs_dir=${workdir}/raspi_output/rootfs
 root_mnt=${workdir}/raspi_output/root
@@ -343,9 +347,8 @@ boot_mnt=${workdir}/raspi_output/boot
 tmp_dir=${workdir}/raspi_output/tmp
 log_dir=${workdir}/raspi_output/log
 img_dir=${workdir}/raspi_output/img
-euler_dir=${cur_dir}/config-quick
+euler_dir=${cur_dir}/config
 CONFIG_RPM_LIST=${euler_dir}/rpmlist
-
 
 builddate=$(date +%Y%m%d)
 

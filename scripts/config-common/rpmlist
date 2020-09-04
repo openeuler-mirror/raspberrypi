@@ -12,7 +12,4 @@ hostname
 ntp
 bluez
 pulseaudio-module-bluetooth
-raspberrypi-kernel
-raspberrypi-firmware
-raspberrypi-bluetooth
 openEuler-repos

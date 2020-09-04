@@ -453,8 +453,8 @@ make_rootfs(){
     cp pi-bluetooth/debian/pi-bluetooth.bthelper\@.service ${rootfs_dir}/lib/systemd/system/bthelper\@.service
     cp pi-bluetooth/debian/pi-bluetooth.hciuart.service ${rootfs_dir}/lib/systemd/system/hciuart.service
     cp -r ${output_dir}/lib/modules ${rootfs_dir}/lib/
-    mkdir -p /usr/share/licenses/raspi
-    cp -a ${euler_dir}/License/* /usr/share/licenses/raspi/
+    mkdir -p ${rootfs_dir}/usr/share/licenses/raspi
+    cp -a ${euler_dir}/License/* ${rootfs_dir}/usr/share/licenses/raspi/
     cp ${euler_dir}/chroot.sh ${rootfs_dir}/chroot.sh
     chmod +x ${rootfs_dir}/chroot.sh
     mount --bind /dev ${rootfs_dir}/dev

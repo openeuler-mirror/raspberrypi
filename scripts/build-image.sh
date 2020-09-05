@@ -98,7 +98,7 @@ prepare(){
             repo_file=${tmp_dir}/${repo_file_name}
         fi
     fi
-    
+
     repo_suffix=${repo_file_name%.*}
     if [ "x$img_name" == "x" ]; then
         if [[ "${repo_suffix}" =~ ^${OS_NAME}.* ]]; then
@@ -198,13 +198,10 @@ make_rootfs(){
             ERROR can not install $item.
         fi
     done
-    cat ${rootfs_dir}/etc/ntp.conf | grep "^server*"
+    cat ${rootfs_dir}/etc/systemd/timesyncd.conf | grep "^NTP*"
     if [ $? -ne 0 ]; then
-        echo -e "\nserver 0.cn.pool.ntp.org\nserver 1.asia.pool.ntp.org\nserver 2.asia.pool.ntp.org\nserver 127.0.0.1">>${rootfs_dir}/etc/ntp.conf
-    fi
-    cat ${rootfs_dir}/etc/ntp.conf | grep "^fudge*"
-    if [ $? -ne 0 ]; then
-        echo -e "\nfudge 127.0.0.1 stratum 10">>${rootfs_dir}/etc/ntp.conf
+        sed -i 's/#NTP=/NTP=0.cn.pool.ntp.org/g' ${rootfs_dir}/etc/systemd/timesyncd.conf
+        sed -i 's/#FallbackNTP=/FallbackNTP=1.asia.pool.ntp.org 2.asia.pool.ntp.org/g' ${rootfs_dir}/etc/systemd/timesyncd.conf
     fi
     set -e
     cp ${euler_dir}/hosts ${rootfs_dir}/etc/hosts
@@ -236,7 +233,7 @@ make_img(){
     dd if=/dev/zero of=${img_file} bs=1MiB count=$size && sync
     parted ${img_file} mklabel msdos mkpart primary fat32 8192s 593919s
     parted ${img_file} -s set 1 boot
-    parted ${img_file} mkpart primary linux-swap 593920s 1593343s 
+    parted ${img_file} mkpart primary linux-swap 593920s 1593343s
     parted ${img_file} mkpart primary ext4 1593344s 100%
     device=`losetup -f --show -P ${img_file}`
     LOG "after losetup: ${device}"

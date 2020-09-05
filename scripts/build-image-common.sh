@@ -11,6 +11,7 @@ Options:
   -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
   -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
   -r, --repo REPO_INFO             Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
+  -s, --spec SPEC                  The image's specification: headless, standard, full, default is headless.
   --cores N                        The number of cpu cores to be used during making.
   -h, --help                       Show command help.
 "
@@ -53,6 +54,10 @@ parseargs()
             repo_file=`echo $2`
             shift
             shift
+        elif [ "x$1" == "x-s" -o "x$1" == "x--spec" ]; then
+            spec=`echo $2`
+            shift
+            shift
         elif [ "x$1" == "x--cores" ]; then
             make_cores=`echo $2`
             shift
@@ -72,6 +77,32 @@ LOG(){
     echo `date` - INFO, $* | tee -a ${cur_dir}/log/log_${builddate}.log
 }
 
+UNMOUNT_ALL(){
+    if [ -d ${root_mnt} ]; then
+        df -lh | grep ${root_mnt}
+        if [ $? -eq 0 ]; then
+            umount ${root_mnt}
+        fi
+        rm -rf ${root_mnt}
+    fi
+    if [ -d ${boot_mnt} ]; then
+        df -lh | grep ${boot_mnt}
+        if [ $? -eq 0 ]; then
+            umount ${boot_mnt}
+        fi
+        rm -rf ${boot_mnt}
+    fi
+    if [[ -d ${rootfs_dir}/dev && `ls ${rootfs_dir}/dev | wc -l` -gt 1 ]]; then
+        umount -l ${rootfs_dir}/dev
+    fi
+    if [[ -d ${rootfs_dir}/proc && `ls ${rootfs_dir}/proc | wc -l` -gt 0 ]]; then
+        umount -l ${rootfs_dir}/proc
+    fi
+    if [[ -d ${rootfs_dir}/sys && `ls ${rootfs_dir}/sys | wc -l` -gt 0 ]]; then
+        umount -l ${rootfs_dir}/sys
+    fi
+}
+
 prepare(){
     if [ ! -d ${tmp_dir} ]; then
         mkdir -p ${tmp_dir}
@@ -89,6 +120,19 @@ prepare(){
         kernel_defconfig=${tmp_dir}/${default_defconfig##*/}
     else
         echo `date` - ERROR, config file $default_defconfig can not be found.
+        exit 2
+    fi
+    if [ "x$spec" == "xheadless" ] || [ "x$spec" == "x" ]; then
+        with_standard=0
+        with_full=0
+    elif [ "x$spec" == "xstandard" ]; then
+        with_standard=1
+        with_full=0
+    elif [ "x$spec" == "xfull" ]; then
+        with_standard=1
+        with_full=1
+    else
+        echo `date` - ERROR, please check your params in option -s or --spec.
         exit 2
     fi
     if [ "x$repo_file" == "x" ] ; then
@@ -428,6 +472,28 @@ make_rootfs(){
             ERROR can not install $item.
         fi
     done
+    if [ $with_standard == 1 ]; then
+        for item in $(cat $CONFIG_STANDARD_LIST)
+        do
+            dnf --installroot=${rootfs_dir}/ install -y $item
+            if [ $? == 0 ]; then
+                LOG install $item.
+            else
+                ERROR can not install $item.
+            fi
+        done
+    fi
+    if [ $with_full == 1 ]; then
+        for item in $(cat $CONFIG_FULL_LIST)
+        do
+            dnf --installroot=${rootfs_dir}/ install -y $item
+            if [ $? == 0 ]; then
+                LOG install $item.
+            else
+                ERROR can not install $item.
+            fi
+        done
+    fi
     cat ${rootfs_dir}/etc/systemd/timesyncd.conf | grep "^NTP*"
     if [ $? -ne 0 ]; then
         sed -i 's/#NTP=/NTP=0.cn.pool.ntp.org/g' ${rootfs_dir}/etc/systemd/timesyncd.conf
@@ -601,6 +667,8 @@ root_mnt=${run_dir}/root
 boot_mnt=${run_dir}/boot
 euler_dir=${cur_dir}/config-common
 CONFIG_RPM_LIST=${euler_dir}/rpmlist
+CONFIG_STANDARD_LIST=${euler_dir}/standardlist
+CONFIG_FULL_LIST=${euler_dir}/fulllist
 
 prepare
 IFS=$'\n'
@@ -609,3 +677,4 @@ update_kernel
 
 make_rootfs
 make_img
+trap 'UNMOUNT_ALL' EXIT

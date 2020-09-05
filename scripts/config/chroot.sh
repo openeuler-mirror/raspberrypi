@@ -15,3 +15,7 @@ fi
 if [ -f /etc/rc.d/rc.local ]; then
     chmod +x /etc/rc.d/rc.local
 fi
+if [ -f /etc/lightdm/lightdm.conf ]; then
+    sudo sed -i 's/#user-session=default/user-session=xfce/g' /etc/lightdm/lightdm.conf
+fi
+curl https://gitee.com/src-openeuler/openEuler-repos/raw/openEuler-20.03-LTS/generic.repo > /etc/yum.repos.d/generic.repo

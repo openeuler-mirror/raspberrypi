@@ -4,7 +4,7 @@ set -e
 
 __usage="
 Usage: build-image-docker [OPTIONS]
-Build raspberrypi image. 
+Build raspberrypi image.
 
 Options:
   -d, --docker DOCKER_FILE         The URL/path of the Docker image, which defaults to https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz.
@@ -13,6 +13,7 @@ Options:
   -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
   -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
   -r, --repo REPO_INFO             Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
+  -s, --spec SPEC                  The image's specification: headless, standard, full, default is headless.
   --cores N                        The number of cpu cores to be used during making.
   -h, --help                       Show command help.
 "
@@ -84,6 +85,10 @@ parseargs()
             params="${params} -r ${repo_file}"
             shift
             shift
+        elif [ "x$1" == "x-s" -o "x$1" == "x--spec" ]; then
+            spec=`echo $2`
+            shift
+            shift
         elif [ "x$1" == "x--cores" ]; then
             make_cores=`echo $2`
             params="${params} --cores ${make_cores}"
@@ -126,6 +131,20 @@ elif [ -f $docker_file ]; then
     cp ${docker_file} ${cur_dir}/tmp/
 else
     echo `date` - ERROR, docker file $docker_file can not be found.
+    exit 2
+fi
+
+if [ "x$spec" == "xheadless" ] || [ "x$spec" == "x" ]; then
+    with_standard=0
+    with_full=0
+elif [ "x$spec" == "xstandard" ]; then
+    with_standard=1
+    with_full=0
+elif [ "x$spec" == "xfull" ]; then
+    with_standard=1
+    with_full=1
+else
+    echo `date` - ERROR, please check your params in option -s or --spec.
     exit 2
 fi
 

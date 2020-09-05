@@ -12,3 +12,4 @@ hostname
 bluez
 pulseaudio-module-bluetooth
 openEuler-repos
+sudo

@@ -103,6 +103,8 @@ UNMOUNT_ALL(){
     fi
 }
 
+trap 'UNMOUNT_ALL' INT
+
 prepare(){
     if [ ! -d ${tmp_dir} ]; then
         mkdir -p ${tmp_dir}

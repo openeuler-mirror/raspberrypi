@@ -86,7 +86,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 #### 快速构建（无需编译内核，推荐）
 
->![](public_sys-resources/icon-notice.gif) **须知：**   
+>![](documents/public_sys-resources/icon-notice.gif) **须知：**   
 >当前只支持 openEuler 20.09 版本。
 
 使用已有的树莓派内核、固件、蓝牙等 RPM 包构建镜像。

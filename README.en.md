@@ -85,7 +85,7 @@ Refer to [Script for building openEuler image for Raspberry Pi](documents/openEu
 
 #### Quickly Build without kernel compilation(Recommended)
 
->![](public_sys-resources/icon-notice.gif) **NOTICE:**   
+>![](documents/public_sys-resources/icon-notice.gif) **NOTICE:**   
 >Only openEuler 20.09 is supported currently.
 
 Build images with packages of raspberrypi-kernel, raspberrypi-firmware, and raspberrypi-bluetooth.

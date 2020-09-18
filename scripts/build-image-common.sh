@@ -78,20 +78,6 @@ LOG(){
 }
 
 UNMOUNT_ALL(){
-    if [ -d ${root_mnt} ]; then
-        df -lh | grep ${root_mnt}
-        if [ $? -eq 0 ]; then
-            umount ${root_mnt}
-        fi
-        rm -rf ${root_mnt}
-    fi
-    if [ -d ${boot_mnt} ]; then
-        df -lh | grep ${boot_mnt}
-        if [ $? -eq 0 ]; then
-            umount ${boot_mnt}
-        fi
-        rm -rf ${boot_mnt}
-    fi
     if [[ -d ${rootfs_dir}/dev && `ls ${rootfs_dir}/dev | wc -l` -gt 1 ]]; then
         umount -l ${rootfs_dir}/dev
     fi
@@ -101,6 +87,18 @@ UNMOUNT_ALL(){
     if [[ -d ${rootfs_dir}/sys && `ls ${rootfs_dir}/sys | wc -l` -gt 0 ]]; then
         umount -l ${rootfs_dir}/sys
     fi
+}
+
+INSTALL_PACKAGES(){
+    for item in $(cat $*)
+    do
+        dnf --installroot=${rootfs_dir}/ install -y $item
+        if [ $? == 0 ]; then
+            LOG install $item.
+        else
+            ERROR can not install $item.
+        fi
+    done
 }
 
 trap 'UNMOUNT_ALL' INT
@@ -439,15 +437,7 @@ make_rootfs(){
     LOG "make rootfs for ${repo_file} begin..."
     cd "${run_dir}"
     if [[ -d ${rootfs_dir} ]]; then
-        if [[ -d ${rootfs_dir}/dev && `ls ${rootfs_dir}/dev | wc -l` -gt 1 ]]; then
-            umount -l ${rootfs_dir}/dev
-        fi
-        if [[ -d ${rootfs_dir}/proc && `ls ${rootfs_dir}/proc | wc -l` -gt 0 ]]; then
-            umount -l ${rootfs_dir}/proc
-        fi
-        if [[ -d ${rootfs_dir}/sys && `ls ${rootfs_dir}/sys | wc -l` -gt 0 ]]; then
-            umount -l ${rootfs_dir}/sys
-        fi
+        UNMOUNT_ALL
         rm -rf ${rootfs_dir}
     fi
     mkdir ${rootfs_dir}
@@ -465,36 +455,12 @@ make_rootfs(){
     # dnf --installroot=${rootfs_dir}/ makecache
     # dnf --installroot=${rootfs_dir}/ install -y alsa-utils wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp bluez pulseaudio-module-bluetooth
     set +e
-    for item in $(cat $CONFIG_RPM_LIST)
-    do
-        dnf --installroot=${rootfs_dir}/ install -y $item
-        if [ $? == 0 ]; then
-            LOG install $item.
-        else
-            ERROR can not install $item.
-        fi
-    done
+    INSTALL_PACKAGES $CONFIG_RPM_LIST
     if [ $with_standard == 1 ]; then
-        for item in $(cat $CONFIG_STANDARD_LIST)
-        do
-            dnf --installroot=${rootfs_dir}/ install -y $item
-            if [ $? == 0 ]; then
-                LOG install $item.
-            else
-                ERROR can not install $item.
-            fi
-        done
+        INSTALL_PACKAGES $CONFIG_STANDARD_LIST
     fi
     if [ $with_full == 1 ]; then
-        for item in $(cat $CONFIG_FULL_LIST)
-        do
-            dnf --installroot=${rootfs_dir}/ install -y $item
-            if [ $? == 0 ]; then
-                LOG install $item.
-            else
-                ERROR can not install $item.
-            fi
-        done
+        INSTALL_PACKAGES $CONFIG_FULL_LIST
     fi
     cat ${rootfs_dir}/etc/systemd/timesyncd.conf | grep "^NTP*"
     if [ $? -ne 0 ]; then
@@ -527,9 +493,7 @@ make_rootfs(){
     mount -t proc /proc ${rootfs_dir}/proc
     mount -t sysfs /sys ${rootfs_dir}/sys
     chroot ${rootfs_dir} /bin/bash -c "echo 'Y' | /chroot.sh"
-    umount -l ${rootfs_dir}/dev
-    umount -l ${rootfs_dir}/proc
-    umount -l ${rootfs_dir}/sys
+    UNMOUNT_ALL
     rm ${rootfs_dir}/etc/yum.repos.d/tmp.repo
     rm ${rootfs_dir}/chroot.sh
     LOG "make rootfs for ${repo_file} end."
@@ -578,6 +542,7 @@ make_img(){
     fi
     set -e
     mkdir ${root_mnt} ${boot_mnt}
+    sudo e2fsck -y ${rootp}
     mount -t vfat -o uid=root,gid=root,umask=0000 ${bootp} ${boot_mnt}
     mount -t ext4 ${rootp} ${root_mnt}
     fstab_array=("" "" "" "")
@@ -672,6 +637,7 @@ CONFIG_RPM_LIST=${euler_dir}/rpmlist
 CONFIG_STANDARD_LIST=${euler_dir}/standardlist
 CONFIG_FULL_LIST=${euler_dir}/fulllist
 
+UNMOUNT_ALL
 prepare
 IFS=$'\n'
 update_firmware_app

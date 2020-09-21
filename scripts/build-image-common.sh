@@ -272,6 +272,7 @@ make_kernel(){
     find ${output_dir}/ -mindepth 1 -maxdepth 1 -print0 | xargs -0 rm -rf
     make distclean
     cp ${kernel_defconfig} .config
+    make ARCH=arm64 olddefconfig
     kernel_defconfig=${kernel_defconfig##*/}
     make ARCH=arm64 -j${make_cores}
     if [[ $? -eq 0 ]]; then

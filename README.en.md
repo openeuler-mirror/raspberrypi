@@ -85,7 +85,7 @@ Refer to [Script for building openEuler image for Raspberry Pi](documents/openEu
 
 #### Quickly Build without kernel compilation(Recommended)
 
->![](documents/public_sys-resources/icon-notice.gif) **NOTICE:**   
+>![](documents/public_sys-resources/icon-notice.gif) **NOTICE:**
 >Only openEuler 20.09 is supported currently.
 
 Build images with packages of raspberrypi-kernel, raspberrypi-firmware, and raspberrypi-bluetooth.
@@ -105,9 +105,9 @@ The meaning of each parameter:
 2.  -r, --repo REPO_INFO
 
     The URL/path of target repo file, or the list of repositories' baseurls. Note that, the baseurls should be separated by space and enclosed in double quotes.
-    
+
     Examples are as follows:
-    
+
     - The URL of target repo file: *currently unavailable*
     - The path of target repo file: `./openEuler-20.09.repo`
 
@@ -130,11 +130,20 @@ The meaning of each parameter:
 3.  -n, --name IMAGE_NAME
 
     The image name to be built.
-    
+
     For example, `openEuler-20.09.img`. The default is `openEuler-aarch64-raspi.img`, or it is automatically generated based on parameter: `-r, --repo REPO_INFO`.
 
-4.  -h, --help
-    
+4.  -s, --spec SPEC
+
+    The specification to be built:
+    - `headless`, image without desktop environments。
+    - `standard`，image with Xfce desktop environment and fundamental softwares but without CJK fonts and IME.
+    - `full`，image with Xfce desktop environment and related softwares including CJK fonts and IME.
+
+    The default is `headless`.
+
+5.  -h, --help
+
     Display help information.
 
 #### Build with kernel compilation
@@ -152,11 +161,11 @@ The meaning of each parameter:
 1.  -n, --name IMAGE_NAME
 
     The image name to be built.
-    
+
     For example, `openEuler-20.03-LTS.img`. The default is `openEuler-aarch64-raspi.img`, or it is automatically generated based on parameter: `-r, --repo REPO_INFO`.
 
 2.  -k, --kernel KERNEL_URL
-    
+
     The URL of kernel source's repository, which defaults to `https://gitee.com/openeuler/raspberrypi-kernel.git`.
 
 3.  -b, --branch KERNEL_BRANCH
@@ -165,22 +174,22 @@ The meaning of each parameter:
 
 4.  -c, --config KERNEL_DEFCONFIG
 
-    The filename/path of configuration for compiling kernel, which defaults to `openeuler-raspi_defconfig`. If this parameter is the filename of configuration, please make sure the configuration file in arch/arm64/configs of the kernel source. 
+    The filename/path of configuration for compiling kernel, which defaults to `openeuler-raspi_defconfig`. If this parameter is the filename of configuration, please make sure the configuration file in arch/arm64/configs of the kernel source.
 
 5.  -r, --repo REPO_INFO
 
     The URL/path of target repo file, or the list of repositories' baseurls. Note that, the baseurls should be separated by space and enclosed in double quotes.
-    
+
     Examples are as follows:
-    
+
     - The URL of target repo file: `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
     - The path of target repo file: `./openEuler-20.03-LTS.repo`
-    
+
         Refer to `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo` for details about the content of the repo file.
     - List of repo's baseurls: `"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
-    
+
 6.  --cores N
-    
+
     The number of parallel compilations, according to the actual number of CPU of the host running the script. The default is the number of processing units available.
 
 ##### Build in a Docker container

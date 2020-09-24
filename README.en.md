@@ -92,7 +92,7 @@ Build images with packages of raspberrypi-kernel, raspberrypi-firmware, and rasp
 
 Run the following command to build an image:
 
-`sudo bash build-image.sh -d DIR -r REPO -n IMAGE_NAME`
+`sudo bash build-image.sh -d DIR -r REPO -n IMAGE_NAME -s SPEC`
 
 The meaning of each parameter:
 
@@ -154,7 +154,7 @@ Here, we provide two approaches to build an image, which both include compiling 
 
 Run the following command to build an image:
 
-`sudo bash build-image-common.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
+`sudo bash build-image-common.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO -s SPEC --cores N`
 
 The meaning of each parameter:
 
@@ -188,7 +188,16 @@ The meaning of each parameter:
         Refer to `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo` for details about the content of the repo file.
     - List of repo's baseurls: `"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
 
-6.  --cores N
+6.  -s, --spec SPEC
+
+    The specification to be built:
+    - `headless`, image without desktop environments。
+    - `standard`，image with Xfce desktop environment and fundamental softwares but without CJK fonts and IME.
+    - `full`，image with Xfce desktop environment and related softwares including CJK fonts and IME.
+
+    The default is `headless`.
+
+7.  --cores N
 
     The number of parallel compilations, according to the actual number of CPU of the host running the script. The default is the number of processing units available.
 

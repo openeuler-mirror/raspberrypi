@@ -55,7 +55,7 @@ parseargs()
             shift
             shift
         elif [ "x$1" == "x-s" -o "x$1" == "x--spec" ]; then
-            spec=`echo $2`
+            spec_param=`echo $2`
             shift
             shift
         elif [ "x$1" == "x--cores" ]; then
@@ -78,19 +78,19 @@ LOG(){
 }
 
 UNMOUNT_ALL(){
-    if [[ -d ${rootfs_dir}/dev && `ls ${rootfs_dir}/dev | wc -l` -gt 1 ]]; then
+    if grep -q "${rootfs_dir}/dev" /proc/mounts ; then
         umount -l ${rootfs_dir}/dev
     fi
-    if [[ -d ${rootfs_dir}/proc && `ls ${rootfs_dir}/proc | wc -l` -gt 0 ]]; then
+    if grep -q "${rootfs_dir}/proc" /proc/mounts ; then
         umount -l ${rootfs_dir}/proc
     fi
-    if [[ -d ${rootfs_dir}/sys && `ls ${rootfs_dir}/sys | wc -l` -gt 0 ]]; then
+    if grep -q "${rootfs_dir}/sys" /proc/mounts ; then
         umount -l ${rootfs_dir}/sys
     fi
 }
 
 INSTALL_PACKAGES(){
-    for item in $(cat $*)
+    for item in $(cat $1)
     do
         dnf --installroot=${rootfs_dir}/ install -y $item
         if [ $? == 0 ]; then
@@ -122,15 +122,10 @@ prepare(){
         echo `date` - ERROR, config file $default_defconfig can not be found.
         exit 2
     fi
-    if [ "x$spec" == "xheadless" ] || [ "x$spec" == "x" ]; then
-        with_standard=0
-        with_full=0
-    elif [ "x$spec" == "xstandard" ]; then
-        with_standard=1
-        with_full=0
-    elif [ "x$spec" == "xfull" ]; then
-        with_standard=1
-        with_full=1
+    if [ "x$spec_param" == "xheadless" ] || [ "x$spec_param" == "x" ]; then
+        img_spec="headless"
+    elif [ "x$spec_param" == "xstandard" ] || [ "x$spec_param" == "xfull" ]; then
+        img_spec=$spec_param
     else
         echo `date` - ERROR, please check your params in option -s or --spec.
         exit 2
@@ -455,11 +450,11 @@ make_rootfs(){
     # dnf --installroot=${rootfs_dir}/ makecache
     # dnf --installroot=${rootfs_dir}/ install -y alsa-utils wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp bluez pulseaudio-module-bluetooth
     set +e
-    INSTALL_PACKAGES $CONFIG_RPM_LIST
-    if [ $with_standard == 1 ]; then
+    if [ $img_spec == "headless" ]; then
+        INSTALL_PACKAGES $CONFIG_RPM_LIST
+    elif [ $img_spec == "standard" ]; then
         INSTALL_PACKAGES $CONFIG_STANDARD_LIST
-    fi
-    if [ $with_full == 1 ]; then
+    elif [ $img_spec == "full" ]; then
         INSTALL_PACKAGES $CONFIG_FULL_LIST
     fi
     cat ${rootfs_dir}/etc/systemd/timesyncd.conf | grep "^NTP*"
@@ -542,7 +537,7 @@ make_img(){
     fi
     set -e
     mkdir ${root_mnt} ${boot_mnt}
-    sudo e2fsck -y ${rootp}
+    e2fsck -y ${rootp}
     mount -t vfat -o uid=root,gid=root,umask=0000 ${bootp} ${boot_mnt}
     mount -t ext4 ${rootp} ${root_mnt}
     fstab_array=("" "" "" "")
@@ -633,9 +628,11 @@ rootfs_dir=${run_dir}/rootfs_${builddate}
 root_mnt=${run_dir}/root
 boot_mnt=${run_dir}/boot
 euler_dir=${cur_dir}/config-common
+
 CONFIG_RPM_LIST=${euler_dir}/rpmlist
 CONFIG_STANDARD_LIST=${euler_dir}/standardlist
 CONFIG_FULL_LIST=${euler_dir}/fulllist
+img_spec=""
 
 UNMOUNT_ALL
 prepare

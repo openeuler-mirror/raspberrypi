@@ -86,7 +86,13 @@ parseargs()
             shift
             shift
         elif [ "x$1" == "x-s" -o "x$1" == "x--spec" ]; then
-            spec=`echo $2`
+            spec_param=`echo $2`
+            if [ "x$spec_param" != "xheadless" ] && [ "x$spec_param" != "x" ] \
+            && [ "x$spec_param" != "xstandard" ] && [ "x$spec_param" != "xfull" ]; then
+                echo `date` - ERROR, please check your params in option -s or --spec.
+                exit 2
+            fi
+            params="${params} -s ${spec_param}"
             shift
             shift
         elif [ "x$1" == "x--cores" ]; then
@@ -131,20 +137,6 @@ elif [ -f $docker_file ]; then
     cp ${docker_file} ${cur_dir}/tmp/
 else
     echo `date` - ERROR, docker file $docker_file can not be found.
-    exit 2
-fi
-
-if [ "x$spec" == "xheadless" ] || [ "x$spec" == "x" ]; then
-    with_standard=0
-    with_full=0
-elif [ "x$spec" == "xstandard" ]; then
-    with_standard=1
-    with_full=0
-elif [ "x$spec" == "xfull" ]; then
-    with_standard=1
-    with_full=1
-else
-    echo `date` - ERROR, please check your params in option -s or --spec.
     exit 2
 fi
 

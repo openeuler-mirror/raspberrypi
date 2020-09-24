@@ -93,7 +93,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 构建镜像需执行命令：
 
-`sudo bash build-image.sh -d DIR -r REPO -n IMAGE_NAME`
+`sudo bash build-image.sh -d DIR -r REPO -n IMAGE_NAME -s SPEC`
 
 各个参数意义：
 
@@ -156,7 +156,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 构建镜像需执行命令：
 
-`sudo bash build-image-common.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
+`sudo bash build-image-common.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO -s SPEC --cores N`
 
 各个参数意义：
 
@@ -189,7 +189,16 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
         该文件内容参考 `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`。
     - 资源库的 baseurl 列表：`"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
 
-6.  --cores N
+6.  -s, --spec SPEC
+
+    构建的镜像版本：
+    - `headless`，无图形界面版的镜像。
+    - `standard`，带 Xfce 桌面及必要的配套软件（不包括中文字体以及输入法）。
+    - `full`，带 Xfce 桌面以及中文字体、输入法等等全部配套软件。
+
+    默认使用 `headless` 选项。
+
+7.  --cores N
 
     并行编译的数量，根据运行脚本的宿主机 CPU 实际数目设定，默认为可用的 CPU 总数。
 

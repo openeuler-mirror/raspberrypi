@@ -64,13 +64,13 @@ LOG(){
 }
 
 UNMOUNT_ALL(){
-    if grep -q "${rootfs_dir}/dev" /proc/mounts ; then
+    if grep -q "${rootfs_dir}/dev " /proc/mounts ; then
         umount -l ${rootfs_dir}/dev
     fi
-    if grep -q "${rootfs_dir}/proc" /proc/mounts ; then
+    if grep -q "${rootfs_dir}/proc " /proc/mounts ; then
         umount -l ${rootfs_dir}/proc
     fi
-    if grep -q "${rootfs_dir}/sys" /proc/mounts ; then
+    if grep -q "${rootfs_dir}/sys " /proc/mounts ; then
         umount -l ${rootfs_dir}/sys
     fi
 }
@@ -87,7 +87,7 @@ INSTALL_PACKAGES(){
     done
 }
 
-trap 'UNMOUNT_ALL' INT
+trap 'UNMOUNT_ALL' EXIT
 
 prepare(){
     if [ ! -d ${tmp_dir} ]; then
@@ -224,8 +224,10 @@ make_rootfs(){
         INSTALL_PACKAGES $CONFIG_RPM_LIST
     elif [ $img_spec == "standard" ]; then
         INSTALL_PACKAGES $CONFIG_STANDARD_LIST
+        rm ${rootfs_dir}/boot/grub2/grubenv
     elif [ $img_spec == "full" ]; then
         INSTALL_PACKAGES $CONFIG_FULL_LIST
+        rm ${rootfs_dir}/boot/grub2/grubenv
     fi
     cat ${rootfs_dir}/etc/systemd/timesyncd.conf | grep "^NTP*"
     if [ $? -ne 0 ]; then
@@ -294,7 +296,6 @@ make_img(){
     fi
     set -e
     mkdir -p ${root_mnt} ${boot_mnt}
-    e2fsck -y ${rootp}
     mount -t vfat -o uid=root,gid=root,umask=0000 ${bootp} ${boot_mnt}
     mount -t ext4 ${rootp} ${root_mnt}
     fstab_array=("" "" "" "")
@@ -386,4 +387,3 @@ prepare
 IFS=$'\n'
 make_rootfs
 make_img
-trap 'UNMOUNT_ALL' EXIT

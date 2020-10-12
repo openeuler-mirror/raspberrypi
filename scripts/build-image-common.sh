@@ -78,13 +78,13 @@ LOG(){
 }
 
 UNMOUNT_ALL(){
-    if grep -q "${rootfs_dir}/dev" /proc/mounts ; then
+    if grep -q "${rootfs_dir}/dev " /proc/mounts ; then
         umount -l ${rootfs_dir}/dev
     fi
-    if grep -q "${rootfs_dir}/proc" /proc/mounts ; then
+    if grep -q "${rootfs_dir}/proc " /proc/mounts ; then
         umount -l ${rootfs_dir}/proc
     fi
-    if grep -q "${rootfs_dir}/sys" /proc/mounts ; then
+    if grep -q "${rootfs_dir}/sys " /proc/mounts ; then
         umount -l ${rootfs_dir}/sys
     fi
 }
@@ -101,7 +101,7 @@ INSTALL_PACKAGES(){
     done
 }
 
-trap 'UNMOUNT_ALL' INT
+trap 'UNMOUNT_ALL' EXIT
 
 prepare(){
     if [ ! -d ${tmp_dir} ]; then
@@ -537,7 +537,6 @@ make_img(){
     fi
     set -e
     mkdir ${root_mnt} ${boot_mnt}
-    e2fsck -y ${rootp}
     mount -t vfat -o uid=root,gid=root,umask=0000 ${bootp} ${boot_mnt}
     mount -t ext4 ${rootp} ${root_mnt}
     fstab_array=("" "" "" "")
@@ -642,4 +641,3 @@ update_kernel
 
 make_rootfs
 make_img
-trap 'UNMOUNT_ALL' EXIT

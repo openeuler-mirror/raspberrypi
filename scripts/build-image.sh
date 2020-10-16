@@ -224,10 +224,8 @@ make_rootfs(){
         INSTALL_PACKAGES $CONFIG_RPM_LIST
     elif [ $img_spec == "standard" ]; then
         INSTALL_PACKAGES $CONFIG_STANDARD_LIST
-        rm ${rootfs_dir}/boot/grub2/grubenv
     elif [ $img_spec == "full" ]; then
         INSTALL_PACKAGES $CONFIG_FULL_LIST
-        rm ${rootfs_dir}/boot/grub2/grubenv
     fi
     cat ${rootfs_dir}/etc/systemd/timesyncd.conf | grep "^NTP*"
     if [ $? -ne 0 ]; then
@@ -308,6 +306,9 @@ make_img(){
     echo "UUID=${fstab_array[1]}  /boot vfat    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
     echo "UUID=${fstab_array[2]}  swap swap    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
 
+    if [ -f ${rootfs_dir}/boot/grub2/grubenv ]; then
+        rm ${rootfs_dir}/boot/grub2/grubenv
+    fi
     cp -a ${rootfs_dir}/boot/* ${boot_mnt}/
     cp ${euler_dir}/config.txt ${boot_mnt}/
     echo "console=serial0,115200 console=tty1 root=/dev/mmcblk0p3 rootfstype=ext4 elevator=deadline rootwait" > ${boot_mnt}/cmdline.txt

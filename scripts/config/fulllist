@@ -14,7 +14,6 @@ pulseaudio-module-bluetooth
 raspberrypi-kernel
 raspberrypi-firmware
 raspberrypi-bluetooth
-openEuler-repos
 sudo
 xorg-x11-drv-fbdev
 lightdm
@@ -29,7 +28,7 @@ thunar-vcs-plugin
 thunar-volman
 ristretto
 xarchiver
-midori
+firefox
 mousepad
 parole
 xfce4-appfinder
@@ -63,3 +62,4 @@ fcitx-configtool
 google-noto-sans-sc-fonts
 google-noto-serif-sc-fonts
 google-noto-sans-mono-cjk-sc-fonts
+openEuler-repos

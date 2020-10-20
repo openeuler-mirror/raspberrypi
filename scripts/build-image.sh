@@ -63,7 +63,8 @@ LOG(){
     echo `date` - INFO, $* | tee -a ${log_dir}/${builddate}.log
 }
 
-UNMOUNT_ALL(){
+UMOUNT_ALL(){
+    set +e
     if grep -q "${rootfs_dir}/dev " /proc/mounts ; then
         umount -l ${rootfs_dir}/dev
     fi
@@ -73,6 +74,7 @@ UNMOUNT_ALL(){
     if grep -q "${rootfs_dir}/sys " /proc/mounts ; then
         umount -l ${rootfs_dir}/sys
     fi
+    set -e
 }
 
 INSTALL_PACKAGES(){
@@ -87,7 +89,7 @@ INSTALL_PACKAGES(){
     done
 }
 
-trap 'UNMOUNT_ALL' EXIT
+trap 'UMOUNT_ALL' EXIT
 
 prepare(){
     if [ ! -d ${tmp_dir} ]; then
@@ -201,7 +203,7 @@ prepare(){
 make_rootfs(){
     LOG "make rootfs for ${repo_file} begin..."
     if [[ -d ${rootfs_dir} ]]; then
-        UNMOUNT_ALL
+        UMOUNT_ALL
         rm -rf ${rootfs_dir}
     fi
     mkdir -p ${rootfs_dir}
@@ -246,7 +248,7 @@ make_rootfs(){
     mount -t proc /proc ${rootfs_dir}/proc
     mount -t sysfs /sys ${rootfs_dir}/sys
     chroot ${rootfs_dir} /bin/bash -c "echo 'Y' | /chroot.sh"
-    UNMOUNT_ALL
+    UMOUNT_ALL
     rm ${rootfs_dir}/etc/yum.repos.d/tmp.repo
     rm ${rootfs_dir}/chroot.sh
     LOG "make rootfs for ${repo_file} end."
@@ -383,7 +385,7 @@ img_spec=""
 
 builddate=$(date +%Y%m%d)
 
-UNMOUNT_ALL
+UMOUNT_ALL
 prepare
 IFS=$'\n'
 make_rootfs

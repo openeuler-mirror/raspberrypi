@@ -308,8 +308,8 @@ make_img(){
     echo "UUID=${fstab_array[1]}  /boot vfat    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
     echo "UUID=${fstab_array[2]}  swap swap    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
 
-    if [ -f ${rootfs_dir}/boot/grub2/grubenv ]; then
-        rm ${rootfs_dir}/boot/grub2/grubenv
+    if [ -d ${rootfs_dir}/boot/grub2 ]; then
+        rm -rf ${rootfs_dir}/boot/grub2
     fi
     cp -a ${rootfs_dir}/boot/* ${boot_mnt}/
     cp ${euler_dir}/config.txt ${boot_mnt}/

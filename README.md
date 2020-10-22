@@ -138,7 +138,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
     构建的镜像版本：
     - `headless`，无图形界面版的镜像。
     - `standard`，带 Xfce 桌面及必要的配套软件（不包括中文字体以及输入法）。
-    - `full`，带 Xfce 桌面以及中文字体、输入法等等全部配套软件。
+    - `full`，带 Xfce 桌面以及中文字体、输入法等全部配套软件。
 
     默认使用 `headless` 选项。
 
@@ -194,7 +194,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
     构建的镜像版本：
     - `headless`，无图形界面版的镜像。
     - `standard`，带 Xfce 桌面及必要的配套软件（不包括中文字体以及输入法）。
-    - `full`，带 Xfce 桌面以及中文字体、输入法等等全部配套软件。
+    - `full`，带 Xfce 桌面以及中文字体、输入法等全部配套软件。
 
     默认使用 `headless` 选项。
 

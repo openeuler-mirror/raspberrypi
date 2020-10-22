@@ -10,7 +10,7 @@ Options:
   -d, --dir  DIR             The directory for storing the image and other temporary files, which defaults to be the directory in which the script resides. If the DIR does not exist, it will be created automatically.
   -r, --repo REPO_INFO       Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
   -n, --name IMAGE_NAME      The raspberrypi image name to be built.
-  -s, --spec SPEC            The image's specification: headless, standard, full, default is headless.
+  -s, --spec SPEC            The image's specification: headless, standard, full. The default is headless.
   -h, --help                 Show command help.
 "
 

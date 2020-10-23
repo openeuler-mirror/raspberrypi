@@ -135,9 +135,9 @@ The meaning of each parameter:
 
 4.  -s, --spec SPEC
 
-    The specification to be built:
+    Specify the image version:
     - `headless`, image without desktop environments。
-    - `standard`，image with Xfce desktop environment and fundamental softwares but without CJK fonts and IME.
+    - `standard`，image with Xfce desktop environment and fundamental softwares without CJK fonts and IME.
     - `full`，image with Xfce desktop environment and related softwares including CJK fonts and IME.
 
     The default is `headless`.

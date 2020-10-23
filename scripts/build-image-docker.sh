@@ -4,7 +4,7 @@ set -e
 
 __usage="
 Usage: build-image-docker [OPTIONS]
-Build raspberrypi image. 
+Build raspberrypi image.
 
 Options:
   -d, --docker DOCKER_FILE         The URL/path of the Docker image, which defaults to https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz.
@@ -13,6 +13,7 @@ Options:
   -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
   -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
   -r, --repo REPO_INFO             Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
+  -s, --spec SPEC                  The image's specification: headless, standard, full. The default is headless.
   --cores N                        The number of cpu cores to be used during making.
   -h, --help                       Show command help.
 "
@@ -82,6 +83,16 @@ parseargs()
                 fi
             fi
             params="${params} -r ${repo_file}"
+            shift
+            shift
+        elif [ "x$1" == "x-s" -o "x$1" == "x--spec" ]; then
+            spec_param=`echo $2`
+            if [ "x$spec_param" != "xheadless" ] && [ "x$spec_param" != "x" ] \
+            && [ "x$spec_param" != "xstandard" ] && [ "x$spec_param" != "xfull" ]; then
+                echo `date` - ERROR, please check your params in option -s or --spec.
+                exit 2
+            fi
+            params="${params} -s ${spec_param}"
             shift
             shift
         elif [ "x$1" == "x--cores" ]; then

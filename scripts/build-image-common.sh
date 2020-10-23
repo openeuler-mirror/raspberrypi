@@ -3,7 +3,7 @@ set -e
 
 __usage="
 Usage: build-image-common [OPTIONS]
-Build raspberrypi image. 
+Build raspberrypi image.
 
 Options:
   -n, --name IMAGE_NAME            The raspberrypi image name to be built.
@@ -11,6 +11,7 @@ Options:
   -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
   -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
   -r, --repo REPO_INFO             Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
+  -s, --spec SPEC                  The image's specification: headless, standard, full. The default is headless.
   --cores N                        The number of cpu cores to be used during making.
   -h, --help                       Show command help.
 "
@@ -53,6 +54,10 @@ parseargs()
             repo_file=`echo $2`
             shift
             shift
+        elif [ "x$1" == "x-s" -o "x$1" == "x--spec" ]; then
+            spec_param=`echo $2`
+            shift
+            shift
         elif [ "x$1" == "x--cores" ]; then
             make_cores=`echo $2`
             shift
@@ -72,6 +77,34 @@ LOG(){
     echo `date` - INFO, $* | tee -a ${cur_dir}/log/log_${builddate}.log
 }
 
+UMOUNT_ALL(){
+    set +e
+    if grep -q "${rootfs_dir}/dev " /proc/mounts ; then
+        umount -l ${rootfs_dir}/dev
+    fi
+    if grep -q "${rootfs_dir}/proc " /proc/mounts ; then
+        umount -l ${rootfs_dir}/proc
+    fi
+    if grep -q "${rootfs_dir}/sys " /proc/mounts ; then
+        umount -l ${rootfs_dir}/sys
+    fi
+    set -e
+}
+
+INSTALL_PACKAGES(){
+    for item in $(cat $1)
+    do
+        dnf --installroot=${rootfs_dir}/ install -y $item
+        if [ $? == 0 ]; then
+            LOG install $item.
+        else
+            ERROR can not install $item.
+        fi
+    done
+}
+
+trap 'UMOUNT_ALL' EXIT
+
 prepare(){
     if [ ! -d ${tmp_dir} ]; then
         mkdir -p ${tmp_dir}
@@ -89,6 +122,14 @@ prepare(){
         kernel_defconfig=${tmp_dir}/${default_defconfig##*/}
     else
         echo `date` - ERROR, config file $default_defconfig can not be found.
+        exit 2
+    fi
+    if [ "x$spec_param" == "xheadless" ] || [ "x$spec_param" == "x" ]; then
+        img_spec="headless"
+    elif [ "x$spec_param" == "xstandard" ] || [ "x$spec_param" == "xfull" ]; then
+        img_spec=$spec_param
+    else
+        echo `date` - ERROR, please check your params in option -s or --spec.
         exit 2
     fi
     if [ "x$repo_file" == "x" ] ; then
@@ -125,7 +166,7 @@ prepare(){
             repo_file=${tmp_dir}/${repo_file_name}
         fi
     fi
-    
+
     repo_suffix=${repo_file_name%.*}
     if [ "x$img_name" == "x" ]; then
         if [[ "${repo_suffix}" =~ ^${OS_NAME}.* ]]; then
@@ -151,7 +192,7 @@ prepare(){
     if [ ! -d ${run_dir}/img ]; then
         mkdir ${run_dir}/img
     fi
-    
+
     repo_info_names=`cat ${repo_file} | grep "^\["`
     repo_baseurls=`cat ${repo_file} | grep "^baseurl="`
     index=1
@@ -393,15 +434,7 @@ make_rootfs(){
     LOG "make rootfs for ${repo_file} begin..."
     cd "${run_dir}"
     if [[ -d ${rootfs_dir} ]]; then
-        if [[ -d ${rootfs_dir}/dev && `ls ${rootfs_dir}/dev | wc -l` -gt 1 ]]; then
-            umount -l ${rootfs_dir}/dev
-        fi
-        if [[ -d ${rootfs_dir}/proc && `ls ${rootfs_dir}/proc | wc -l` -gt 0 ]]; then
-            umount -l ${rootfs_dir}/proc
-        fi
-        if [[ -d ${rootfs_dir}/sys && `ls ${rootfs_dir}/sys | wc -l` -gt 0 ]]; then
-            umount -l ${rootfs_dir}/sys
-        fi
+        UMOUNT_ALL
         rm -rf ${rootfs_dir}
     fi
     mkdir ${rootfs_dir}
@@ -419,22 +452,17 @@ make_rootfs(){
     # dnf --installroot=${rootfs_dir}/ makecache
     # dnf --installroot=${rootfs_dir}/ install -y alsa-utils wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp bluez pulseaudio-module-bluetooth
     set +e
-    for item in $(cat $CONFIG_RPM_LIST)
-    do
-        dnf --installroot=${rootfs_dir}/ install -y $item
-        if [ $? == 0 ]; then
-            LOG install $item.
-        else
-            ERROR can not install $item.
-        fi
-    done
-    cat ${rootfs_dir}/etc/ntp.conf | grep "^server*"
-    if [ $? -ne 0 ]; then
-        echo -e "\nserver 0.cn.pool.ntp.org\nserver 1.asia.pool.ntp.org\nserver 2.asia.pool.ntp.org\nserver 127.0.0.1">>${rootfs_dir}/etc/ntp.conf
+    if [ $img_spec == "headless" ]; then
+        INSTALL_PACKAGES $CONFIG_RPM_LIST
+    elif [ $img_spec == "standard" ]; then
+        INSTALL_PACKAGES $CONFIG_STANDARD_LIST
+    elif [ $img_spec == "full" ]; then
+        INSTALL_PACKAGES $CONFIG_FULL_LIST
     fi
-    cat ${rootfs_dir}/etc/ntp.conf | grep "^fudge*"
+    cat ${rootfs_dir}/etc/systemd/timesyncd.conf | grep "^NTP*"
     if [ $? -ne 0 ]; then
-        echo -e "\nfudge 127.0.0.1 stratum 10">>${rootfs_dir}/etc/ntp.conf
+        sed -i 's/#NTP=/NTP=0.cn.pool.ntp.org/g' ${rootfs_dir}/etc/systemd/timesyncd.conf
+        sed -i 's/#FallbackNTP=/FallbackNTP=1.asia.pool.ntp.org 2.asia.pool.ntp.org/g' ${rootfs_dir}/etc/systemd/timesyncd.conf
     fi
     set -e
     cp ${euler_dir}/hosts ${rootfs_dir}/etc/hosts
@@ -462,9 +490,7 @@ make_rootfs(){
     mount -t proc /proc ${rootfs_dir}/proc
     mount -t sysfs /sys ${rootfs_dir}/sys
     chroot ${rootfs_dir} /bin/bash -c "echo 'Y' | /chroot.sh"
-    umount -l ${rootfs_dir}/dev
-    umount -l ${rootfs_dir}/proc
-    umount -l ${rootfs_dir}/sys
+    UMOUNT_ALL
     rm ${rootfs_dir}/etc/yum.repos.d/tmp.repo
     rm ${rootfs_dir}/chroot.sh
     LOG "make rootfs for ${repo_file} end."
@@ -474,12 +500,12 @@ make_img(){
     LOG "make ${img_file} begin..."
     cd "${run_dir}"
     size=`du -sh --block-size=1MiB ${rootfs_dir} | cut -f 1 | xargs`
-    size=$(($size+1100))
+    size=$(($size+1150))
     losetup -D
     dd if=/dev/zero of=${img_file} bs=1MiB count=$size && sync
     parted ${img_file} mklabel msdos mkpart primary fat32 8192s 593919s
     parted ${img_file} -s set 1 boot
-    parted ${img_file} mkpart primary linux-swap 593920s 1593343s 
+    parted ${img_file} mkpart primary linux-swap 593920s 1593343s
     parted ${img_file} mkpart primary ext4 1593344s 100%
     device=`losetup -f --show -P ${img_file}`
     LOG "after losetup: ${device}"
@@ -603,8 +629,13 @@ rootfs_dir=${run_dir}/rootfs_${builddate}
 root_mnt=${run_dir}/root
 boot_mnt=${run_dir}/boot
 euler_dir=${cur_dir}/config-common
-CONFIG_RPM_LIST=${euler_dir}/rpmlist
 
+CONFIG_RPM_LIST=${euler_dir}/rpmlist
+CONFIG_STANDARD_LIST=${euler_dir}/standardlist
+CONFIG_FULL_LIST=${euler_dir}/fulllist
+img_spec=""
+
+UMOUNT_ALL
 prepare
 IFS=$'\n'
 update_firmware_app

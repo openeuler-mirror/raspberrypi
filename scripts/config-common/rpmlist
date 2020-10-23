@@ -9,7 +9,7 @@ NetworkManager
 openssh-server
 passwd
 hostname
-ntp
 bluez
 pulseaudio-module-bluetooth
+sudo
 openEuler-repos

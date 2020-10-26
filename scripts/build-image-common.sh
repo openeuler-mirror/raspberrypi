@@ -91,6 +91,33 @@ UMOUNT_ALL(){
     set -e
 }
 
+LOSETUP_D_IMG(){
+    set +e
+    if [ -d ${root_mnt} ]; then
+        if grep -q "${root_mnt} " /proc/mounts ; then
+            umount ${root_mnt}
+        fi
+        rm -rf ${root_mnt}
+    fi
+    if [ -d ${boot_mnt} ]; then
+        if grep -q "${boot_mnt} " /proc/mounts ; then
+            umount ${boot_mnt}
+        fi
+        rm -rf ${boot_mnt}
+    fi
+    if [ "x$device" != "x" ]; then
+        kpartx -d ${device}
+        losetup -d ${device}
+    fi
+    if [ -d ${root_mnt} ]; then
+        rm -rf ${root_mnt}
+    fi
+    if [ -d ${boot_mnt} ]; then
+        rm -rf ${boot_mnt}
+    fi
+    set -e
+}
+
 INSTALL_PACKAGES(){
     for item in $(cat $1)
     do
@@ -483,7 +510,7 @@ make_rootfs(){
     cp pi-bluetooth/debian/pi-bluetooth.hciuart.service ${rootfs_dir}/lib/systemd/system/hciuart.service
     cp -r ${output_dir}/lib/modules ${rootfs_dir}/lib/
     mkdir -p ${rootfs_dir}/usr/share/licenses/raspi
-    cp -a ${euler_dir}/License/* ${rootfs_dir}/usr/share/licenses/raspi/
+    cp ${euler_dir}/License/* ${rootfs_dir}/usr/share/licenses/raspi/
     cp ${euler_dir}/chroot.sh ${rootfs_dir}/chroot.sh
     chmod +x ${rootfs_dir}/chroot.sh
     mount --bind /dev ${rootfs_dir}/dev
@@ -498,6 +525,7 @@ make_rootfs(){
 
 make_img(){
     LOG "make ${img_file} begin..."
+    LOSETUP_D_IMG
     cd "${run_dir}"
     size=`du -sh --block-size=1MiB ${rootfs_dir} | cut -f 1 | xargs`
     size=$(($size+1150))
@@ -509,6 +537,7 @@ make_img(){
     parted ${img_file} mkpart primary ext4 1593344s 100%
     device=`losetup -f --show -P ${img_file}`
     LOG "after losetup: ${device}"
+    trap 'LOSETUP_D_IMG' EXIT
     LOG "image ${img_file} created and mounted as ${device}"
     # loopX=`kpartx -va ${device} | sed -E 's/.*(loop[0-9])p.*/\1/g' | head -1`
     # LOG "after kpartx: ${loopX}"
@@ -522,23 +551,7 @@ make_img(){
     mkfs.vfat -n boot ${bootp}
     mkswap ${swapp}
     mkfs.ext4 ${rootp}
-    set +e
-    if [ -d ${root_mnt} ]; then
-        df -lh | grep ${root_mnt}
-        if [ $? -eq 0 ]; then
-            umount ${root_mnt}
-        fi
-        rm -rf ${root_mnt}
-    fi
-    if [ -d ${boot_mnt} ]; then
-        df -lh | grep ${boot_mnt}
-        if [ $? -eq 0 ]; then
-            umount ${boot_mnt}
-        fi
-        rm -rf ${boot_mnt}
-    fi
-    set -e
-    mkdir ${root_mnt} ${boot_mnt}
+    mkdir -p ${root_mnt} ${boot_mnt}
     mount -t vfat -o uid=root,gid=root,umask=0000 ${bootp} ${boot_mnt}
     mount -t ext4 ${rootp} ${root_mnt}
     fstab_array=("" "" "" "")
@@ -582,12 +595,7 @@ make_img(){
     cd "${run_dir}"
     sync
     sleep 10
-    umount ${root_mnt}
-    umount ${boot_mnt}
-
-    kpartx -d ${device}
-    losetup -d ${device}
-
+    LOSETUP_D_IMG
     rm ${run_dir}/rootfs.tar
     if [ -f ${img_file} ]; then
         md5sum ${img_file} > ${img_file}.md5sum

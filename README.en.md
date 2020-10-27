@@ -248,8 +248,8 @@ The meaning of each parameter:
     - The URL of target repo file: `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
     - The path of target repo file:
 
-        - `./openEuler-20.03-LTS.repo`: to build openEuler 20.03 LTS image, refer to `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo` for details about the content of the repo file.
-        - `./openEuler-20.09.repo`: to build openEuler 20.09 image, the content of the repo file is as follows:
+        - `./openEuler-20.03-LTS.repo`: for building openEuler 20.03 LTS image, refer to <https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo> for details.
+        - `./openEuler-20.09.repo`: for building openEuler 20.09 image, the content of the repo file is as follows:
 
             ```
             [OS]

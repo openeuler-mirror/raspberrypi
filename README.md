@@ -249,8 +249,8 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
     - 开发源 repo 文件的 URL：`https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
     - 开发源的 repo 文件路径：
 
-        - `./openEuler-20.03-LTS.repo`：生成 openEuler 20.03 LTS 版本的镜像，该文件内容参考 `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`。
-        - `./openEuler-20.09.repo`：生成 openEuler 20.09 版本的镜像，repo 文件的内容如下：
+        - `./openEuler-20.03-LTS.repo`：生成 openEuler 20.03 LTS 版本的镜像，该文件内容参考 <https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo>。
+        - `./openEuler-20.09.repo`：生成 openEuler 20.09 版本的镜像，该文件的内容如下：
 
             ```
             [OS]

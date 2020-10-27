@@ -27,40 +27,63 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
   - [交叉编译内核](documents/交叉编译内核.md)
   - [刷写镜像](documents/刷写镜像.md)
   - [树莓派使用](documents/树莓派使用.md)
-  - [openEuler 20.03 LTS 更新日志](documents/changelog.md)
-  - [openEuler 20.09 更新日志](documents/changelog-20.09.md)
+  - [openEuler 20.03 LTS 内测版更新日志](documents/changelog/changelog.md)
+  - [openEuler 20.09 内测版更新日志](documents/changelog/changelog-20.09.md)
+  - [openEuler 20.09 内测版（含 Xfce 桌面环境）更新日志](documents/changelog/changelog-20.09-desktop.md)
+  - [openEuler 20.09 更新日志](documents/changelog/changelog-20.09-release.md)
 
 ## 最新镜像
 
-1.  openEuler 20.03 LTS
+镜像的基本信息如下所示：
 
-    openEuler 20.03 LTS 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-aarch64-raspi.img.xz)。
+<table><thead align="left"><tr>
+<th class="cellrowborder" valign="top" width="10%"><p><strong>镜像版本</strong></p></th>
+<th class="cellrowborder" valign="top" width="10%"><p><strong>系统用户（密码）</strong></p></th>
+<th class="cellrowborder" valign="top" width="10%"><p><strong>更新日志</strong></p></th>
+<th class="cellrowborder" valign="top" width="10%"><p><strong>发布时间</strong></p></th>
+<th class="cellrowborder" valign="top" width="10%"><p><strong>大小</strong></p></th>
+<th class="cellrowborder" valign="top" width="10%"><p><strong>内核版本</strong></p></th>
+<th class="cellrowborder" valign="top" width="10%"><p><strong>构建文件系统的源仓库</strong></p></th>
+</tr></thead>
+<tbody><tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS 内测版</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog.md">链接</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/10/27</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>224 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2009.3.0.0003</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo">openEuler 20.03 LTS 源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-raspi-aarch64-alpha1.img.xz">openEuler 20.09 内测版</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.09.md">链接</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/10/27</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>238 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.140-2009.4.0.0001</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.09/generic.repo">openEuler 20.09 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-desktop-raspi-aarch64-alpha1.img.xz">openEuler 20.09 内测版（包含 Xfce 桌面环境）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.09-desktop.md">链接</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/10/27</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>875 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.138-2008.1.0.0001</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-20.09">openEuler 20.09 源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-20.09/raspi_img/aarch64/openEuler-20.09-raspi-aarch64.img.xz">openEuler 20.09</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>root（openeuler）</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.09-release.md">链接</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/09/30</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>259 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.138-2008.1.0.0001</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-20.09/">openEuler 20.09 源仓库</a></td>
+</tr></tbody></table>
 
-    该镜像的基本信息：
-
-    - [更新日志](documents/changelog.md)
-    - 发布时间：2020-08-10
-    - 大小：259 MiB
-    - 操作系统版本：openEuler 20.03 LTS
-    - 内核版本：4.19.90-2005.2.0.0002
-    - 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
-    - 构建文件系统的源仓库：[openEuler 20.03 LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
-    - 镜像内置源仓库：[openEuler 20.03 LTS 源仓库](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo)
-
-2.  openEuler 20.09
-
-    openEuler 20.09 的内测版本镜像，[下载](https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-aarch64-raspi.img.xz)。
-
-    该镜像的基本信息：
-
-    - [更新日志](documents/changelog-20.09.md)
-    - 发布时间：2020-09-04
-    - 大小：237 MiB
-    - 操作系统版本：openEuler 20.09
-    - 内核版本：4.19.140-2008.3.0.0001
-    - 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
-    - 构建文件系统的源仓库：[openEuler 20.09 每日构建的源仓库](http://119.3.219.20:82/openEuler:/Mainline/standard_aarch64/)
-    - 镜像内置源仓库：[openEuler 20.09 源仓库](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.09/generic.repo)
+其他信息：
+- 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
 
 ## 使用镜像
 
@@ -86,8 +109,11 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 #### 快速构建（无需编译内核，推荐）
 
->![](documents/public_sys-resources/icon-notice.gif) **须知：**
+>![](documents/public_sys-resources/icon-notice.gif) **须知：**  
 >当前只支持 openEuler 20.09 版本。
+>如果构建包含 Xfce 桌面环境的镜像，需要注意两点：
+>1. 需要添加额外的开发源，也就是下面 `-r/--repo` 参数介绍中 `[Xfce]` 对应的信息。注意，该开发源是临时的测试源，其目的为补充 openEuler 的开发源中缺失的 Xfce 相关软件包。
+>2. 根据需要设置 `-s/--spec` 为 `standard` 或 `full`，其具体意义见该参数的介绍部分。
 
 使用已有的树莓派内核、固件、蓝牙等 RPM 包构建镜像。
 
@@ -112,20 +138,50 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
     - 开发源的 repo 文件路径：`./openEuler-20.09.repo`
 
         该文件的内容如下：
+
         ```
-        [MAINLINE]
-        name=MAINLINE
-        baseurl=http://119.3.219.20:82/openEuler:/Mainline/standard_aarch64/
+        [OS]
+        name=OS
+        baseurl=http://repo.openeuler.org/openEuler-20.09/OS/$basearch/
         enabled=1
-        gpgcheck=0
+        gpgcheck=1
+        gpgkey=http://repo.openeuler.org/openEuler-20.09/OS/$basearch/RPM-GPG-KEY-openEuler
+
+        [everything]
+        name=everything
+        baseurl=http://repo.openeuler.org/openEuler-20.09/everything/$basearch/
+        enabled=1
+        gpgcheck=1
+        gpgkey=http://repo.openeuler.org/openEuler-20.09/everything/$basearch/RPM-GPG-KEY-openEuler
 
         [EPOL]
         name=EPOL
-        baseurl=http://119.3.219.20:82/openEuler:/Epol/standard_aarch64/
+        baseurl=http://repo.openeuler.org/openEuler-20.09/EPOL/$basearch/
+        enabled=1
+        gpgcheck=1
+        gpgkey=http://repo.openeuler.org/openEuler-20.09/EPOL/$basearch/RPM-GPG-KEY-openEuler
+
+        [debuginfo]
+        name=debuginfo
+        baseurl=http://repo.openeuler.org/openEuler-20.09/debuginfo/$basearch/
+        enabled=1
+        gpgcheck=1
+        gpgkey=http://repo.openeuler.org/openEuler-20.09/debuginfo/$basearch/RPM-GPG-KEY-openEuler
+
+        [source]
+        name=source
+        baseurl=http://repo.openeuler.org/openEuler-20.09/source/
+        enabled=1
+        gpgcheck=1
+        gpgkey=http://repo.openeuler.org/openEuler-20.09/source/RPM-GPG-KEY-openEuler
+
+        [Xfce]
+        name=Xfce
+        baseurl=https://eulixos.com/repo/others/openeuler-raspberrypi/pkgs/
         enabled=1
         gpgcheck=0
         ```
-    - 资源库的 baseurl 列表：`"http://119.3.219.20:82/openEuler:/Mainline/standard_aarch64/ http://119.3.219.20:82/openEuler:/Epol/standard_aarch64/"`
+    - 资源库的 baseurl 列表：`"http://repo.openeuler.org/openEuler-20.09/everything/aarch64/ http://repo.openeuler.org/openEuler-20.09/EPOL/aarch64/ https://eulixos.com/repo/others/openeuler-raspberrypi/pkgs/"`
 
 3.  -n, --name IMAGE_NAME
 
@@ -152,6 +208,13 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 这里，提供两种构建方式。
 
+>![](documents/public_sys-resources/icon-notice.gif) **须知：**  
+>当前支持 openEuler 20.03 LTS 或 openEuler 20.09 版本。
+>如果构建包含 Xfce 桌面环境的镜像，需要注意三点：
+>1. 只支持 openEuler 20.09 版本。需要选择内核源码的 `openEuler-20.09` 分支，即参数 `-b/--branch` 设置为 `openEuler-20.09`。
+>2. 需要添加额外的开发源，也就是下面 `-r/--repo` 参数介绍中 `[Xfce]` 对应的信息。注意，该开发源是临时的测试源，其目的为补充 openEuler 的开发源中缺失的 Xfce 相关软件包。
+>3. 根据需要设置 `-s/--spec` 为 `standard` 或 `full`，其具体意义见该参数的介绍部分。
+
 ##### 主机上构建
 
 构建镜像需执行命令：
@@ -172,7 +235,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 3.  -b, --branch KERNEL_BRANCH
 
-    内核源码的对应分支，默认为 `master`。
+    内核源码的对应分支，默认为 `master`，推荐使用分支 `openEuler-20.03-LTS` 或 `openEuler-20.09`。
 
 4.  -c, --config KERNEL_DEFCONFIG
 
@@ -184,10 +247,54 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
     下面分别举例：
     - 开发源 repo 文件的 URL：`https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`
-    - 开发源的 repo 文件路径：`./openEuler-20.03-LTS.repo`
+    - 开发源的 repo 文件路径：
 
-        该文件内容参考 `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`。
-    - 资源库的 baseurl 列表：`"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"`
+        - `./openEuler-20.03-LTS.repo`：生成 openEuler 20.03 LTS 版本的镜像，该文件内容参考 `https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo`。
+        - `./openEuler-20.09.repo`：生成 openEuler 20.09 版本的镜像，repo 文件的内容如下：
+
+            ```
+            [OS]
+            name=OS
+            baseurl=http://repo.openeuler.org/openEuler-20.09/OS/$basearch/
+            enabled=1
+            gpgcheck=1
+            gpgkey=http://repo.openeuler.org/openEuler-20.09/OS/$basearch/RPM-GPG-KEY-openEuler
+
+            [everything]
+            name=everything
+            baseurl=http://repo.openeuler.org/openEuler-20.09/everything/$basearch/
+            enabled=1
+            gpgcheck=1
+            gpgkey=http://repo.openeuler.org/openEuler-20.09/everything/$basearch/RPM-GPG-KEY-openEuler
+
+            [EPOL]
+            name=EPOL
+            baseurl=http://repo.openeuler.org/openEuler-20.09/EPOL/$basearch/
+            enabled=1
+            gpgcheck=1
+            gpgkey=http://repo.openeuler.org/openEuler-20.09/EPOL/$basearch/RPM-GPG-KEY-openEuler
+
+            [debuginfo]
+            name=debuginfo
+            baseurl=http://repo.openeuler.org/openEuler-20.09/debuginfo/$basearch/
+            enabled=1
+            gpgcheck=1
+            gpgkey=http://repo.openeuler.org/openEuler-20.09/debuginfo/$basearch/RPM-GPG-KEY-openEuler
+
+            [source]
+            name=source
+            baseurl=http://repo.openeuler.org/openEuler-20.09/source/
+            enabled=1
+            gpgcheck=1
+            gpgkey=http://repo.openeuler.org/openEuler-20.09/source/RPM-GPG-KEY-openEuler
+
+            [Xfce]
+            name=Xfce
+            baseurl=https://eulixos.com/repo/others/openeuler-raspberrypi/pkgs/
+            enabled=1
+            gpgcheck=0
+            ```
+    - 资源库的 baseurl 列表：`"http://repo.openeuler.org/openEuler-20.03-LTS/OS/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/EPOL/aarch64/ http://repo.openeuler.org/openEuler-20.03-LTS/source"` 或 `"http://repo.openeuler.org/openEuler-20.09/everything/aarch64/ http://repo.openeuler.org/openEuler-20.09/EPOL/aarch64/ https://eulixos.com/repo/others/openeuler-raspberrypi/pkgs/"`
 
 6.  -s, --spec SPEC
 

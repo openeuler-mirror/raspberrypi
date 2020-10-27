@@ -83,17 +83,16 @@ LOSETUP_D_IMG(){
         if grep -q "${root_mnt} " /proc/mounts ; then
             umount ${root_mnt}
         fi
-        rm -rf ${root_mnt}
     fi
     if [ -d ${boot_mnt} ]; then
         if grep -q "${boot_mnt} " /proc/mounts ; then
             umount ${boot_mnt}
         fi
-        rm -rf ${boot_mnt}
     fi
     if [ "x$device" != "x" ]; then
         kpartx -d ${device}
         losetup -d ${device}
+        device=""
     fi
     if [ -d ${root_mnt} ]; then
         rm -rf ${root_mnt}
@@ -174,7 +173,7 @@ prepare(){
         else
             img_name=${OS_NAME}
         fi
-        img_name=${img_name}-aarch64-raspi.img
+        img_name=${img_name}-raspi-aarch64.img
     else
         if [ "x${img_name:0-4}" != "x.img" ]; then
             img_name=${img_name}.img

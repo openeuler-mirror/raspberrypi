@@ -187,7 +187,7 @@ The meaning of each parameter:
 
     The image name to be built.
 
-    For example, `openEuler-20.09.img`. The default is `openEuler-aarch64-raspi.img`, or it is automatically generated based on parameter: `-r, --repo REPO_INFO`.
+    For example, `openEuler-20.09.img`. The default is `openEuler-raspi-aarch64.img`, or it is automatically generated based on parameter: `-n, --name IMAGE_NAME`.
 
 4.  -s, --spec SPEC
 
@@ -225,7 +225,7 @@ The meaning of each parameter:
 
     The image name to be built.
 
-    For example, `openEuler-20.03-LTS.img`. The default is `openEuler-aarch64-raspi.img`, or it is automatically generated based on parameter: `-r, --repo REPO_INFO`.
+    For example, `openEuler-20.03-LTS.img`. The default is `openEuler-raspi-aarch64.img`, or it is automatically generated based on parameter: `-n, --name IMAGE_NAME`.
 
 2.  -k, --kernel KERNEL_URL
 

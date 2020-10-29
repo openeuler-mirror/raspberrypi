@@ -187,7 +187,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
     构建的镜像名称。
 
-    例如，`openEuler-20.09.img`。默认为`openEuler-aarch64-raspi.img`，或者根据 `-r, --repo REPO_INFO` 参数自动生成。
+    例如，`openEuler-20.09.img`。默认为`openEuler-raspi-aarch64.img`，或者根据 `-n, --name IMAGE_NAME` 参数自动生成。
 
 4.  -s, --spec SPEC
 
@@ -227,7 +227,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
     构建的镜像名称。
 
-    例如，`openEuler-20.03-LTS.img`。默认为`openEuler-aarch64-raspi.img`，或者根据 `-r, --repo REPO_INFO` 参数自动生成。
+    例如，`openEuler-20.03-LTS.img`。默认为`openEuler-raspi-aarch64.img`，或者根据 `-n, --name IMAGE_NAME` 参数自动生成。
 
 2.  -k, --kernel KERNEL_URL
 

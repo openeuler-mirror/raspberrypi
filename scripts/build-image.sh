@@ -77,6 +77,32 @@ UMOUNT_ALL(){
     set -e
 }
 
+LOSETUP_D_IMG(){
+    set +e
+    if [ -d ${root_mnt} ]; then
+        if grep -q "${root_mnt} " /proc/mounts ; then
+            umount ${root_mnt}
+        fi
+    fi
+    if [ -d ${boot_mnt} ]; then
+        if grep -q "${boot_mnt} " /proc/mounts ; then
+            umount ${boot_mnt}
+        fi
+    fi
+    if [ "x$device" != "x" ]; then
+        kpartx -d ${device}
+        losetup -d ${device}
+        device=""
+    fi
+    if [ -d ${root_mnt} ]; then
+        rm -rf ${root_mnt}
+    fi
+    if [ -d ${boot_mnt} ]; then
+        rm -rf ${boot_mnt}
+    fi
+    set -e
+}
+
 INSTALL_PACKAGES(){
     for item in $(cat $1)
     do
@@ -147,7 +173,7 @@ prepare(){
         else
             img_name=${OS_NAME}
         fi
-        img_name=${img_name}-aarch64-raspi.img
+        img_name=${img_name}-raspi-aarch64.img
     else
         if [ "x${img_name:0-4}" != "x.img" ]; then
             img_name=${img_name}.img
@@ -241,7 +267,11 @@ make_rootfs(){
     fi
     cp ${euler_dir}/ifup-eth0 $rootfs_dir/etc/sysconfig/network-scripts/ifup-eth0
     mkdir -p ${rootfs_dir}/usr/bin ${rootfs_dir}/lib/udev/rules.d ${rootfs_dir}/lib/systemd/system
+    if [ -d ${rootfs_dir}/usr/share/licenses/raspi ]; then
+        mkdir -p ${rootfs_dir}/usr/share/licenses/raspi
+    fi
     cp ${euler_dir}/*.rules ${rootfs_dir}/lib/udev/rules.d/
+    cp ${euler_dir}/LICENCE.* ${rootfs_dir}/usr/share/licenses/raspi/
     cp ${euler_dir}/chroot.sh ${rootfs_dir}/chroot.sh
     chmod +x ${rootfs_dir}/chroot.sh
     mount --bind /dev ${rootfs_dir}/dev
@@ -256,6 +286,7 @@ make_rootfs(){
 
 make_img(){
     LOG "make ${img_file} begin..."
+    LOSETUP_D_IMG
     size=`du -sh --block-size=1MiB ${rootfs_dir} | cut -f 1 | xargs`
     size=$(($size+1100))
     losetup -D
@@ -266,6 +297,7 @@ make_img(){
     parted ${img_file} mkpart primary ext4 1593344s 100%
     device=`losetup -f --show -P ${img_file}`
     LOG "after losetup: ${device}"
+    trap 'LOSETUP_D_IMG' EXIT
     LOG "image ${img_file} created and mounted as ${device}"
     # loopX=`kpartx -va ${device} | sed -E 's/.*(loop[0-9])p.*/\1/g' | head -1`
     # LOG "after kpartx: ${loopX}"
@@ -279,22 +311,6 @@ make_img(){
     mkfs.vfat -n boot ${bootp}
     mkswap ${swapp}
     mkfs.ext4 ${rootp}
-    set +e
-    if [ -d ${root_mnt} ]; then
-        df -lh | grep ${root_mnt}
-        if [ $? -eq 0 ]; then
-            umount ${root_mnt}
-        fi
-        rm -rf ${root_mnt}
-    fi
-    if [ -d ${boot_mnt} ]; then
-        df -lh | grep ${boot_mnt}
-        if [ $? -eq 0 ]; then
-            umount ${boot_mnt}
-        fi
-        rm -rf ${boot_mnt}
-    fi
-    set -e
     mkdir -p ${root_mnt} ${boot_mnt}
     mount -t vfat -o uid=root,gid=root,umask=0000 ${bootp} ${boot_mnt}
     mount -t ext4 ${rootp} ${root_mnt}
@@ -327,12 +343,7 @@ make_img(){
     popd
     sync
     sleep 10
-    umount ${root_mnt}
-    umount ${boot_mnt}
-
-    kpartx -d ${device}
-    losetup -d ${device}
-
+    LOSETUP_D_IMG
     rm ${tmp_dir}/rootfs.tar
     rm -rf ${rootfs_dir}
     losetup -D

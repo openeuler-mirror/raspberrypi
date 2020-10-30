@@ -1,17 +1,35 @@
-## Feature Release Log
+## Feature Release Log of openEuler 20.03 LTS Alpha Version
 
 English | [简体中文](./changelog.md)
+
+### 2020-10-27
+
+#### Basic information
+
+- Release date: 2020/10/27
+- Size: 224 MiB
+- OS version: openEuler 20.03 LTS
+- Kernel version: 4.19.90-2009.3.0.0003
+- Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+- Repository of rootfs: [openEuler 20.03 LTS repository](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo)
+- Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo)
+
+#### Updates
+
+##### Kernel
+
+Update to the latest stable version of openeuler: 4.19.90-2009.3.0.
 
 ### 2020-08-10
 
 #### Basic information
 
-- Release date: 2020-08-10
+- Release date: 2020/08/10
 - Size: 259 MiB
 - OS version: openEuler 20.03 LTS
 - Kernel version: 4.19.90-2005.2.0.0002
 - Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
-- Repository of rootfs: [openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
+- Repository of rootfs: [openEuler 20.03 LTS repository](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
 - Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config/openEuler-20.03-LTS.repo)
 
 #### Updates
@@ -20,16 +38,16 @@ English | [简体中文](./changelog.md)
 
 Update to the latest stable version of openeuler: 4.19.90-2005.2.0.
 
-### 2020-05-09
+### 2020-05-11
 
 #### Basic information
 
-- Release date: 2020-05-11
+- Release date: 2020/05/11
 - Size: 245 MiB
 - OS version: openEuler 20.03 LTS
 - Kernel version: 4.19.90-2003.4.0.0036
 - Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
-- Repository of rootfs: [openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
+- Repository of rootfs: [openEuler 20.03 LTS repository](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
 - Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config/openEuler-20.03-LTS.repo)
 
 #### Updates
@@ -42,12 +60,12 @@ Start related services of bluetooth and bind Bluetooth devices by default.
 
 #### Basic information
 
-- Release date: 2020-04-27
+- Release date: 2020/04/27
 - Size: 240 MiB
 - OS version: openEuler 20.03 LTS
 - Kernel version: 4.19.90-2003.4.0.0036
 - Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
-- Repository of rootfs: [openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
+- Repository of rootfs: [openEuler 20.03 LTS repository](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
 - Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config/openEuler-20.03-LTS.repo)
 
 #### Updates
@@ -72,10 +90,10 @@ Set CONFIG_SERIAL_DEV_CTRL_TTYPORT and CONFIG_BT_HCIUART_BCM as 'y' to compile s
 
 #### Basic information
 
-- Release date: 2020-04-15
+- Release date: 2020/04/15
 - Size: 241 MiB
 - OS version: openEuler 20.03 LTS
 - Kernel version: 4.19.90-2003.4.0.0036
 - Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
-- Repository of rootfs: [openEuler-20.03-LTS](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
+- Repository of rootfs: [openEuler 20.03 LTS repository](http://repo.openeuler.org/openEuler-20.03-LTS/everything/aarch64/)
 - Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/openeuler/raspberrypi/blob/master/scripts/config/openEuler-20.03-LTS.repo)

@@ -10,10 +10,13 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 - 建立或回复 issue：欢迎通过建立或回复 issue 来讨论，此 SIG 组维护的仓库列表可在 [sig-RaspberryPi](https://gitee.com/jianminw/community/tree/master/sig/sig-RaspberryPi) 中查看。
 - 加入 Slack 群组：[openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com )
-  - [加入群组链接](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-gghnovr7-l05In14G3uAtuQIVZ3xH2A)，此链接于 9 月 7 日失效，我们会定期更新。
-- SIG 组会议：每个月的第一个和第三个周二下午 03:00 - 03:30 会进行一次讨论会议，Zoom Meeting ID: 881 4204 8958
-  - [会议议题](https://docs.google.com/document/d/1HuN7sWLiPuvGLqd-1tH1WAbzk51tgXpFBodp3dz_DBY/)：每周会议前填写要讨论的议题，我们也会从 issue 列表中提取本周讨论的内容。
-  - [会议记录](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6?from=project-issue)：每周会议结束后会议结论会更新在此 issue 中。
+  - [加入群组链接](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-iqpnvura-TiEGGioYPC6gswmhWrIisQ)，此链接于 2020/12/04 失效，我们会定期更新。
+- SIG 组会议：每个月的第一个和第三个周二下午 03:00 - 03:30 会进行一次讨论会议
+  - 会议链接：有以下两种获取方式
+    - [openEuler 社区网站](https://openeuler.org/)下的会议日历中查看 `sig-RaspberryPi例会` 预定信息。
+    - 微信小程序搜索 `openEuler`，添加 `openEuler` 小程序，可在其`会议`栏目查看 `sig-RaspberryPi例会` 预定信息。
+  - [会议议题](https://etherpad.openeuler.org/p/sig-RaspberryPi-meetings)：每次会议前填写要讨论的议题，我们也会从 issue 列表中提取本周讨论的内容。
+  - [会议记录](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6)：每次会议结束后会议结论会更新在此 issue 中。
 - 重要的事说三遍：**欢迎提交 PR！欢迎提交 PR！欢迎提交 PR！**
 
 ## 仓库目录

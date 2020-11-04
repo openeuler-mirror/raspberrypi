@@ -10,12 +10,14 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
 
 - Issues: welcome to collaborate with us by create new issues or reply opened issues. You can get repository list from [sig-RaspberryPi](https://gitee.com/jianminw/community/tree/master/sig/sig-RaspberryPi).
 - Join Slack workspace: [openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com )
-  - [Invite link](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-gghnovr7-l05In14G3uAtuQIVZ3xH2A), this link will be due on Sep 7th. We will update the link periodically.
-- Weekly meeting
-  - Time: The first and third Tuesday of every month, 15:00 - 15:30 +0800
-  - Zoom Meeting ID: 881 4204 8958
-  - [Meeting Agenda](https://docs.google.com/document/d/1HuN7sWLiPuvGLqd-1tH1WAbzk51tgXpFBodp3dz_DBY/)
-  - [Meeting Minutes](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6?from=project-issue)
+  - [Invite link](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-iqpnvura-TiEGGioYPC6gswmhWrIisQ): This link will be due on Dec 4th, 2020. We will update the link periodically.
+- Weekly meeting schedule
+  - Meeting Time: The 1st and 3rd Tuesday of each month, 15:00 - 15:30 UTC+8.
+  - Meeting Link: There are two methods to get the meeting link which will be updated before each meeting.
+    - Log in to the [openEuler Community](https://openeuler.org/) website, then view the booking information of `sig-RaspberryPi例会` in the meeting calendar.
+    - Search `openEuler` in mini programs of Wechat, add `openEuler mini program`. Then click `会议` and view the booking information of `sig-RaspberryPi例会`.
+  - [Meeting Agenda](https://etherpad.openeuler.org/p/sig-RaspberryPi-meetings)
+  - [Meeting Minutes](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6)
 - Warmly welcome to sumbit Pull Requests.
 
 ## Files and Directories

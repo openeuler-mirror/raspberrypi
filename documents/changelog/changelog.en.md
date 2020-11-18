@@ -2,6 +2,24 @@
 
 English | [简体中文](./changelog.md)
 
+### 2020-11-17
+
+#### Basic information
+
+- Release date: 2020/11/17
+- Size: 224 MiB
+- OS version: openEuler 20.03 LTS
+- Kernel version: 4.19.90-2010.2.0
+- Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+- Repository of rootfs: [openEuler 20.03 LTS repository](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo)
+- Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo)
+
+#### Updates
+
+##### Kernel
+
+Update to the latest stable version of openeuler: 4.19.90-2010.2.0.
+
 ### 2020-10-27
 
 #### Basic information

@@ -249,8 +249,8 @@ prepare(){
     set -e
 
     wget https://raw.githubusercontent.com/RPi-Distro/raspberrypi-sys-mods/master/etc.armhf/udev/rules.d/99-com.rules -P ${tmp_dir}/
-    wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/regulatory.db.p7s -P ${tmp_dir}/
-    wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/tree/regulatory.db -P ${tmp_dir}/
+    wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/plain/regulatory.db.p7s -P ${tmp_dir}/
+    wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/plain/regulatory.db -P ${tmp_dir}/
     if [ ! -d ${run_dir}/img/${builddate} ]; then
         mkdir -p ${run_dir}/img/${builddate}
     fi
@@ -597,9 +597,9 @@ make_img(){
     LOSETUP_D_IMG
     rm ${run_dir}/rootfs.tar
     if [ -f ${img_file} ]; then
-        md5sum ${img_file} > ${img_file}.md5sum
+        sha256sum $(basename ${img_file}) > ${img_file}.sha256sum
         xz -T 20 -z -c ${img_file} > ${img_file}.xz
-        md5sum ${img_file}.xz > ${img_file}.xz.md5sum
+        sha256sum $(basename ${img_file}.xz) > ${img_file}.xz.sha256sum
         LOG "made sum files for ${img_file}"
     fi
     # rm -rf ${output_dir}

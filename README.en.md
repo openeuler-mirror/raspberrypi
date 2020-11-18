@@ -50,28 +50,28 @@ Basic information of the image is as follows:
 <th class="cellrowborder" valign="top" width="10%"><p><strong>Repository of rootfs</strong></p></th>
 </tr></thead>
 <tbody><tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS alpha1</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-raspi-aarch64-alpha2.img.xz">openEuler 20.03 LTS alpha2</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog.en.md">Link</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2020/10/27</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/11/17</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>224 MiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2009.3.0.0003</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2010.2.0</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo">openEuler 20.03 LTS repository</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-raspi-aarch64-alpha1.img.xz">openEuler 20.09 alpha1</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-raspi-aarch64-alpha2.img.xz">openEuler 20.09 alpha2</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.09.en.md">Link</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2020/10/27</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>238 MiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>4.19.140-2009.4.0.0001</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/11/17</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>239 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.140-2011.1.0.0003</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.09/generic.repo">openEuler 20.09 repository built daily</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-desktop-raspi-aarch64-alpha1.img.xz">openEuler 20.09 alpha1 (with desktop environment)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-desktop-raspi-aarch64-alpha2.img.xz">openEuler 20.09 alpha2 (with desktop environment)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.09-desktop.en.md">Link</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2020/10/27</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/11/17</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>875 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.138-2008.1.0.0001</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-20.09/">openEuler 20.09 repository</a></td>

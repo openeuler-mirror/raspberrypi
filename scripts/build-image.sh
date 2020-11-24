@@ -115,8 +115,6 @@ INSTALL_PACKAGES(){
     done
 }
 
-trap 'UMOUNT_ALL' EXIT
-
 prepare(){
     if [ ! -d ${tmp_dir} ]; then
         mkdir -p ${tmp_dir}
@@ -286,6 +284,7 @@ make_rootfs(){
 
 make_img(){
     LOG "make ${img_file} begin..."
+    device=""
     LOSETUP_D_IMG
     size=`du -sh --block-size=1MiB ${rootfs_dir} | cut -f 1 | xargs`
     size=$(($size+1100))
@@ -380,7 +379,17 @@ fi
 
 OS_NAME=openEuler
 
-workdir=$(cd "$(dirname $workdir)"; pwd)/$(basename $workdir)
+if [ "x${workdir}" == "x./" ]; then
+    workdir=${cur_dir}
+fi
+if [ "x${workdir}" == "x/" ]; then
+    workdir=""
+elif [ "x$(dirname $workdir)" == "x/" ]; then
+    workdir=/$(basename $workdir)
+else
+    workdir=$(cd "$(dirname $workdir)"; pwd)/$(basename $workdir)
+fi
+
 rootfs_dir=${workdir}/raspi_output/rootfs
 root_mnt=${workdir}/raspi_output/root
 boot_mnt=${workdir}/raspi_output/boot
@@ -396,6 +405,7 @@ img_spec=""
 
 builddate=$(date +%Y%m%d)
 
+trap 'UMOUNT_ALL' EXIT
 UMOUNT_ALL
 prepare
 IFS=$'\n'

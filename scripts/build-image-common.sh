@@ -129,8 +129,6 @@ INSTALL_PACKAGES(){
     done
 }
 
-trap 'UMOUNT_ALL' EXIT
-
 prepare(){
     if [ ! -d ${tmp_dir} ]; then
         mkdir -p ${tmp_dir}
@@ -259,7 +257,7 @@ prepare(){
 
 update_firmware_app(){
     LOG "update firmware and app begin..."
-    cd "${run_dir}"
+    cd "${run_dir}/"
     ######## firmware
     if [[ ! -d firmware ]]; then
         git clone --depth=1 https://github.com/raspberrypi/firmware
@@ -365,7 +363,7 @@ make_kernel(){
 
 update_kernel(){
     LOG "update kernel begin..."
-    cd "${run_dir}"
+    cd "${run_dir}/"
     kernel_dir=""
     for file in `ls`
     do
@@ -458,7 +456,7 @@ update_kernel(){
 
 make_rootfs(){
     LOG "make rootfs for ${repo_file} begin..."
-    cd "${run_dir}"
+    cd "${run_dir}/"
     if [[ -d ${rootfs_dir} ]]; then
         UMOUNT_ALL
         rm -rf ${rootfs_dir}
@@ -524,8 +522,9 @@ make_rootfs(){
 
 make_img(){
     LOG "make ${img_file} begin..."
+    device=""
     LOSETUP_D_IMG
-    cd "${run_dir}"
+    cd "${run_dir}/"
     size=`du -sh --block-size=1MiB ${rootfs_dir} | cut -f 1 | xargs`
     size=$(($size+1150))
     losetup -D
@@ -591,7 +590,7 @@ make_img(){
             fi
         fi
     done
-    cd "${run_dir}"
+    cd "${run_dir}/"
     sync
     sleep 10
     LOSETUP_D_IMG
@@ -627,6 +626,9 @@ OS_NAME=openEuler
 cur_dir=$(cd $(dirname $0);pwd)
 
 run_dir=${cur_dir}
+if [ "x${run_dir}" == "x/" ]; then
+    run_dir=""
+fi
 tmp_dir=${cur_dir}/tmp
 
 buildid=$(date +%Y%m%d%H%M%S)
@@ -642,6 +644,7 @@ CONFIG_STANDARD_LIST=${euler_dir}/standardlist
 CONFIG_FULL_LIST=${euler_dir}/fulllist
 img_spec=""
 
+trap 'UMOUNT_ALL' EXIT
 UMOUNT_ALL
 prepare
 IFS=$'\n'

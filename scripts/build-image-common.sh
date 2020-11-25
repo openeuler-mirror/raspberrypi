@@ -70,11 +70,11 @@ parseargs()
 }
 
 ERROR(){
-    echo `date` - ERROR, $* | tee -a ${cur_dir}/log/log_${builddate}.log
+    echo `date` - ERROR, $* | tee -a ${log_dir}/log_${builddate}.log
 }
 
 LOG(){
-    echo `date` - INFO, $* | tee -a ${cur_dir}/log/log_${builddate}.log
+    echo `date` - INFO, $* | tee -a ${log_dir}/log_${builddate}.log
 }
 
 UMOUNT_ALL(){
@@ -204,19 +204,15 @@ prepare(){
             img_name=${img_name}.img
         fi
     fi
-    img_file=${run_dir}/img/${builddate}/${img_name}
+    img_file=${img_dir}/${img_name}
 
-    if [ ! -d ${cur_dir}/log ]; then
-        mkdir ${cur_dir}/log
+    if [ ! -d ${log_dir} ]; then
+        mkdir ${log_dir}
     fi
     LOG "prepare begin..."
     dnf clean all
     dnf makecache
     dnf install -y bison flex openssl-devel bc wget dnf-plugins-core tar parted dosfstools grep bash xz kpartx
-
-    if [ ! -d ${run_dir}/img ]; then
-        mkdir ${run_dir}/img
-    fi
 
     repo_info_names=`cat ${repo_file} | grep "^\["`
     repo_baseurls=`cat ${repo_file} | grep "^baseurl="`
@@ -250,8 +246,8 @@ prepare(){
     wget https://raw.githubusercontent.com/RPi-Distro/raspberrypi-sys-mods/master/etc.armhf/udev/rules.d/99-com.rules -P ${tmp_dir}/
     wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/plain/regulatory.db.p7s -P ${tmp_dir}/
     wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/plain/regulatory.db -P ${tmp_dir}/
-    if [ ! -d ${run_dir}/img/${builddate} ]; then
-        mkdir -p ${run_dir}/img/${builddate}
+    if [ ! -d ${img_dir} ]; then
+        mkdir -p ${img_dir}
     fi
     LOG "prepare end."
 }
@@ -602,15 +598,18 @@ make_img(){
     sleep 10
     LOSETUP_D_IMG
     rm ${run_dir}/rootfs.tar
+    rm -rf ${rootfs_dir}
+    losetup -D
+    pushd ${img_dir}
     if [ -f ${img_file} ]; then
         sha256sum $(basename ${img_file}) > ${img_file}.sha256sum
         xz -T 20 -z -c ${img_file} > ${img_file}.xz
         sha256sum $(basename ${img_file}.xz) > ${img_file}.xz.sha256sum
         LOG "made sum files for ${img_file}"
     fi
+    popd
     # rm -rf ${output_dir}
-    rm -rf ${rootfs_dir}
-    losetup -D
+    
     LOG "write ${img_file} done."
     LOG "make ${img_file} end."
 }
@@ -636,10 +635,13 @@ run_dir=${cur_dir}
 if [ "x${run_dir}" == "x/" ]; then
     run_dir=""
 fi
-tmp_dir=${cur_dir}/tmp
 
 buildid=$(date +%Y%m%d%H%M%S)
 builddate=${buildid:0:8}
+
+tmp_dir=${cur_dir}/tmp
+log_dir=${cur_dir}/log
+img_dir=${run_dir}/img/${builddate}
 output_dir=${run_dir}/output
 rootfs_dir=${run_dir}/rootfs_${builddate}
 root_mnt=${run_dir}/root

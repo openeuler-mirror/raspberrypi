@@ -210,6 +210,7 @@ prepare(){
         mkdir ${cur_dir}/log
     fi
     LOG "prepare begin..."
+    dnf clean all
     dnf makecache
     dnf install -y bison flex openssl-devel bc wget dnf-plugins-core tar parted dosfstools grep bash xz kpartx
 
@@ -399,6 +400,7 @@ update_kernel(){
         fi
     fi
     cd "${kernel_dir}"
+    make distclean
     cur_branch=`git branch | grep \*`
     cur_branch=${cur_branch##*\ }
     exist_branch=0
@@ -433,7 +435,12 @@ update_kernel(){
         ERROR "no ${kernel_branch} found."
         exit 1
     else
+        set +e
         git pull origin ${kernel_branch} # git_rst=`xxx`
+        if [ $? -ne 0 ]; then
+            git reset --hard remotes/origin/${kernel_branch}
+        fi
+        set -e
         make_kernel ${kernel_dir}
     fi
     # if [[ ${git_rst} = Already* ]]; then

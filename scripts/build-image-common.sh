@@ -230,7 +230,6 @@ prepare(){
     done
     set +e
     os_release_name=${OS_NAME}-release
-    # yumdownloader --downloaddir=${tmp_dir} ${os_release_name} -c ${repo_file}
     dnf ${repo_info} --disablerepo="*" --downloaddir=${tmp_dir}/ download ${os_release_name}
     if [ $? != 0 ]; then
         ERROR "Fail to download ${os_release_name}!"
@@ -439,21 +438,6 @@ update_kernel(){
         set -e
         make_kernel ${kernel_dir}
     fi
-    # if [[ ${git_rst} = Already* ]]; then
-    #     echo "updated."
-    #     if [ ! -d ${run_dir}/output ]; then
-    #         make_kernel ${kernel_dir}
-    #     else
-    #         output_dir=${run_dir}/output
-    #     fi
-    # elif [[ ${git_rst} = fatal* ]]; then
-    #     echo "get newest kernel failed!!!"
-    #     ERROR "get newest kernel failed!!!"
-    #     exit 1
-    # else
-    #     cd "${kernel_dir}"
-    #     make_kernel ${kernel_dir}
-    # fi
     LOG "update kernel end."
 }
 
@@ -475,9 +459,6 @@ make_rootfs(){
         mkdir -p ${rootfs_dir}/etc/yum.repos.d
     fi
     cp ${repo_file} ${rootfs_dir}/etc/yum.repos.d/tmp.repo
-    # dnf --installroot=${rootfs_dir}/ install dnf --nogpgcheck -y #--repofrompath=${repo_file_name},${rootfs_dir}/etc/yum.repos.d/${repo_file_name}
-    # dnf --installroot=${rootfs_dir}/ makecache
-    # dnf --installroot=${rootfs_dir}/ install -y alsa-utils wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp bluez pulseaudio-module-bluetooth
     set +e
     if [ $img_spec == "headless" ]; then
         INSTALL_PACKAGES $CONFIG_RPM_LIST
@@ -540,8 +521,6 @@ make_img(){
     LOG "after losetup: ${device}"
     trap 'LOSETUP_D_IMG' EXIT
     LOG "image ${img_file} created and mounted as ${device}"
-    # loopX=`kpartx -va ${device} | sed -E 's/.*(loop[0-9])p.*/\1/g' | head -1`
-    # LOG "after kpartx: ${loopX}"
     kpartx -va ${device}
     loopX=${device##*\/}
     partprobe ${device}
@@ -608,8 +587,6 @@ make_img(){
         LOG "made sum files for ${img_file}"
     fi
     popd
-    # rm -rf ${output_dir}
-    
     LOG "write ${img_file} done."
     LOG "make ${img_file} end."
 }

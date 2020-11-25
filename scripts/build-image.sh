@@ -210,7 +210,6 @@ prepare(){
     done
     set +e
     os_release_name=${OS_NAME}-release
-    # yumdownloader --downloaddir=${tmp_dir} ${os_release_name} -c ${repo_file}
     dnf ${repo_info} --disablerepo="*" --downloaddir=${tmp_dir}/ download ${os_release_name}
     if [ $? != 0 ]; then
         ERROR "Fail to download ${os_release_name}!"
@@ -242,10 +241,7 @@ make_rootfs(){
         mkdir -p ${rootfs_dir}/etc/yum.repos.d
     fi
     cp ${repo_file} ${rootfs_dir}/etc/yum.repos.d/tmp.repo
-    # dnf --installroot=${rootfs_dir}/ install dnf --nogpgcheck -y # --repofrompath=tmp,${rootfs_dir}/etc/yum.repos.d/tmp.repo --disablerepo="*"
     dnf --installroot=${rootfs_dir}/ makecache
-    # dnf --installroot=${rootfs_dir}/ install -y alsa-utils wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp bluez pulseaudio-module-bluetooth
-    # dnf --installroot=${rootfs_dir}/ install -y raspberrypi-kernel raspberrypi-firmware openEuler-repos
     set +e
     if [ $img_spec == "headless" ]; then
         INSTALL_PACKAGES $CONFIG_RPM_LIST
@@ -299,8 +295,6 @@ make_img(){
     LOG "after losetup: ${device}"
     trap 'LOSETUP_D_IMG' EXIT
     LOG "image ${img_file} created and mounted as ${device}"
-    # loopX=`kpartx -va ${device} | sed -E 's/.*(loop[0-9])p.*/\1/g' | head -1`
-    # LOG "after kpartx: ${loopX}"
     kpartx -va ${device}
     loopX=${device##*\/}
     partprobe ${device}

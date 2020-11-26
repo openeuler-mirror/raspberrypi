@@ -230,7 +230,6 @@ make_rootfs(){
         UMOUNT_ALL
         rm -rf ${rootfs_dir}
     fi
-    mkdir -p ${rootfs_dir}
     mkdir -p ${rootfs_dir}/var/lib/rpm
     rpm --root ${rootfs_dir} --initdb
     rpm -ivh --nodeps --root ${rootfs_dir}/ ${os_release_name}
@@ -374,23 +373,19 @@ fi
 
 OS_NAME=openEuler
 
-if [ "x${workdir}" == "x./" ]; then
-    workdir=${cur_dir}
-fi
+workdir=$(cd $workdir; pwd)
 if [ "x${workdir}" == "x/" ]; then
-    workdir=""
-elif [ "x$(dirname $workdir)" == "x/" ]; then
-    workdir=/$(basename $workdir)
+    workdir=/raspi_output
 else
-    workdir=$(cd "$(dirname $workdir)"; pwd)/$(basename $workdir)
+    workdir=${workdir}/raspi_output
 fi
 
-rootfs_dir=${workdir}/raspi_output/rootfs
-root_mnt=${workdir}/raspi_output/root
-boot_mnt=${workdir}/raspi_output/boot
-tmp_dir=${workdir}/raspi_output/tmp
-log_dir=${workdir}/raspi_output/log
-img_dir=${workdir}/raspi_output/img
+tmp_dir=${workdir}/tmp
+log_dir=${workdir}/log
+img_dir=${workdir}/img
+rootfs_dir=${workdir}/rootfs
+root_mnt=${workdir}/root
+boot_mnt=${workdir}/boot
 euler_dir=${cur_dir}/config
 
 CONFIG_RPM_LIST=${euler_dir}/rpmlist

@@ -221,6 +221,8 @@ Run the following command to build an image:
 
 `sudo bash build-image-common.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO -s SPEC --cores N`
 
+After building the image, you can find the image in `raspi_output_common/img/` of the directory in which the script resides as shown in the script output.
+
 The meaning of each parameter:
 
 1.  -n, --name IMAGE_NAME
@@ -315,6 +317,8 @@ The meaning of each parameter:
 Run the following command to build an image:
 
 `sudo bash build-image-docker.sh -d DOCKER_FILE -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
+
+After building the image, you can find the image in `raspi_output_common/img/` of the directory in which the script resides.
 
 Caution, before running the script, you need to install Docker. The script will automatically import the Docker image into the local system according to the script's parameter: DOCKER_FILE.
 

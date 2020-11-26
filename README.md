@@ -224,6 +224,8 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 `sudo bash build-image-common.sh -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO -s SPEC --cores N`
 
+脚本运行结束后，会提示镜像的存储位置，镜像默认保存在脚本运行所在目录的 `raspi_output_common/img/` 下。
+
 各个参数意义：
 
 1.  -n, --name IMAGE_NAME
@@ -317,6 +319,8 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 构建镜像需执行命令：
 
 `sudo bash build-image-docker.sh -d DOCKER_FILE -n IMAGE_NAME -k KERNEL_URL -b KERNEL_BRANCH -c KERNEL_DEFCONFIG -r REPO --cores N`
+
+脚本运行结束后，镜像默认保存在脚本运行所在目录的 `raspi_output_common/img/` 下。
 
 注意！！！运行该脚本前，需安装 Docker 运行环境。该脚本会自动将 DOCKER_FILE 参数对应的 Docker 镜像导入本机系统中。
 

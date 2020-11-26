@@ -70,11 +70,11 @@ parseargs()
 }
 
 ERROR(){
-    echo `date` - ERROR, $* | tee -a ${log_dir}/log_${builddate}.log
+    echo `date` - ERROR, $* | tee -a ${log_dir}/${builddate}.log
 }
 
 LOG(){
-    echo `date` - INFO, $* | tee -a ${log_dir}/log_${builddate}.log
+    echo `date` - INFO, $* | tee -a ${log_dir}/${builddate}.log
 }
 
 UMOUNT_ALL(){
@@ -159,7 +159,7 @@ prepare(){
     if [ "x$repo_file" == "x" ] ; then
         echo `date` - ERROR, \"-r REPO_INFO or --repo REPO_INFO\" missing.
         help 2
-    elif [ "x${repo_file:0:4}" = "xhttp" ]; then
+    elif [ "x${repo_file:0:4}" == "xhttp" ]; then
         if [ "x${repo_file:0-5}" == "x.repo" ]; then
             wget ${repo_file} -P ${tmp_dir}/
             repo_file_name=${repo_file##*/}
@@ -207,7 +207,7 @@ prepare(){
     img_file=${img_dir}/${img_name}
 
     if [ ! -d ${log_dir} ]; then
-        mkdir ${log_dir}
+        mkdir -p ${log_dir}
     fi
     LOG "prepare begin..."
     dnf clean all
@@ -253,7 +253,7 @@ prepare(){
 
 update_firmware_app(){
     LOG "update firmware and app begin..."
-    cd "${run_dir}/"
+    cd "${workdir}"
     ######## firmware
     if [[ ! -d firmware ]]; then
         git clone --depth=1 https://github.com/raspberrypi/firmware
@@ -359,12 +359,12 @@ make_kernel(){
 
 update_kernel(){
     LOG "update kernel begin..."
-    cd "${run_dir}/"
+    cd "${workdir}"
     kernel_dir=""
     for file in `ls`
     do
         if [[ ${file} = ${kernel_name} && -d ${file}/.git ]]; then
-            kernel_dir=${run_dir}/${file}
+            kernel_dir=${workdir}/${file}
             break
         fi
     done
@@ -377,7 +377,7 @@ update_kernel(){
             ERROR "clone ${kernel_name} failed."
             exit 1
         fi
-        kernel_dir=${run_dir}/${kernel_name}
+        kernel_dir=${workdir}/${kernel_name}
     else
         cd "${kernel_name}"
         remote_url_exist=`git remote -v | grep "origin"`
@@ -443,12 +443,10 @@ update_kernel(){
 
 make_rootfs(){
     LOG "make rootfs for ${repo_file} begin..."
-    cd "${run_dir}/"
     if [[ -d ${rootfs_dir} ]]; then
         UMOUNT_ALL
         rm -rf ${rootfs_dir}
     fi
-    mkdir ${rootfs_dir}
     mkdir -p ${rootfs_dir}/var/lib/rpm
     rpm --root ${rootfs_dir} --initdb
     rpm -ivh --nodeps --root ${rootfs_dir}/ ${os_release_name}
@@ -479,16 +477,16 @@ make_rootfs(){
     fi
     cp ${euler_dir}/ifup-eth0 $rootfs_dir/etc/sysconfig/network-scripts/ifup-eth0
     mkdir -p ${rootfs_dir}/lib/firmware ${rootfs_dir}/usr/bin ${rootfs_dir}/lib/udev/rules.d ${rootfs_dir}/lib/systemd/system
-    cp bluez-firmware/broadcom/* ${rootfs_dir}/lib/firmware/
-    cp -r firmware-nonfree/brcm/ ${rootfs_dir}/lib/firmware/
+    cp ${workdir}/bluez-firmware/broadcom/* ${rootfs_dir}/lib/firmware/
+    cp -r ${workdir}/firmware-nonfree/brcm/ ${rootfs_dir}/lib/firmware/
     mv ${rootfs_dir}/lib/firmware/BCM43430A1.hcd ${rootfs_dir}/lib/firmware/brcm/
     mv ${rootfs_dir}/lib/firmware/BCM4345C0.hcd ${rootfs_dir}/lib/firmware/brcm/
     cp ${tmp_dir}/regulatory.db* ${rootfs_dir}/lib/firmware/
     cp ${tmp_dir}/*.rules ${rootfs_dir}/lib/udev/rules.d/
-    cp pi-bluetooth/usr/bin/* ${rootfs_dir}/usr/bin/
-    cp pi-bluetooth/lib/udev/rules.d/90-pi-bluetooth.rules ${rootfs_dir}/lib/udev/rules.d/
-    cp pi-bluetooth/debian/pi-bluetooth.bthelper\@.service ${rootfs_dir}/lib/systemd/system/bthelper\@.service
-    cp pi-bluetooth/debian/pi-bluetooth.hciuart.service ${rootfs_dir}/lib/systemd/system/hciuart.service
+    cp ${workdir}/pi-bluetooth/usr/bin/* ${rootfs_dir}/usr/bin/
+    cp ${workdir}/pi-bluetooth/lib/udev/rules.d/90-pi-bluetooth.rules ${rootfs_dir}/lib/udev/rules.d/
+    cp ${workdir}/pi-bluetooth/debian/pi-bluetooth.bthelper\@.service ${rootfs_dir}/lib/systemd/system/bthelper\@.service
+    cp ${workdir}/pi-bluetooth/debian/pi-bluetooth.hciuart.service ${rootfs_dir}/lib/systemd/system/hciuart.service
     cp -r ${output_dir}/lib/modules ${rootfs_dir}/lib/
     mkdir -p ${rootfs_dir}/usr/share/licenses/raspi
     cp ${euler_dir}/License/* ${rootfs_dir}/usr/share/licenses/raspi/
@@ -508,7 +506,6 @@ make_img(){
     LOG "make ${img_file} begin..."
     device=""
     LOSETUP_D_IMG
-    cd "${run_dir}/"
     size=`du -sh --block-size=1MiB ${rootfs_dir} | cut -f 1 | xargs`
     size=$(($size+1150))
     losetup -D
@@ -544,7 +541,7 @@ make_img(){
     echo "UUID=${fstab_array[1]}  /boot vfat    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
     echo "UUID=${fstab_array[2]}  swap swap    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
 
-    cp -rf --preserve=mode,timestamps --no-preserve=ownership ${run_dir}/firmware/boot/* ${boot_mnt}/
+    cp -rf --preserve=mode,timestamps --no-preserve=ownership ${workdir}/firmware/boot/* ${boot_mnt}/
     pushd ${boot_mnt}/
     rm -f *.dtb cmdline.txt kernel.img kernel7.img kernel7l.img
     cp ${euler_dir}/config.txt ./
@@ -554,13 +551,15 @@ make_img(){
     cp --preserve=mode,timestamps --no-preserve=ownership ${output_dir}/*.dtb ${boot_mnt}/
     cp --preserve=mode,timestamps --no-preserve=ownership ${output_dir}/overlays/* ${boot_mnt}/overlays/
 
-    if [ -f ${run_dir}/rootfs.tar ]; then
-        rm ${run_dir}/rootfs.tar
+    if [ -f ${tmp_dir}/rootfs.tar ]; then
+        rm ${tmp_dir}/rootfs.tar
     fi
-    cd ${rootfs_dir}
-    tar cpf ${run_dir}/rootfs.tar .
-    cd ${root_mnt}
-    tar xpf ${run_dir}/rootfs.tar -C .
+    pushd ${rootfs_dir}
+    rm -rf boot
+    tar cpf ${tmp_dir}/rootfs.tar .
+    popd
+    pushd ${root_mnt}
+    tar xpf ${tmp_dir}/rootfs.tar -C .
     for tmpdir in `ls ${output_dir}/lib/modules`
     do
         if [ -d ./lib/modules/${tmpdir} ]; then
@@ -572,11 +571,11 @@ make_img(){
             fi
         fi
     done
-    cd "${run_dir}/"
+    popd
     sync
     sleep 10
     LOSETUP_D_IMG
-    rm ${run_dir}/rootfs.tar
+    rm ${tmp_dir}/rootfs.tar
     rm -rf ${rootfs_dir}
     losetup -D
     pushd ${img_dir}
@@ -608,21 +607,23 @@ OS_NAME=openEuler
 
 cur_dir=$(cd $(dirname $0);pwd)
 
-run_dir=${cur_dir}
-if [ "x${run_dir}" == "x/" ]; then
-    run_dir=""
+workdir=${cur_dir}
+if [ "x${workdir}" == "x/" ]; then
+    workdir=/raspi_output_common
+else
+    workdir=${workdir}/raspi_output_common
 fi
 
 buildid=$(date +%Y%m%d%H%M%S)
 builddate=${buildid:0:8}
 
-tmp_dir=${cur_dir}/tmp
-log_dir=${cur_dir}/log
-img_dir=${run_dir}/img/${builddate}
-output_dir=${run_dir}/output
-rootfs_dir=${run_dir}/rootfs_${builddate}
-root_mnt=${run_dir}/root
-boot_mnt=${run_dir}/boot
+tmp_dir=${workdir}/tmp
+log_dir=${workdir}/log
+img_dir=${workdir}/img
+output_dir=${workdir}/output
+rootfs_dir=${workdir}/rootfs
+root_mnt=${workdir}/root
+boot_mnt=${workdir}/boot
 euler_dir=${cur_dir}/config-common
 
 CONFIG_RPM_LIST=${euler_dir}/rpmlist

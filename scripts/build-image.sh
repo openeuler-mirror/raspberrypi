@@ -115,8 +115,6 @@ INSTALL_PACKAGES(){
     done
 }
 
-trap 'UMOUNT_ALL' EXIT
-
 prepare(){
     if [ ! -d ${tmp_dir} ]; then
         mkdir -p ${tmp_dir}
@@ -185,6 +183,7 @@ prepare(){
         mkdir -p ${log_dir}
     fi
     LOG "prepare begin..."
+    dnf clean all
     dnf makecache
     dnf install -y dnf-plugins-core tar parted dosfstools grep bash xz kpartx
 
@@ -211,7 +210,6 @@ prepare(){
     done
     set +e
     os_release_name=${OS_NAME}-release
-    # yumdownloader --downloaddir=${tmp_dir} ${os_release_name} -c ${repo_file}
     dnf ${repo_info} --disablerepo="*" --downloaddir=${tmp_dir}/ download ${os_release_name}
     if [ $? != 0 ]; then
         ERROR "Fail to download ${os_release_name}!"
@@ -232,7 +230,6 @@ make_rootfs(){
         UMOUNT_ALL
         rm -rf ${rootfs_dir}
     fi
-    mkdir -p ${rootfs_dir}
     mkdir -p ${rootfs_dir}/var/lib/rpm
     rpm --root ${rootfs_dir} --initdb
     rpm -ivh --nodeps --root ${rootfs_dir}/ ${os_release_name}
@@ -243,10 +240,7 @@ make_rootfs(){
         mkdir -p ${rootfs_dir}/etc/yum.repos.d
     fi
     cp ${repo_file} ${rootfs_dir}/etc/yum.repos.d/tmp.repo
-    # dnf --installroot=${rootfs_dir}/ install dnf --nogpgcheck -y # --repofrompath=tmp,${rootfs_dir}/etc/yum.repos.d/tmp.repo --disablerepo="*"
     dnf --installroot=${rootfs_dir}/ makecache
-    # dnf --installroot=${rootfs_dir}/ install -y alsa-utils wpa_supplicant vim net-tools iproute iputils NetworkManager openssh-server passwd hostname ntp bluez pulseaudio-module-bluetooth
-    # dnf --installroot=${rootfs_dir}/ install -y raspberrypi-kernel raspberrypi-firmware openEuler-repos
     set +e
     if [ $img_spec == "headless" ]; then
         INSTALL_PACKAGES $CONFIG_RPM_LIST
@@ -286,6 +280,7 @@ make_rootfs(){
 
 make_img(){
     LOG "make ${img_file} begin..."
+    device=""
     LOSETUP_D_IMG
     size=`du -sh --block-size=1MiB ${rootfs_dir} | cut -f 1 | xargs`
     size=$(($size+1100))
@@ -299,8 +294,6 @@ make_img(){
     LOG "after losetup: ${device}"
     trap 'LOSETUP_D_IMG' EXIT
     LOG "image ${img_file} created and mounted as ${device}"
-    # loopX=`kpartx -va ${device} | sed -E 's/.*(loop[0-9])p.*/\1/g' | head -1`
-    # LOG "after kpartx: ${loopX}"
     kpartx -va ${device}
     loopX=${device##*\/}
     partprobe ${device}
@@ -380,13 +373,19 @@ fi
 
 OS_NAME=openEuler
 
-workdir=$(cd "$(dirname $workdir)"; pwd)/$(basename $workdir)
-rootfs_dir=${workdir}/raspi_output/rootfs
-root_mnt=${workdir}/raspi_output/root
-boot_mnt=${workdir}/raspi_output/boot
-tmp_dir=${workdir}/raspi_output/tmp
-log_dir=${workdir}/raspi_output/log
-img_dir=${workdir}/raspi_output/img
+workdir=$(cd $workdir; pwd)
+if [ "x${workdir}" == "x/" ]; then
+    workdir=/raspi_output
+else
+    workdir=${workdir}/raspi_output
+fi
+
+tmp_dir=${workdir}/tmp
+log_dir=${workdir}/log
+img_dir=${workdir}/img
+rootfs_dir=${workdir}/rootfs
+root_mnt=${workdir}/root
+boot_mnt=${workdir}/boot
 euler_dir=${cur_dir}/config
 
 CONFIG_RPM_LIST=${euler_dir}/rpmlist
@@ -396,6 +395,7 @@ img_spec=""
 
 builddate=$(date +%Y%m%d)
 
+trap 'UMOUNT_ALL' EXIT
 UMOUNT_ALL
 prepare
 IFS=$'\n'

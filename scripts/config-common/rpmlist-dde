@@ -12,8 +12,6 @@ passwd
 hostname
 bluez
 pulseaudio-module-bluetooth
-raspberrypi-kernel
-raspberrypi-firmware
-raspberrypi-bluetooth
 sudo
+dde
 openEuler-repos

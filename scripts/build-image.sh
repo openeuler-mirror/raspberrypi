@@ -10,7 +10,7 @@ Options:
   -d, --dir  DIR             The directory for storing the image and other temporary files, which defaults to be the directory in which the script resides. If the DIR does not exist, it will be created automatically.
   -r, --repo REPO_INFO       Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
   -n, --name IMAGE_NAME      The raspberrypi image name to be built.
-  -s, --spec SPEC            The image's specification: headless, standard, full. The default is headless.
+  -s, --spec SPEC            The image's specification: headless, xfce, ukui, dde or the file path of rpmlist. The default is headless.
   -h, --help                 Show command help.
 "
 
@@ -122,9 +122,13 @@ prepare(){
         rm -rf ${tmp_dir}/*
     fi
     if [ "x$spec_param" == "xheadless" ] || [ "x$spec_param" == "x" ]; then
-        img_spec="headless"
-    elif [ "x$spec_param" == "xstandard" ] || [ "x$spec_param" == "xfull" ]; then
-        img_spec=$spec_param
+        :
+    elif [ "x$spec_param" == "xxfce" ] || [ "x$spec_param" == "xukui" ] || [ "x$spec_param" == "xdde" ]; then
+        CONFIG_RPM_LIST=${euler_dir}/rpmlist-${spec_param}
+    elif [ -f ${spec_param} ]; then
+        cp ${spec_param} ${tmp_dir}/
+        spec_file_name=${spec_param##*/}
+        CONFIG_RPM_LIST=${tmp_dir}/${spec_file_name}
     else
         echo `date` - ERROR, please check your params in option -s or --spec.
         exit 2
@@ -242,13 +246,7 @@ make_rootfs(){
     cp ${repo_file} ${rootfs_dir}/etc/yum.repos.d/tmp.repo
     dnf --installroot=${rootfs_dir}/ makecache
     set +e
-    if [ $img_spec == "headless" ]; then
-        INSTALL_PACKAGES $CONFIG_RPM_LIST
-    elif [ $img_spec == "standard" ]; then
-        INSTALL_PACKAGES $CONFIG_STANDARD_LIST
-    elif [ $img_spec == "full" ]; then
-        INSTALL_PACKAGES $CONFIG_FULL_LIST
-    fi
+    INSTALL_PACKAGES $CONFIG_RPM_LIST
     cat ${rootfs_dir}/etc/systemd/timesyncd.conf | grep "^NTP*"
     if [ $? -ne 0 ]; then
         sed -i 's/#NTP=/NTP=0.cn.pool.ntp.org/g' ${rootfs_dir}/etc/systemd/timesyncd.conf
@@ -271,7 +269,7 @@ make_rootfs(){
     mount --bind /dev ${rootfs_dir}/dev
     mount -t proc /proc ${rootfs_dir}/proc
     mount -t sysfs /sys ${rootfs_dir}/sys
-    chroot ${rootfs_dir} /bin/bash -c "echo 'Y' | /chroot.sh"
+    chroot ${rootfs_dir} /bin/bash -c "echo 'Y' | /chroot.sh ${spec_param}"
     UMOUNT_ALL
     rm ${rootfs_dir}/etc/yum.repos.d/tmp.repo
     rm ${rootfs_dir}/chroot.sh
@@ -283,7 +281,7 @@ make_img(){
     device=""
     LOSETUP_D_IMG
     size=`du -sh --block-size=1MiB ${rootfs_dir} | cut -f 1 | xargs`
-    size=$(($size+1100))
+    size=$(($size+1150))
     losetup -D
     dd if=/dev/zero of=${img_file} bs=1MiB count=$size && sync
     parted ${img_file} mklabel msdos mkpart primary fat32 8192s 593919s
@@ -302,7 +300,7 @@ make_img(){
     rootp=/dev/mapper/${loopX}p3
     LOG "bootp: " ${bootp} "rootp: " ${rootp}
     mkfs.vfat -n boot ${bootp}
-    mkswap ${swapp}
+    mkswap ${swapp} --pagesize 4096
     mkfs.ext4 ${rootp}
     mkdir -p ${root_mnt} ${boot_mnt}
     mount -t vfat -o uid=root,gid=root,umask=0000 ${bootp} ${boot_mnt}
@@ -389,10 +387,6 @@ boot_mnt=${workdir}/boot
 euler_dir=${cur_dir}/config
 
 CONFIG_RPM_LIST=${euler_dir}/rpmlist
-CONFIG_STANDARD_LIST=${euler_dir}/standardlist
-CONFIG_FULL_LIST=${euler_dir}/fulllist
-img_spec=""
-
 builddate=$(date +%Y%m%d)
 
 trap 'UMOUNT_ALL' EXIT

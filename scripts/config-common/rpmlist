@@ -1,5 +1,6 @@
 dnf
 alsa-utils
+haveged
 wpa_supplicant
 vim
 net-tools

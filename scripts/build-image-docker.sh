@@ -13,7 +13,7 @@ Options:
   -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
   -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
   -r, --repo REPO_INFO             Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
-  -s, --spec SPEC                  The image's specification: headless, standard, full. The default is headless.
+  -s, --spec SPEC                  The image's specification: headless, xfce, ukui, dde or the file path of rpmlist. The default is headless.
   --cores N                        The number of cpu cores to be used during making.
   -h, --help                       Show command help.
 "
@@ -87,8 +87,15 @@ parseargs()
             shift
         elif [ "x$1" == "x-s" -o "x$1" == "x--spec" ]; then
             spec_param=`echo $2`
-            if [ "x$spec_param" != "xheadless" ] && [ "x$spec_param" != "x" ] \
-            && [ "x$spec_param" != "xstandard" ] && [ "x$spec_param" != "xfull" ]; then
+            if [ "x$spec_param" == "xheadless" ] || [ "x$spec_param" == "x" ] \
+            || [ "x$spec_param" == "xxfce" ] || [ "x$spec_param" == "xukui" ] \
+            || [ "x$spec_param" == "xdde" ]; then
+                :
+            elif [ -f $spec_param ]; then
+                cp $spec_param ${cur_dir}/params/
+                spec_file_name=${spec_param##*/}
+                $spec_param=/work/params/${spec_file_name}
+            else
                 echo `date` - ERROR, please check your params in option -s or --spec.
                 exit 2
             fi

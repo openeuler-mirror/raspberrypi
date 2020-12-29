@@ -1,5 +1,6 @@
 dnf
 alsa-utils
+haveged
 wpa_supplicant
 vim
 net-tools
@@ -11,9 +12,6 @@ passwd
 hostname
 bluez
 pulseaudio-module-bluetooth
-raspberrypi-kernel
-raspberrypi-firmware
-raspberrypi-bluetooth
 sudo
 xorg-x11-drv-fbdev
 lightdm
@@ -46,4 +44,19 @@ blueman
 network-manager-applet
 gparted
 librsvg2
+catfish
+gigolo
+xfburn
+xfce4-dev-tools
+xfce4-dict
+xfce4-panel-profiles
+imsettings
+im-chooser
+fcitx
+fcitx-qt5
+fcitx-libpinyin
+fcitx-configtool
+google-noto-sans-sc-fonts
+google-noto-serif-sc-fonts
+google-noto-sans-mono-cjk-sc-fonts
 openEuler-repos

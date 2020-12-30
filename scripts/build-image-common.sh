@@ -11,7 +11,7 @@ Options:
   -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
   -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
   -r, --repo REPO_INFO             Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
-  -s, --spec SPEC                  The image's specification: headless, standard, full. The default is headless.
+  -s, --spec SPEC                  The image's specification: headless, xfce, ukui, dde or the file path of rpmlist. The default is headless.
   --cores N                        The number of cpu cores to be used during making.
   -h, --help                       Show command help.
 "
@@ -149,9 +149,13 @@ prepare(){
         exit 2
     fi
     if [ "x$spec_param" == "xheadless" ] || [ "x$spec_param" == "x" ]; then
-        img_spec="headless"
-    elif [ "x$spec_param" == "xstandard" ] || [ "x$spec_param" == "xfull" ]; then
-        img_spec=$spec_param
+        :
+    elif [ "x$spec_param" == "xxfce" ] || [ "x$spec_param" == "xukui" ] || [ "x$spec_param" == "xdde" ]; then
+        CONFIG_RPM_LIST=${euler_dir}/rpmlist-${spec_param}
+    elif [ -f ${spec_param} ]; then
+        cp ${spec_param} ${tmp_dir}/
+        spec_file_name=${spec_param##*/}
+        CONFIG_RPM_LIST=${tmp_dir}/${spec_file_name}
     else
         echo `date` - ERROR, please check your params in option -s or --spec.
         exit 2
@@ -430,12 +434,8 @@ update_kernel(){
         ERROR "no ${kernel_branch} found."
         exit 1
     else
-        set +e
-        git pull origin ${kernel_branch} # git_rst=`xxx`
-        if [ $? -ne 0 ]; then
-            git reset --hard remotes/origin/${kernel_branch}
-        fi
-        set -e
+        git fetch origin
+        git reset --hard remotes/origin/${kernel_branch}
         make_kernel ${kernel_dir}
     fi
     LOG "update kernel end."
@@ -458,13 +458,7 @@ make_rootfs(){
     fi
     cp ${repo_file} ${rootfs_dir}/etc/yum.repos.d/tmp.repo
     set +e
-    if [ $img_spec == "headless" ]; then
-        INSTALL_PACKAGES $CONFIG_RPM_LIST
-    elif [ $img_spec == "standard" ]; then
-        INSTALL_PACKAGES $CONFIG_STANDARD_LIST
-    elif [ $img_spec == "full" ]; then
-        INSTALL_PACKAGES $CONFIG_FULL_LIST
-    fi
+    INSTALL_PACKAGES $CONFIG_RPM_LIST
     cat ${rootfs_dir}/etc/systemd/timesyncd.conf | grep "^NTP*"
     if [ $? -ne 0 ]; then
         sed -i 's/#NTP=/NTP=0.cn.pool.ntp.org/g' ${rootfs_dir}/etc/systemd/timesyncd.conf
@@ -495,7 +489,7 @@ make_rootfs(){
     mount --bind /dev ${rootfs_dir}/dev
     mount -t proc /proc ${rootfs_dir}/proc
     mount -t sysfs /sys ${rootfs_dir}/sys
-    chroot ${rootfs_dir} /bin/bash -c "echo 'Y' | /chroot.sh"
+    chroot ${rootfs_dir} /bin/bash -c "echo 'Y' | /chroot.sh ${spec_param}"
     UMOUNT_ALL
     rm ${rootfs_dir}/etc/yum.repos.d/tmp.repo
     rm ${rootfs_dir}/chroot.sh
@@ -526,7 +520,7 @@ make_img(){
     rootp=/dev/mapper/${loopX}p3
     LOG "bootp: " ${bootp} "rootp: " ${rootp}
     mkfs.vfat -n boot ${bootp}
-    mkswap ${swapp}
+    mkswap ${swapp} --pagesize 4096
     mkfs.ext4 ${rootp}
     mkdir -p ${root_mnt} ${boot_mnt}
     mount -t vfat -o uid=root,gid=root,umask=0000 ${bootp} ${boot_mnt}
@@ -627,9 +621,6 @@ boot_mnt=${workdir}/boot
 euler_dir=${cur_dir}/config-common
 
 CONFIG_RPM_LIST=${euler_dir}/rpmlist
-CONFIG_STANDARD_LIST=${euler_dir}/standardlist
-CONFIG_FULL_LIST=${euler_dir}/fulllist
-img_spec=""
 
 trap 'UMOUNT_ALL' EXIT
 UMOUNT_ALL

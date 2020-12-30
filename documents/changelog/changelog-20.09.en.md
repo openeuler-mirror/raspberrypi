@@ -2,6 +2,29 @@
 
 English | [简体中文](./changelog-20.09.md)
 
+### 2020-12-29
+
+#### Basic information
+
+- Release date: 2020/12/29
+- Size: 242 MiB
+- OS version: openEuler 20.09
+- Kernel version: 4.19.140-2012.2.0.0006
+- Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+- Repository of rootfs: [openEuler 20.09 repository built daily](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.09/generic.repo)
+- Repository inside the image: [openEuler 20.09 repository](http://repo.openeuler.org/openEuler-20.09/)
+
+#### Updates
+
+##### Kernel
+
+Update to the latest stable version of openEuler: 4.19.140-2012.2.0.
+
+##### Feature update
+
+- Install and start haveged service on boot.
+- Fixed: fail to activate swap on boot.
+
 ### 2020-11-17
 
 #### Basic information
@@ -18,7 +41,7 @@ English | [简体中文](./changelog-20.09.md)
 
 ##### Kernel
 
-Update to the latest stable version of openeuler: 4.19.140-2011.1.0.
+Update to the latest stable version of openEuler: 4.19.140-2011.1.0.
 
 ##### Firmware
 
@@ -48,7 +71,7 @@ Update to [the latest version](https://github.com/RPi-Distro/pi-bluetooth/archiv
 
 ##### Kernel
 
-Update to the latest stable version of openeuler: 4.19.140-2009.4.0.
+Update to the latest stable version of openEuler: 4.19.140-2009.4.0.
 
 ### 2020-09-04
 

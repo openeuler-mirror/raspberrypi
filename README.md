@@ -30,10 +30,14 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
   - [交叉编译内核](documents/交叉编译内核.md)
   - [刷写镜像](documents/刷写镜像.md)
   - [树莓派使用](documents/树莓派使用.md)
-  - [openEuler 20.03 LTS 内测版更新日志](documents/changelog/changelog.md)
+  - [openEuler 20.03 LTS 内测版更新日志](documents/changelog/changelog-20.03-LTS.md)
   - [openEuler 20.09 内测版更新日志](documents/changelog/changelog-20.09.md)
-  - [openEuler 20.09 内测版（含 Xfce 桌面环境）更新日志](documents/changelog/changelog-20.09-desktop.md)
+  - [openEuler 20.09 内测版（含 Xfce 桌面环境）更新日志](documents/changelog/changelog-20.09-Xfce.md)
   - [openEuler 20.09 更新日志](documents/changelog/changelog-20.09-release.md)
+  - [openEuler 20.03 LTS SP1 更新日志](documents/changelog/changelog-20.03-LTS-SP1.md)
+  - [openEuler 20.03 LTS SP1 内测版（含 UKUI 桌面环境）更新日志](documents/changelog/changelog-20.03-LTS-SP1-UKUI.md)
+  - [openEuler 20.03 LTS SP1 内测版（含 DDE 桌面环境）更新日志](documents/changelog/changelog-20.03-LTS-SP1-DDE.md)
+  - [openEuler 20.03 LTS SP1 更新日志](documents/changelog/changelog-20.03-LTS-SP1-release.md)
 
 ## 最新镜像
 
@@ -49,29 +53,29 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 <th class="cellrowborder" valign="top" width="10%"><p><strong>构建文件系统的源仓库</strong></p></th>
 </tr></thead>
 <tbody><tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-raspi-aarch64-alpha2.img.xz">openEuler 20.03 LTS 内测版</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-raspi-aarch64-alpha3.img.xz">openEuler 20.03 LTS 内测版</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog.md">链接</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2020/11/17</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>224 MiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2010.2.0</p></td>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo">openEuler 20.03 LTS 源仓库</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS.md">链接</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/12/29</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>217 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2012.5.0</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS/standard_aarch64/aarch64/">openEuler 20.03 LTS 每日构建的源仓库</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-raspi-aarch64-alpha2.img.xz">openEuler 20.09 内测版</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-raspi-aarch64-alpha3.img.xz">openEuler 20.09 内测版</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.09.md">链接</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2020/11/17</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>239 MiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>4.19.140-2011.1.0.0003</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/12/29</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>242 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.140-2012.2.0.0006</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.09/generic.repo">openEuler 20.09 每日构建源仓库</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-desktop-raspi-aarch64-alpha2.img.xz">openEuler 20.09 内测版（包含 Xfce 桌面环境）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-Xfce-raspi-aarch64-alpha3.img.xz">openEuler 20.09 内测版（包含 Xfce 桌面环境）</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.09-desktop.md">链接</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2020/11/17</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>875 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.09-Xfce.md">链接</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/12/29</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>876 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.138-2008.1.0.0001</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-20.09">openEuler 20.09 源仓库</a></td>
 </tr>
@@ -83,6 +87,42 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 <td class="cellrowborder" valign="top" width="10%"><p>259 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.138-2008.1.0.0001</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-20.09/">openEuler 20.09 源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP1-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP1 内测版</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP1.md">链接</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/12/29</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>238 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2012.3.0.0011</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP1/standard_aarch64/aarch64/">openEuler 20.03 LTS SP1 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP1-UKUI-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP1 内测版（包含 UKUI 桌面环境）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP1-UKUI.md">链接</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/12/29</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.0 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2012.3.0.0011</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP1/standard_aarch64/aarch64/">openEuler 20.03 LTS SP1 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP1-DDE-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP1 内测版（包含 DDE 桌面环境）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP1-DDE.md">链接</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/12/29</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.0 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2012.3.0.0011</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP1/standard_aarch64/aarch64/">openEuler 20.03 LTS SP1 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-20.03-LTS-SP1/raspi_img/aarch64/openEuler-20.03-LTS-SP1-raspi-aarch64.img.xz">openEuler 20.03 LTS SP1</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>root（openeuler）</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP1-release.md">链接</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2020/12/28</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>266 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2012.3.0.0011</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS-SP1/generic.repo">openEuler 20.03 LTS SP1 源仓库</a></td>
 </tr></tbody></table>
 
 其他信息：
@@ -113,10 +153,11 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 #### 快速构建（无需编译内核，推荐）
 
 >![](documents/public_sys-resources/icon-notice.gif) **须知：**  
->当前只支持 openEuler 20.09 版本。
->如果构建包含 Xfce 桌面环境的镜像，需要注意两点：
->1. 需要添加额外的开发源，也就是下面 `-r/--repo` 参数介绍中 `[Xfce]` 对应的信息。注意，该开发源是临时的测试源，其目的为补充 openEuler 的开发源中缺失的 Xfce 相关软件包。
->2. 根据需要设置 `-s/--spec` 为 `standard` 或 `full`，其具体意义见该参数的介绍部分。
+>当前支持两个 openEuler 版本，即 20.09、20.03 LTS SP1 版本。
+>如果构建包含 Xfce/UKUI/DDE 桌面环境的镜像，需要注意三点：
+>1. 构建包含 Xfce 桌面环境的镜像，当前只支持 openEuler 20.09 版本。且需要添加额外的开发源，也就是下面 `-r/--repo` 参数介绍中 `[Xfce]` 对应的信息。注意，该开发源是临时的测试源，其目的为补充 openEuler 20.09 的开发源中缺失的 Xfce 相关软件包。
+>2. 构建包含 DDE 桌面环境的镜像，当前只支持 openEuler 20.03 LTS SP1 版本。
+>3. 根据需要设置 -s/--spec，其具体意义见该参数的介绍部分。
 
 使用已有的树莓派内核、固件、蓝牙等 RPM 包构建镜像。
 
@@ -196,8 +237,10 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
     构建的镜像版本：
     - `headless`，无图形界面版的镜像。
-    - `standard`，带 Xfce 桌面及必要的配套软件（不包括中文字体以及输入法）。
-    - `full`，带 Xfce 桌面以及中文字体、输入法等全部配套软件。
+    - `xfce`，带 Xfce 桌面以及中文字体、输入法等全部配套软件。
+    - `ukui`，带 UKUI 桌面及必要的配套软件（不包括中文字体以及输入法）。
+    - `dde`，带 DDE 桌面及必要的配套软件（不包括中文字体以及输入法）。
+    -  rpmlist 文件路径，其中包含镜像中要安装的软件列表，内容参考 [rpmlist](./scripts/config/rpmlist)。
 
     默认使用 `headless` 选项。
 
@@ -212,11 +255,12 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 这里，提供两种构建方式。
 
 >![](documents/public_sys-resources/icon-notice.gif) **须知：**  
->当前支持 openEuler 20.03 LTS 或 openEuler 20.09 版本。
->如果构建包含 Xfce 桌面环境的镜像，需要注意三点：
->1. 只支持 openEuler 20.09 版本。需要选择内核源码的 `openEuler-20.09` 分支，即参数 `-b/--branch` 设置为 `openEuler-20.09`。
->2. 需要添加额外的开发源，也就是下面 `-r/--repo` 参数介绍中 `[Xfce]` 对应的信息。注意，该开发源是临时的测试源，其目的为补充 openEuler 的开发源中缺失的 Xfce 相关软件包。
->3. 根据需要设置 `-s/--spec` 为 `standard` 或 `full`，其具体意义见该参数的介绍部分。
+>当前支持三个 openEuler 版本，即 20.03 LTS、20.09、20.03 LTS SP1 版本。
+>如果构建包含 Xfce/UKUI/DDE 桌面环境的镜像，需要注意四点：
+>1. 构建包含 Xfce 桌面环境的镜像，当前只支持 openEuler 20.09 版本，需要选择内核源码的 `openEuler-20.09` 分支，即将参数 `-b/--branch` 设置为 `openEuler-20.09`。同时需要添加额外的开发源，也就是下面 `-r/--repo` 参数介绍中 `[Xfce]` 对应的信息。注意，该开发源是临时的测试源，其目的为补充 openEuler 20.09 的开发源中缺失的 Xfce 相关软件包。
+>2. 构建包含 UKUI 桌面环境的镜像，当前只支持 openEuler 20.09/20.03 LTS SP1 版本，需要选择内核源码的 `openEuler-20.09` 或 `openEuler-20.03-LTS` 分支，即将参数 `-b/--branch` 设置为 `openEuler-20.09` 或 `openEuler-20.03-LTS`。
+>3. 构建包含 DDE 桌面环境的镜像，当前只支持 openEuler 20.03 LTS SP1 版本，需要选择内核源码的 `openEuler-20.03-LTS` 分支，即将参数 `-b/--branch` 设置为 `openEuler-20.03-LTS`。
+>4. 根据需要设置 -s/--spec，其具体意义见该参数的介绍部分。
 
 ##### 主机上构建
 
@@ -305,8 +349,10 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
     构建的镜像版本：
     - `headless`，无图形界面版的镜像。
-    - `standard`，带 Xfce 桌面及必要的配套软件（不包括中文字体以及输入法）。
-    - `full`，带 Xfce 桌面以及中文字体、输入法等全部配套软件。
+    - `xfce`，带 Xfce 桌面以及中文字体、输入法等全部配套软件。
+    - `ukui`，带 UKUI 桌面及必要的配套软件（不包括中文字体以及输入法）。
+    - `dde`，带 DDE 桌面及必要的配套软件（不包括中文字体以及输入法）。
+    -  rpmlist 文件路径，该文件包含镜像中要安装的软件列表，内容参考 [rpmlist](./scripts/config-common/rpmlist)。
 
     默认使用 `headless` 选项。
 

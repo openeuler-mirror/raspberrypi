@@ -410,7 +410,7 @@ add map loop0p3 ...
 
 2.  格式化交换分区
 
-    `mkswap /dev/mapper/loop0p2`
+    `mkswap /dev/mapper/loop0p2 --pagesize 4096`
 
 3.  格式化根目录分区
 

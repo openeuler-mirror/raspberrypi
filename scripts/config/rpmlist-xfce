@@ -1,5 +1,6 @@
 dnf
 alsa-utils
+haveged
 wpa_supplicant
 vim
 net-tools
@@ -11,6 +12,9 @@ passwd
 hostname
 bluez
 pulseaudio-module-bluetooth
+raspberrypi-kernel
+raspberrypi-firmware
+raspberrypi-bluetooth
 sudo
 xorg-x11-drv-fbdev
 lightdm

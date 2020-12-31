@@ -13,6 +13,7 @@ hostname
 bluez
 pulseaudio-module-bluetooth
 sudo
+mesa-dri-drivers
 xorg-x11-drv-fbdev
 lightdm
 lightdm-gtk
@@ -32,6 +33,7 @@ parole
 xfce4-appfinder
 xfce4-notifyd
 xfce4-power-manager
+xfce4-screensaver
 xfce4-screenshooter
 xfce4-settings
 xfce4-taskmanager

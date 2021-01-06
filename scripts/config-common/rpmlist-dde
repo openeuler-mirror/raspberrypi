@@ -12,6 +12,7 @@ passwd
 hostname
 bluez
 pulseaudio-module-bluetooth
+parted
 sudo
 dde
 openEuler-repos

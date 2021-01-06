@@ -12,6 +12,7 @@ passwd
 hostname
 bluez
 pulseaudio-module-bluetooth
+parted
 sudo
 mesa-dri-drivers
 xorg-x11-drv-fbdev

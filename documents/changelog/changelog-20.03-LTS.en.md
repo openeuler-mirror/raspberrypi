@@ -2,6 +2,24 @@
 
 English | [简体中文](./changelog-20.03-LTS.md)
 
+### 2021-01-06
+
+#### Basic information
+
+- Release date: 2021/01/06
+- Size: 217 MiB
+- OS version: openEuler 20.03 LTS
+- Kernel version: 4.19.90-2012.5.0
+- Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+- Repository of rootfs: [openEuler 20.03 LTS repository built daily](http://119.3.219.20:82/openEuler:/20.03:/LTS/standard_aarch64/aarch64/)
+- Repository inside the image: [openEuler 20.03 LTS repository](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS/generic.repo)
+
+#### Updates
+
+##### Feature update
+
+Extend the root partition automatically on boot.
+
 ### 2020-12-29
 
 #### Basic information

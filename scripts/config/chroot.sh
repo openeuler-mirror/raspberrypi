@@ -25,3 +25,8 @@ elif [ "x$1" == "xdde" ]; then
         userdel -r openeuler
     fi
 fi
+cd /etc/rc.d/init.d
+chmod +x extend-root.sh
+chkconfig --add extend-root.sh
+chkconfig extend-root.sh on
+cd -

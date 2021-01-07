@@ -8,9 +8,11 @@ iproute
 iputils
 NetworkManager
 openssh-server
+openssh-clients
 passwd
 hostname
 bluez
 pulseaudio-module-bluetooth
+parted
 sudo
 openEuler-repos

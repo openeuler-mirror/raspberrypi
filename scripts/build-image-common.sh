@@ -485,6 +485,10 @@ make_rootfs(){
     mkdir -p ${rootfs_dir}/usr/share/licenses/raspi
     cp ${euler_dir}/License/* ${rootfs_dir}/usr/share/licenses/raspi/
     cp ${euler_dir}/chroot.sh ${rootfs_dir}/chroot.sh
+    if [ ! -d ${rootfs_dir}/etc/rc.d/init.d ]; then
+        mkdir -p ${rootfs_dir}/etc/rc.d/init.d
+    fi
+    cp ${euler_dir}/extend-root.sh ${rootfs_dir}/etc/rc.d/init.d/extend-root.sh
     chmod +x ${rootfs_dir}/chroot.sh
     mount --bind /dev ${rootfs_dir}/dev
     mount -t proc /proc ${rootfs_dir}/proc

@@ -8,10 +8,12 @@ iproute
 iputils
 NetworkManager
 openssh-server
+openssh-clients
 passwd
 hostname
 bluez
 pulseaudio-module-bluetooth
+parted
 raspberrypi-kernel
 raspberrypi-firmware
 raspberrypi-bluetooth

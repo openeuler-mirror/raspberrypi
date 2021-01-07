@@ -372,4 +372,4 @@ In addition to the parameter DOCKER_FILE, the other parameters are the same as t
 
 1.  -d, --docker DOCKER_FILE
 
-    The URL/path of the Docker image, which defaults to `https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz`. With the default parameter, the script will automatically download the Docker image of openEuler 20.03 LTS and import it into the local system.
+    The URL/path of the Docker image, which defaults to `https://repo.openeuler.org/openEuler-20.03-LTS-SP1/docker_img/aarch64/openEuler-docker.aarch64.tar.xz`. With the default parameter, the script will automatically download the Docker image of openEuler 20.03 LTS SP1 and import it into the local system.

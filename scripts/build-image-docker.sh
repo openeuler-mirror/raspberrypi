@@ -7,7 +7,7 @@ Usage: build-image-docker [OPTIONS]
 Build raspberrypi image.
 
 Options:
-  -d, --docker DOCKER_FILE         The URL/path of the Docker image, which defaults to https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz.
+  -d, --docker DOCKER_FILE         The URL/path of the Docker image, which defaults to https://repo.openeuler.org/openEuler-20.03-LTS-SP1/docker_img/aarch64/openEuler-docker.aarch64.tar.xz
   -n, --name IMAGE_NAME            The raspberrypi image name to be built.
   -k, --kernel KERNEL_URL          The URL of kernel source's repository, which defaults to https://gitee.com/openeuler/raspberrypi-kernel.git.
   -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
@@ -62,9 +62,9 @@ parseargs()
                     echo `date` - ERROR, config file $default_defconfig can not be found.
                     exit 2
                 else
-                    cp $default_defconfig ${cur_dir}/params/
+                    cp $default_defconfig ${params_dir}/
                     defconfig_name=${default_defconfig##*/}
-                    default_defconfig=/work/params/${defconfig_name}
+                    default_defconfig=${params_dir_indocker}/${defconfig_name}
                 fi
             fi
             params="${params} -c ${default_defconfig}"
@@ -77,9 +77,9 @@ parseargs()
                     echo `date` - ERROR, repo file $repo_file can not be found.
                     exit 2
                 else
-                    cp $repo_file ${cur_dir}/params/
+                    cp $repo_file ${params_dir}/
                     repo_file_name=${repo_file##*/}
-                    repo_file=/work/params/${repo_file_name}
+                    repo_file=${params_dir_indocker}/${repo_file_name}
                 fi
             fi
             params="${params} -r ${repo_file}"
@@ -92,9 +92,9 @@ parseargs()
             || [ "x$spec_param" == "xdde" ]; then
                 :
             elif [ -f $spec_param ]; then
-                cp $spec_param ${cur_dir}/params/
+                cp $spec_param ${params_dir}/
                 spec_file_name=${spec_param##*/}
-                $spec_param=/work/params/${spec_file_name}
+                $spec_param=${params_dir_indocker}/${spec_file_name}
             else
                 echo `date` - ERROR, please check your params in option -s or --spec.
                 exit 2
@@ -115,33 +115,38 @@ parseargs()
 }
 
 ERROR(){
-    echo `date` - ERROR, $* | tee -a ${cur_dir}/log/log_${builddate}.log
+    echo `date` - ERROR, $* | tee -a ${log_dir}/${builddate}.log
 }
 
 LOG(){
-    echo `date` - INFO, $* | tee -a ${cur_dir}/log/log_${builddate}.log
+    echo `date` - INFO, $* | tee -a ${log_dir}/${builddate}.log
 }
 
 cur_dir=$(cd $(dirname $0);pwd)
 
-docker_file="https://repo.openeuler.org/openEuler-20.03-LTS/docker_img/aarch64/openEuler-docker.aarch64.tar.xz"
+docker_file="https://repo.openeuler.org/openEuler-20.03-LTS-SP1/docker_img/aarch64/openEuler-docker.aarch64.tar.xz"
 
-if [ -d ${cur_dir}/tmp ]; then
-    rm -rf ${cur_dir}/tmp
-fi
-mkdir ${cur_dir}/tmp
+workdir=${cur_dir}/raspi_output_common
 
-if [ -d ${cur_dir}/params ]; then
-    rm -rf ${cur_dir}/params
+buildid=$(date +%Y%m%d%H%M%S)
+builddate=${buildid:0:8}
+
+log_dir=${workdir}/log
+params_dir=${workdir}/params
+euler_dir=${cur_dir}/config-common
+params_dir_indocker=/work/raspi_output_common/params
+
+if [ -d ${params_dir} ]; then
+    rm -rf ${params_dir}
 fi
-mkdir ${cur_dir}/params
+mkdir -p ${params_dir}
 
 parseargs "$@" || help $?
 
 if [ "x${docker_file:0:4}" == "xhttp" ]; then
-    wget ${docker_file} -P ${cur_dir}/tmp/
+    wget ${docker_file} -P ${params_dir}/
 elif [ -f $docker_file ]; then
-    cp ${docker_file} ${cur_dir}/tmp/
+    cp ${docker_file} ${params_dir}/
 else
     echo `date` - ERROR, docker file $docker_file can not be found.
     exit 2
@@ -152,22 +157,30 @@ if [ "x$repo_file" == "x" ] ; then
     help 2
 fi
 
-buildid=$(date +%Y%m%d%H%M%S)
-builddate=${buildid:0:8}
-
-if [ ! -d ${cur_dir}/log ]; then
-    mkdir ${cur_dir}/log
+if [ ! -d ${log_dir} ]; then
+    mkdir ${log_dir}
 fi
-
 docker_file_name=${docker_file##*/}
-docker_img_name=`docker load --input ${cur_dir}/tmp/${docker_file_name}`
+docker_img_name=`docker load --input ${params_dir}/${docker_file_name}`
 docker_img_name=${docker_img_name##*: }
 
-(echo "FROM $docker_img_name" && grep -v FROM ${cur_dir}/config-common/Dockerfile_makeraspi) | docker build -t ${docker_img_name}-${buildid} --no-cache -f- .
-echo docker run --rm --privileged=true -v ${cur_dir}:/work ${docker_img_name}-${buildid} ${params}
-docker run --rm --privileged=true -v ${cur_dir}:/work ${docker_img_name}-${buildid} ${params}
-chmod -R a+r ${cur_dir}/img
+LOG build raspi image with docker: ${docker_file}.
+
+(echo "FROM $docker_img_name" && grep -v FROM ${euler_dir}/Dockerfile_makeraspi) | docker build -t ${docker_img_name}-${buildid} --no-cache -f- ${euler_dir}
+echo docker run --rm --privileged=true \
+    -v ${cur_dir}/build-image-common.sh:/work/build-image-common.sh \
+    -v ${euler_dir}:/work/config-common \
+    -v ${cur_dir}/config:/work/config \
+    -v ${workdir}:/work/raspi_output_common \
+    ${docker_img_name}-${buildid} ${params}
+docker run --rm --privileged=true \
+    -v ${cur_dir}/build-image-common.sh:/work/build-image-common.sh \
+    -v ${euler_dir}:/work/config-common \
+    -v ${cur_dir}/config:/work/config \
+    -v ${workdir}:/work/raspi_output_common \
+    ${docker_img_name}-${buildid} ${params}
+chmod -R a+r ${workdir}/img
 docker image rm ${docker_img_name}-${buildid}
-echo
-echo Done.
+LOG
+LOG Done.
 

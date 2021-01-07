@@ -8,6 +8,7 @@ iproute
 iputils
 NetworkManager
 openssh-server
+openssh-clients
 passwd
 hostname
 bluez

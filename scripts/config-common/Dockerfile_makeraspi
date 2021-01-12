@@ -6,7 +6,7 @@ RUN dnf -y install cmake gdb gcc gcc-c++ libstdc++-static ncurses ncurses-devel 
     dnf -y clean all
 
 RUN dnf -y install module-init-tools git openssl-devel bc bison flex dnf-plugins-core dosfstools parted wget device-mapper-multipath grep xz kpartx
-RUN dnf -y install tar passwd diffutils
+RUN dnf -y install rsync passwd diffutils
 ENV SHELL=/bin/bash
 
 ENTRYPOINT ["/bin/bash", "/work/build-image-common.sh"]

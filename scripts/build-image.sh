@@ -189,7 +189,7 @@ prepare(){
     LOG "prepare begin..."
     dnf clean all
     dnf makecache
-    dnf install -y dnf-plugins-core tar parted dosfstools grep bash xz kpartx
+    dnf install -y dnf-plugins-core rsync parted dosfstools grep bash xz kpartx
 
     if [ -d ${rootfs_dir} ]; then
         rm -rf ${rootfs_dir}
@@ -257,7 +257,7 @@ make_rootfs(){
     if [ ! -d $rootfs_dir/etc/sysconfig/network-scripts ]; then
         mkdir -p $rootfs_dir/etc/sysconfig/network-scripts
     fi
-    cp ${euler_dir}/ifup-eth0 $rootfs_dir/etc/sysconfig/network-scripts/ifup-eth0
+    cp ${euler_dir}/ifcfg-eth0 $rootfs_dir/etc/sysconfig/network-scripts/ifcfg-eth0
     mkdir -p ${rootfs_dir}/usr/bin ${rootfs_dir}/lib/udev/rules.d ${rootfs_dir}/lib/systemd/system
     if [ -d ${rootfs_dir}/usr/share/licenses/raspi ]; then
         mkdir -p ${rootfs_dir}/usr/share/licenses/raspi
@@ -326,20 +326,11 @@ make_img(){
     cp ${euler_dir}/config.txt ${boot_mnt}/
     echo "console=serial0,115200 console=tty1 root=/dev/mmcblk0p3 rootfstype=ext4 elevator=deadline rootwait" > ${boot_mnt}/cmdline.txt
 
-    if [ -f ${tmp_dir}/rootfs.tar ]; then
-        rm ${tmp_dir}/rootfs.tar
-    fi
-    pushd ${rootfs_dir}
-    rm -rf boot
-    tar cpf ${tmp_dir}/rootfs.tar .
-    popd
-    pushd ${root_mnt}
-    tar xpf ${tmp_dir}/rootfs.tar -C .
-    popd
+    rm -rf ${rootfs_dir}/boot
+    rsync -avHAXq ${rootfs_dir}/* ${root_mnt}
     sync
     sleep 10
     LOSETUP_D_IMG
-    rm ${tmp_dir}/rootfs.tar
     rm -rf ${rootfs_dir}
     losetup -D
     pushd ${img_dir}

@@ -10,7 +10,7 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
 
 - Issues: welcome to collaborate with us by create new issues or reply opened issues. You can get repository list from [sig-RaspberryPi](https://gitee.com/jianminw/community/tree/master/sig/sig-RaspberryPi).
 - Join Slack workspace: [openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com )
-  - [Invite link](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-iqpnvura-TiEGGioYPC6gswmhWrIisQ): This link will be due on Dec 4th, 2020. We will update the link periodically.
+  - [Invite link](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-kp6de2va-2t4k6JqvNWKogtYv1Kg3pQ): This link will be due on Feb 11th, 2021. We will update the link periodically.
 - Weekly meeting schedule
   - Meeting Time: The 1st and 3rd Tuesday of each month, 15:00 - 15:30 UTC+8.
   - Meeting Link: There are two methods to get the meeting link which will be updated before each meeting.

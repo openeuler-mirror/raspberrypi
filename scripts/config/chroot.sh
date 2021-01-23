@@ -30,3 +30,4 @@ chmod +x extend-root.sh
 chkconfig --add extend-root.sh
 chkconfig extend-root.sh on
 cd -
+ln -s /lib/firmware /etc/firmware

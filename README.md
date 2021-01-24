@@ -21,15 +21,15 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 
 ## 仓库目录
 
-- [scripts](./scripts): 构建 openEuler 树莓派镜像的脚本
-  - [快速构建（不编译内核）](scripts/build-image.sh)
-  - [主机上构建（编译内核）](scripts/build-image-common.sh)
-  - [Docker 容器中构建（编译内核）](scripts/build-image-docker.sh)
+>![](documents/public_sys-resources/icon-note.gif) **说明：**   
+>- 建议直接使用本文档 [最新镜像](#最新镜像) 章节中给出的 openEuler 的树莓派镜像。
+>- 如需根据自身需求定制镜像，可参考 [openEuler 镜像的构建](documents/openEuler镜像的构建.md) 和 [交叉编译内核](documents/交叉编译内核.md)。
+
 - [documents](./documents/): 使用文档
-  - [openEuler 镜像的构建](documents/openEuler镜像的构建.md)
-  - [交叉编译内核](documents/交叉编译内核.md)
   - [刷写镜像](documents/刷写镜像.md)
   - [树莓派使用](documents/树莓派使用.md)
+  - [openEuler 镜像的构建](documents/openEuler镜像的构建.md)
+  - [交叉编译内核](documents/交叉编译内核.md)
   - [openEuler 20.03 LTS 内测版更新日志](documents/changelog/changelog-20.03-LTS.md)
   - [openEuler 20.09 内测版更新日志](documents/changelog/changelog-20.09.md)
   - [openEuler 20.09 内测版（含 Xfce 桌面环境）更新日志](documents/changelog/changelog-20.09-Xfce.md)
@@ -38,6 +38,10 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
   - [openEuler 20.03 LTS SP1 内测版（含 UKUI 桌面环境）更新日志](documents/changelog/changelog-20.03-LTS-SP1-UKUI.md)
   - [openEuler 20.03 LTS SP1 内测版（含 DDE 桌面环境）更新日志](documents/changelog/changelog-20.03-LTS-SP1-DDE.md)
   - [openEuler 20.03 LTS SP1 更新日志](documents/changelog/changelog-20.03-LTS-SP1-release.md)
+- [scripts](./scripts): 构建 openEuler 树莓派镜像的脚本
+  - [快速构建（不编译内核）](scripts/build-image.sh)
+  - [主机上构建（编译内核）](scripts/build-image-common.sh)
+  - [Docker 容器中构建（编译内核）](scripts/build-image-docker.sh)
 
 ## 最新镜像
 

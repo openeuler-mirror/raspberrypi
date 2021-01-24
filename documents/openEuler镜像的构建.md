@@ -56,6 +56,9 @@
 
 <!-- /TOC -->
 
+>![](public_sys-resources/icon-note.gif) **说明：**   
+>如需根据自身需求定制镜像，可参考本文档。
+
 # 环境需求
 
 - 操作系统：openEuler 或 Centos 7/8；

@@ -22,15 +22,15 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
 
 ## Files and Directories
 
-- [scripts](./scripts): Script for building openEuler image for Raspberry Pi
-  - [Quickly Build (without kernel compilation)](scripts/build-image.sh)
-  - [Build on host (with kernel compilation)](scripts/build-image-common.sh)
-  - [Build in a Docker container (with kernel compilation)](scripts/build-image-docker.sh)
+>![](documents/public_sys-resources/icon-note.gif) **NOTE: **   
+>- Recommendation: use the openEuler-RaspberryPi images provided in the chapter [How to download latest image](#how-to-download-latest-image) of this documentation.
+>- If you need to customize the image, please refer to [Building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md) and [Cross-compile the kernel](documents/交叉编译内核.md).
+
 - [documents](./documents/):
-  - [Building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md)
-  - [Cross-compile the kernel](documents/交叉编译内核.md)
   - [Install openEuler on a SD card](documents/刷写镜像.md)
   - [How to use Raspberry Pi](documents/树莓派使用.md)
+  - [Building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md)
+  - [Cross-compile the kernel](documents/交叉编译内核.md)
   - [openEuler 20.03 LTS alpha version ChangeLog](documents/changelog/changelog-20.03-LTS.en.md)
   - [openEuler 20.09 alpha version ChangeLog](documents/changelog/changelog-20.09.en.md)
   - [openEuler 20.09 alpha version (with Xfce desktop environment) ChangeLog](documents/changelog/changelog-20.09-Xfce.en.md)
@@ -39,6 +39,10 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
   - [openEuler 20.03 LTS SP1 alpha version (with UKUI desktop environment) ChangeLog](documents/changelog/changelog-20.03-LTS-SP1-UKUI.en.md)
   - [openEuler 20.03 LTS SP1 alpha version (with DDE desktop environment) ChangeLog](documents/changelog/changelog-20.03-LTS-SP1-DDE.en.md)
   - [openEuler 20.03 LTS SP1 ChangeLog](documents/changelog/changelog-20.03-LTS-SP1-release.en.md)
+- [scripts](./scripts): Script for building openEuler image for Raspberry Pi
+  - [Quickly Build (without kernel compilation)](scripts/build-image.sh)
+  - [Build on host (with kernel compilation)](scripts/build-image-common.sh)
+  - [Build in a Docker container (with kernel compilation)](scripts/build-image-docker.sh)
 
 ## How to download latest image
 

@@ -54,29 +54,29 @@ Basic information of the image is as follows:
 <th class="cellrowborder" valign="top" width="10%"><p><strong>Repository of rootfs</strong></p></th>
 </tr></thead>
 <tbody><tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-raspi-aarch64-alpha4.img.xz">openEuler 20.03 LTS alpha4</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-raspi-aarch64-alpha5.img.xz">openEuler 20.03 LTS alpha5</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS.en.md">ChangeLog</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2021/01/06</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>217 MiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2012.5.0</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/01/19</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>212 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2101.1.0</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS/standard_aarch64/aarch64/">openEuler 20.03 LTS repository built daily</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-raspi-aarch64-alpha4.img.xz">openEuler 20.09 alpha4</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-raspi-aarch64-alpha5.img.xz">openEuler 20.09 alpha5</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.09.en.md">ChangeLog</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2021/01/06</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>243 MiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>4.19.140-2012.2.0.0006</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/01/19</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>236 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.140-2101.1.0.0007</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.09/generic.repo">openEuler 20.09 repository built daily</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-Xfce-raspi-aarch64-alpha5.img.xz">openEuler 20.09 alpha5 (with Xfce desktop environment)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.09-Xfce-raspi-aarch64-alpha6.img.xz">openEuler 20.09 alpha6 (with Xfce desktop environment)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.09-Xfce.en.md">ChangeLog</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2021/01/06</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>922 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/01/19</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>903 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.138-2008.1.0.0001</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-20.09/">openEuler 20.09 repository</a></td>
 </tr>
@@ -90,28 +90,28 @@ Basic information of the image is as follows:
 <td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-20.09/">openEuler 20.09 repository</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP1-raspi-aarch64-alpha2.img.xz">openEuler 20.03 LTS SP1 alpha2</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP1-raspi-aarch64-alpha3.img.xz">openEuler 20.03 LTS SP1 alpha3</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP1.en.md">ChangeLog</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2021/01/06</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>239 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/01/19</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>234 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2012.5.0.0013</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP1/standard_aarch64/aarch64/">openEuler 20.03 LTS SP1 repository built daily</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP1-UKUI-raspi-aarch64-alpha2.img.xz">openEuler 20.03 LTS SP1 alpha2 (with UKUI desktop environment)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP1-UKUI-raspi-aarch64-alpha3.img.xz">openEuler 20.03 LTS SP1 alpha3 (with UKUI desktop environment)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP1-UKUI.en.md">ChangeLog</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2021/01/06</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/01/19</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>1.0 GiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2012.5.0.0013</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP1/standard_aarch64/aarch64/">openEuler 20.03 LTS SP1 repository built daily</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP1-DDE-raspi-aarch64-alpha2.img.xz">openEuler 20.03 LTS SP1 alpha2 (with DDE desktop environment)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP1-DDE-raspi-aarch64-alpha3.img.xz">openEuler 20.03 LTS SP1 alpha3 (with DDE desktop environment)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP1-DDE.en.md">ChangeLog</a></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2021/01/06</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/01/19</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>1.0 GiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2012.5.0.0013</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP1/standard_aarch64/aarch64/">openEuler 20.03 LTS SP1 repository built daily</a></td>

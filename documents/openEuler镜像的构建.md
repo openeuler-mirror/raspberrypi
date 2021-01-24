@@ -264,7 +264,7 @@ etc/ usr/ var/
 
     `mkdir ${WORKDIR}/rootfs/etc/sysconfig/network-scripts`
 
-    `vim ${WORKDIR}/rootfs/etc/sysconfig/network-scripts/ifup-eth0`
+    `vim ${WORKDIR}/rootfs/etc/sysconfig/network-scripts/ifcfg-eth0`
 
     内容：
     ```
@@ -448,13 +448,7 @@ UUID=a451bee4-4384-48a2-8d5a-d09c2dd9a1a  swap swap    defaults,noatime 0 0
 
 ## rootfs 拷贝到镜像
 
-`cd ${WORKDIR}/rootfs/`
-
-`tar cpf ${WORKDIR}/rootfs.tar .`
-
-`cd ${WORKDIR}/root`
-
-`tar xpf ${WORKDIR}/rootfs.tar -C .`
+`rsync -avHAXq ${WORKDIR}/rootfs/* ${WORKDIR}/root`
 
 ## boot 引导拷贝到镜像
 

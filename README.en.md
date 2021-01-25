@@ -2,7 +2,24 @@
 
 English | [简体中文](./README.md)
 
-This repository is main repository of openEuler RaspberryPi SIG, and provides scripts for building openEuler image for Raspberry Pi and related documents:
+This repository is main repository of openEuler RaspberryPi SIG, and provides scripts for building openEuler image for Raspberry Pi and related documents.
+
+<!-- TOC -->
+
+- [raspberrypi](#raspberrypi)
+    - [How to collaborate](#how-to-collaborate)
+    - [File description](#file-description)
+    - [How to download latest image](#how-to-download-latest-image)
+    - [How to Use image](#how-to-use-image)
+    - [How to build image locally](#how-to-build-image-locally)
+        - [Prepare the environment](#prepare-the-environment)
+        - [Run the scripts to build image](#run-the-scripts-to-build-image)
+            - [Quickly Build without kernel compilation(Recommended)](#quickly-build-without-kernel-compilationrecommended)
+            - [Build with kernel compilation](#build-with-kernel-compilation)
+                - [Build on host](#build-on-host)
+                - [Build in a Docker container](#build-in-a-docker-container)
+
+<!-- /TOC -->
 
 ## How to collaborate
 
@@ -20,7 +37,7 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
   - [Meeting Minutes](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6)
 - Warmly welcome to sumbit Pull Requests.
 
-## Files and Directories
+## File description
 
 >![](documents/public_sys-resources/icon-note.gif) **NOTE: **   
 >- Recommendation: use the openEuler-RaspberryPi images provided in the chapter [How to download latest image](#how-to-download-latest-image) of this documentation.

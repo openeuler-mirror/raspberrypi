@@ -2,7 +2,24 @@
 
 [English](./README.en.md) | 简体中文
 
-本仓库是 openEuler 社区树莓派 SIG 组的主仓库，提供 SIG 组相关信息以及适用于树莓派的 openEuler 镜像的构建脚本和相关文档：
+本仓库是 openEuler 社区树莓派 SIG 组的主仓库，提供 SIG 组相关信息以及适用于树莓派的 openEuler 镜像的构建脚本和相关文档。
+
+<!-- TOC -->
+
+- [raspberrypi](#raspberrypi)
+    - [如何参与 SIG 组](#如何参与-sig-组)
+    - [文件说明](#文件说明)
+    - [最新镜像](#最新镜像)
+    - [使用镜像](#使用镜像)
+    - [镜像构建](#镜像构建)
+        - [准备环境](#准备环境)
+        - [构建镜像](#构建镜像)
+            - [快速构建（无需编译内核，推荐）](#快速构建无需编译内核推荐)
+            - [完全构建（包括编译内核）](#完全构建包括编译内核)
+                - [主机上构建](#主机上构建)
+                - [Docker 容器内构建](#docker-容器内构建)
+
+<!-- /TOC -->
 
 ## 如何参与 SIG 组
 
@@ -19,7 +36,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
   - [会议记录](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6)：每次会议结束后会议结论会更新在此 issue 中。
 - 重要的事说三遍：**欢迎提交 PR！欢迎提交 PR！欢迎提交 PR！**
 
-## 仓库目录
+## 文件说明
 
 >![](documents/public_sys-resources/icon-note.gif) **说明：**   
 >- 建议直接使用本文档 [最新镜像](#最新镜像) 章节中给出的 openEuler 的树莓派镜像。

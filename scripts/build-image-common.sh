@@ -244,11 +244,19 @@ prepare(){
         ERROR "${os_release_name} can not be found!"
         exit 2
     fi
-    set -e
-
     wget https://raw.githubusercontent.com/RPi-Distro/raspberrypi-sys-mods/master/etc.armhf/udev/rules.d/99-com.rules -P ${tmp_dir}/
+    if [ $? -ne 0 ]; then
+        cp ${euler_dir}/99-com.rules ${tmp_dir}/
+    fi
     wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/plain/regulatory.db.p7s -P ${tmp_dir}/
+    if [ $? -ne 0 ]; then
+        cp ${euler_dir}/regulatory.db.p7s ${tmp_dir}/
+    fi
     wget https://git.kernel.org/pub/scm/linux/kernel/git/sforshee/wireless-regdb.git/plain/regulatory.db -P ${tmp_dir}/
+    if [ $? -ne 0 ]; then
+        cp ${euler_dir}/regulatory.db ${tmp_dir}/
+    fi
+    set -e
     if [ ! -d ${img_dir} ]; then
         mkdir -p ${img_dir}
     fi

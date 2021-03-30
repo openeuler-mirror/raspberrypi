@@ -29,7 +29,7 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
 - Join Slack workspace: [openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com )
   - [Invite link](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-kp6de2va-2t4k6JqvNWKogtYv1Kg3pQ): This link will be due on Feb 11th, 2021. We will update the link periodically.
 - Weekly meeting schedule
-  - Meeting Time: The 1st and 3rd Tuesday of each month, 15:00 - 15:30 UTC+8.
+  - Meeting Time: The 1st and 3rd Wednesday of each month, 20:00 - 20:30 UTC+8.
   - Meeting Link: There are two methods to get the meeting link which will be updated before each meeting.
     - Log in to the [openEuler Community](https://openeuler.org/) website, then view the booking information of `sig-RaspberryPi例会` in the meeting calendar.
     - Search `openEuler` in mini programs of Wechat, add `openEuler mini program`. Then click `会议` and view the booking information of `sig-RaspberryPi例会`.

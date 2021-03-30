@@ -28,7 +28,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
 - 建立或回复 issue：欢迎通过建立或回复 issue 来讨论，此 SIG 组维护的仓库列表可在 [sig-RaspberryPi](https://gitee.com/jianminw/community/tree/master/sig/sig-RaspberryPi) 中查看。
 - 加入 Slack 群组：[openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com )
   - [加入群组链接](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-kp6de2va-2t4k6JqvNWKogtYv1Kg3pQ)，此链接于 2021/02/11 失效，我们会定期更新。
-- SIG 组会议：每个月的第一个和第三个周二下午 03:00 - 03:30 会进行一次讨论会议
+- SIG 组会议：每个月的第一个和第三个周三晚上 20:00 - 20:30 会进行一次讨论会议
   - 会议链接：有以下两种获取方式
     - [openEuler 社区网站](https://openeuler.org/)下的会议日历中查看 `sig-RaspberryPi例会` 预定信息。
     - 微信小程序搜索 `openEuler`，添加 `openEuler` 小程序，可在其`会议`栏目查看 `sig-RaspberryPi例会` 预定信息。

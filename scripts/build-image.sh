@@ -258,8 +258,8 @@ make_rootfs(){
         mkdir -p $rootfs_dir/etc/sysconfig/network-scripts
     fi
     cp ${euler_dir}/ifcfg-eth0 $rootfs_dir/etc/sysconfig/network-scripts/ifcfg-eth0
-    mkdir -p ${rootfs_dir}/usr/bin ${rootfs_dir}/lib/udev/rules.d ${rootfs_dir}/lib/systemd/system
-    if [ -d ${rootfs_dir}/usr/share/licenses/raspi ]; then
+    mkdir -p ${rootfs_dir}/lib/udev/rules.d
+    if [ ! -d ${rootfs_dir}/usr/share/licenses/raspi ]; then
         mkdir -p ${rootfs_dir}/usr/share/licenses/raspi
     fi
     cp ${euler_dir}/*.rules ${rootfs_dir}/lib/udev/rules.d/

@@ -1,6 +1,29 @@
-## Feature Release Log of openEuler 20.03 LTS SP1 Alpha Version (with DDE desktop environment)
+## Feature Release Log of openEuler 20.03 LTS SP1 Alpha Version (with DDE desktop environment and Chinese input method)
 
 English | [简体中文](./changelog-20.03-LTS-SP1-DDE.md)
+
+### 2021-04-12
+
+#### Basic information
+
+- Release date: 2021/04/12
+- Size: 1.1 GiB
+- OS version: openEuler 20.03 LTS SP1
+- Kernel version: 4.19.90-2104.1.0.0017
+- Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+- Repository of rootfs: [openEuler 20.03 LTS SP1 repository built daily](http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP1/standard_aarch64/aarch64/)
+- Repository inside the image: [openEuler 20.03 LTS SP1 repository](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.03-LTS-SP1/generic.repo)
+
+#### Updates
+
+##### Kernel
+
+Update to the latest stable version of openEuler: 4.19.90-2104.1.0.
+
+##### Feature update
+
+- Add Chinese input method.
+- Fixed: can not find wireless device in RPi 400.
 
 ### 2021-01-19
 

@@ -1,5 +1,7 @@
 ## 镜像
 
+[English](./images.en.md) | 简体中文
+
 镜像的基本信息如下所示：
 
 <table><thead align="left"><tr>

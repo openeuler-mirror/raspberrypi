@@ -1,5 +1,7 @@
 ## images
 
+English | [简体中文](./images.md)
+
 Basic information of the image is as follows:
 
 <table><thead align="left"><tr>

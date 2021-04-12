@@ -2,6 +2,28 @@
 
 English | [简体中文](./changelog-20.09.md)
 
+### 2021-04-12
+
+#### Basic information
+
+- Release date: 2021/04/12
+- Size: 236 MiB
+- OS version: openEuler 20.09
+- Kernel version: 4.19.140-2104.1.0.0010
+- Firmware source: [firmware](https://github.com/raspberrypi/firmware), [bluez-firmware](https://github.com/RPi-Distro/bluez-firmware), [firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+- Repository of rootfs: [openEuler 20.09 repository built daily](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-20.09/generic.repo)
+- Repository inside the image: [openEuler 20.09 repository](http://repo.openeuler.org/openEuler-20.09/)
+
+#### Updates
+
+##### Kernel
+
+Update to the latest stable version of openEuler: 4.19.140-2104.1.0.
+
+##### Feature update
+
+Fixed: can not find wireless device in RPi 400.
+
 ### 2021-01-19
 
 #### Basic information

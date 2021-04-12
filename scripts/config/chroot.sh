@@ -17,9 +17,8 @@ if [ -f /etc/rc.d/rc.local ]; then
     chmod +x /etc/rc.d/rc.local
 fi
 if [ "x$1" == "xxfce" ]; then
-    if [ -f /etc/lightdm/lightdm.conf ]; then
-        sed -i 's/#user-session=default/user-session=xfce/g' /etc/lightdm/lightdm.conf
-    fi
+    echo "user-session=xfce" >> /etc/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf
+    sed -i -e "/^#background=/cbackground=\/usr\/share\/backgrounds\/xfce\/xfce-blue.jpg" /etc/lightdm/lightdm-gtk-greeter.conf
 elif [ "x$1" == "xdde" ]; then
     if id openeuler; then
         userdel -r openeuler

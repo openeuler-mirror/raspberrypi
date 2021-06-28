@@ -4,6 +4,8 @@ English | [简体中文](./README.md)
 
 This repository is main repository of openEuler RaspberryPi SIG, and provides scripts for building openEuler image for Raspberry Pi and related documents.
 
+In addition, RaspberryPi SIG also aims to migrate openEuler to other SoCs, such as [Rockchip](https://gitee.com/openeuler/rockchip).
+
 <!-- TOC -->
 
 - [raspberrypi](#raspberrypi)
@@ -48,6 +50,7 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
   - [How to use Raspberry Pi](documents/树莓派使用.md)
   - [Building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md)
   - [Cross-compile the kernel](documents/交叉编译内核.md)
+  - [Emulate Raspberry Pi with QEMU](documents/QEMU启动树莓派.md)
   - [openEuler 20.03 LTS SP1 alpha version ChangeLog](documents/changelog/changelog-20.03-LTS-SP1.en.md)
   - [openEuler 20.03 LTS SP1 alpha version (UKUI desktop environment and Chinese input method) ChangeLog](documents/changelog/changelog-20.03-LTS-SP1-UKUI.en.md)
   - [openEuler 20.03 LTS SP1 alpha version (DDE desktop environment and Chinese input method) ChangeLog](documents/changelog/changelog-20.03-LTS-SP1-DDE.en.md)

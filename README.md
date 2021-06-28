@@ -4,6 +4,8 @@
 
 本仓库是 openEuler 社区树莓派 SIG 组的主仓库，提供 SIG 组相关信息以及适用于树莓派的 openEuler 镜像的构建脚本和相关文档。
 
+此外，树莓派 SIG 还致力于将 openEuler 移植到其他开发板，例如 [Rockchip](https://gitee.com/openeuler/rockchip)。
+
 <!-- TOC -->
 
 - [raspberrypi](#raspberrypi)
@@ -47,6 +49,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/jianminw/community
   - [树莓派使用](documents/树莓派使用.md)
   - [openEuler 镜像的构建](documents/openEuler镜像的构建.md)
   - [交叉编译内核](documents/交叉编译内核.md)
+  - [QEMU 启动树莓派](documents/QEMU启动树莓派.md)
   - [openEuler 20.03 LTS SP1 更新日志](documents/changelog/changelog-20.03-LTS-SP1.md)
   - [openEuler 20.03 LTS SP1 内测版（UKUI 桌面、中文输入法）更新日志](documents/changelog/changelog-20.03-LTS-SP1-UKUI.md)
   - [openEuler 20.03 LTS SP1 内测版（DDE 桌面、中文输入法）更新日志](documents/changelog/changelog-20.03-LTS-SP1-DDE.md)

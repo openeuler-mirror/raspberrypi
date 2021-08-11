@@ -312,19 +312,19 @@ make_img(){
     fstab_array=("" "" "" "")
     for line in `blkid | grep /dev/mapper/${loopX}p`
     do
-        uuid=${line#*UUID=\"}
-        fstab_array[${line:18:1}]=${uuid%%\"*}
+        partuuid=${line#*PARTUUID=\"}
+        fstab_array[${line:18:1}]=${partuuid%%\"*}
     done
-    echo "UUID=${fstab_array[3]}  / ext4    defaults,noatime 0 0" > ${rootfs_dir}/etc/fstab
-    echo "UUID=${fstab_array[1]}  /boot vfat    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
-    echo "UUID=${fstab_array[2]}  swap swap    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
+    echo "PARTUUID=${fstab_array[3]}  / ext4    defaults,noatime 0 0" > ${rootfs_dir}/etc/fstab
+    echo "PARTUUID=${fstab_array[1]}  /boot vfat    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
+    echo "PARTUUID=${fstab_array[2]}  swap swap    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
 
     if [ -d ${rootfs_dir}/boot/grub2 ]; then
         rm -rf ${rootfs_dir}/boot/grub2
     fi
     cp -a ${rootfs_dir}/boot/* ${boot_mnt}/
     cp ${euler_dir}/config.txt ${boot_mnt}/
-    echo "console=serial0,115200 console=tty1 root=/dev/mmcblk0p3 rootfstype=ext4 elevator=deadline rootwait" > ${boot_mnt}/cmdline.txt
+    echo "console=serial0,115200 console=tty1 root=PARTUUID=${fstab_array[3]} rootfstype=ext4 elevator=deadline rootwait" > ${boot_mnt}/cmdline.txt
 
     rm -rf ${rootfs_dir}/boot
     rsync -avHAXq ${rootfs_dir}/* ${root_mnt}

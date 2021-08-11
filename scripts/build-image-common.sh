@@ -540,18 +540,18 @@ make_img(){
     fstab_array=("" "" "" "")
     for line in `blkid | grep /dev/mapper/${loopX}p`
     do
-        uuid=${line#*UUID=\"}
-        fstab_array[${line:18:1}]=${uuid%%\"*}
+        partuuid=${line#*PARTUUID=\"}
+        fstab_array[${line:18:1}]=${partuuid%%\"*}
     done
-    echo "UUID=${fstab_array[3]}  / ext4    defaults,noatime 0 0" > ${rootfs_dir}/etc/fstab
-    echo "UUID=${fstab_array[1]}  /boot vfat    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
-    echo "UUID=${fstab_array[2]}  swap swap    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
+    echo "PARTUUID=${fstab_array[3]}  / ext4    defaults,noatime 0 0" > ${rootfs_dir}/etc/fstab
+    echo "PARTUUID=${fstab_array[1]}  /boot vfat    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
+    echo "PARTUUID=${fstab_array[2]}  swap swap    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
 
     cp -rf --preserve=mode,timestamps --no-preserve=ownership ${workdir}/firmware/boot/* ${boot_mnt}/
     pushd ${boot_mnt}/
     rm -f *.dtb cmdline.txt kernel.img kernel7.img kernel7l.img
     cp ${euler_dir}/config.txt ./
-    echo "console=serial0,115200 console=tty1 root=/dev/mmcblk0p3 rootfstype=ext4 elevator=deadline rootwait" > cmdline.txt
+    echo "console=serial0,115200 console=tty1 root=PARTUUID=${fstab_array[3]} rootfstype=ext4 elevator=deadline rootwait" > cmdline.txt
     popd
     cp --preserve=mode,timestamps --no-preserve=ownership ${output_dir}/Image ${boot_mnt}/kernel8.img
     cp --preserve=mode,timestamps --no-preserve=ownership ${output_dir}/*.dtb ${boot_mnt}/

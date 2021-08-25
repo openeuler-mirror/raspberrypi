@@ -25,11 +25,11 @@ In addition, RaspberryPi SIG also aims to migrate openEuler to other SoCs, such 
 
 ## How to collaborate
 
-You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](https://gitee.com/jianminw/community/tree/master/sig/sig-RaspberryPi).
+You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](https://gitee.com/openeuler/community/tree/master/sig/sig-RaspberryPi).
 
-- Issues: welcome to collaborate with us by create new issues or reply opened issues. You can get repository list from [sig-RaspberryPi](https://gitee.com/jianminw/community/tree/master/sig/sig-RaspberryPi).
+- Issues: welcome to collaborate with us by create new issues or reply opened issues. You can get repository list from [sig-RaspberryPi](https://gitee.com/openeuler/community/tree/master/sig/sig-RaspberryPi).
 - Join Slack workspace: [openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com )
-  - [Invite link](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-kp6de2va-2t4k6JqvNWKogtYv1Kg3pQ): This link will be due on Feb 11th, 2021. We will update the link periodically.
+  - [Invite link](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-uh95ug4n-yX7a~c7VrTEU64tZlX3Djw)
 - Weekly meeting schedule
   - Meeting Time: The 1st and 3rd Wednesday of each month, 20:00 - 20:30 UTC+8.
   - Meeting Link: There are two methods to get the meeting link which will be updated before each meeting.

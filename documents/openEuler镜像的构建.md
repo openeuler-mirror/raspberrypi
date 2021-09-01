@@ -98,6 +98,7 @@
 2.  4.19 内核
 
     - openEuler 20.03 LTS：`git clone git@gitee.com:openeuler/raspberrypi-kernel.git -b openEuler-20.03-LTS && cd raspberrypi-kernel`
+    - openEuler 20.09：`git clone git@gitee.com:openeuler/raspberrypi-kernel.git -b openEuler-20.09 && cd raspberrypi-kernel`
 
 下面编译时可能还需要 bison、flex、build-essential 等，根据提示安装即可。
 
@@ -113,6 +114,7 @@
 2.  4.19 内核
 
     - openEuler 20.03 LTS：`make openeuler-raspi_defconfig`
+    - openEuler 20.09：`make openeuler-raspi_defconfig`
 
 对应的 defconfig 文件在 ../linux/arch/arm64/configs 下。
 

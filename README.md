@@ -279,7 +279,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/openeuler/communit
 
 3.  -b, --branch KERNEL_BRANCH
 
-    内核源码的对应分支，默认为 `master`，推荐使用分支 `openEuler-20.03-LTS` 或 `openEuler-20.09`。
+    内核源码的对应分支，默认为 `openEuler-20.03-LTS`，推荐使用分支 `openEuler-21.09`、`openEuler-20.03-LTS` 或 `openEuler-20.09`。
 
 4.  -c, --config KERNEL_DEFCONFIG
 

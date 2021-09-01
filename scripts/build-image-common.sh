@@ -8,7 +8,7 @@ Build raspberrypi image.
 Options:
   -n, --name IMAGE_NAME            The raspberrypi image name to be built.
   -k, --kernel KERNEL_URL          The URL of kernel source's repository, which defaults to https://gitee.com/openeuler/raspberrypi-kernel.git.
-  -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to master.
+  -b, --branch KERNEL_BRANCH       The branch name of kernel source's repository, which defaults to openEuler-20.03-LTS.
   -c, --config KERNEL_DEFCONFIG    The name/path of defconfig file when compiling kernel, which defaults to openeuler-raspi_defconfig.
   -r, --repo REPO_INFO             Required! The URL/path of target repo file or list of repo's baseurls which should be a space separated list.
   -s, --spec SPEC                  The image's specification: headless, xfce, ukui, dde or the file path of rpmlist. The default is headless.
@@ -595,7 +595,7 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 kernel_url="https://gitee.com/openeuler/raspberrypi-kernel.git"
-kernel_branch="master"
+kernel_branch="openEuler-20.03-LTS"
 kernel_defconfig="openeuler-raspi_defconfig"
 default_defconfig=""
 make_cores=$(nproc)

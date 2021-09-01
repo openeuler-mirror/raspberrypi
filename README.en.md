@@ -276,7 +276,7 @@ The meaning of each parameter:
 
 3.  -b, --branch KERNEL_BRANCH
 
-    The branch name of kernel source repository, which defaults to `master`. `openEuler-20.03-LTS` or `openEuler-20.09` is recommended.
+    The branch name of kernel source repository, which defaults to `openEuler-20.03-LTS`. `openEuler-21.09`, `openEuler-20.03-LTS` or `openEuler-20.09` is recommended.
 
 4.  -c, --config KERNEL_DEFCONFIG
 

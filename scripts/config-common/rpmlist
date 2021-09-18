@@ -15,4 +15,5 @@ bluez
 pulseaudio-module-bluetooth
 parted
 sudo
+bc
 openEuler-repos

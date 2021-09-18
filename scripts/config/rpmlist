@@ -18,4 +18,5 @@ raspberrypi-kernel
 raspberrypi-firmware
 raspberrypi-bluetooth
 sudo
+bc
 openEuler-repos

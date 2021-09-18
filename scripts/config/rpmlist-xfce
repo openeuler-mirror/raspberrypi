@@ -30,4 +30,5 @@ xfce4-*-plugin
 network-manager-applet
 lightdm
 lightdm-gtk
+bc
 openEuler-repos

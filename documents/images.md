@@ -122,6 +122,87 @@
 <td class="cellrowborder" valign="top" width="10%"><p>5.10.0-4.17.0.8</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-21.03/generic.repo">openEuler 21.03 源仓库</a></td>
 </tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP2-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP2 内测版</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP2.md">更新日志</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>258 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2109.7.0.0031</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP2/standard_aarch64/aarch64/">openEuler 20.03 LTS SP2 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP2-UKUI-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP2 内测版（UKUI 桌面、中文输入法）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP2-UKUI.md">更新日志</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.2 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2109.7.0.0031</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP2/standard_aarch64/aarch64/">openEuler 20.03 LTS SP2 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP2-DDE-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP2 内测版（DDE 桌面、中文输入法）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP2-DDE.md">更新日志</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.2 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2109.7.0.0031</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP2/standard_aarch64/aarch64/">openEuler 20.03 LTS SP2 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP2-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP2 内测版（Xfce 桌面、中文输入法）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP2-Xfce.md">更新日志</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.9 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2109.7.0.0031</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP2/standard_aarch64/aarch64/">openEuler 20.03 LTS SP2 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-raspi-aarch64-alpha1.img.xz">openEuler 21.09 内测版</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09.md">更新日志</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>242 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-5.10.0.8</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-UKUI-raspi-aarch64-alpha1.img.xz">openEuler 21.09 内测版（UKUI 桌面、中文输入法）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09-UKUI.md">更新日志</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.3 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-5.10.0.8</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-DDE-raspi-aarch64-alpha1.img.xz">openEuler 21.09 内测版（DDE 桌面、中文输入法）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09-DDE.md">更新日志</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.2 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-5.10.0.8</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 21.09 内测版（Xfce 桌面、中文输入法）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09-Xfce.md">更新日志</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.8 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-5.10.0.8</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 每日构建源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-LXDE-raspi-aarch64-alpha1.img.xz">openEuler 21.09 内测版（LXDE 桌面、中文输入法）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09-LXDE.md">更新日志</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>548 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-5.10.0.8</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 每日构建源仓库</a></td>
+</tr>
 </tbody></table>
 
 其他信息：

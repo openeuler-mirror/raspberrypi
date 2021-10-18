@@ -122,6 +122,87 @@ Basic information of the image is as follows:
 <td class="cellrowborder" valign="top" width="10%"><p>5.10.0-4.17.0.8</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-21.03/generic.repo">openEuler 21.03 repository</a></td>
 </tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP2-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP2 alpha1</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP2.en.md">ChangeLog</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>258 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2109.7.0.0031</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP2/standard_aarch64/aarch64/">openEuler 20.03 LTS SP2 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP2-UKUI-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP2 alpha1 (UKUI desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP2-UKUI.en.md">ChangeLog</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.2 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2109.7.0.0031</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP2/standard_aarch64/aarch64/">openEuler 20.03 LTS SP2 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP2-DDE-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP2 alpha1 (DDE desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP2-DDE.en.md">ChangeLog</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.2 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2109.7.0.0031</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP2/standard_aarch64/aarch64/">openEuler 20.03 LTS SP2 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP2-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP2 alpha1 (Xfce desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-20.03-LTS-SP2-Xfce.en.md">ChangeLog</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.9 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2109.7.0.0031</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/20.03:/LTS:/SP2/standard_aarch64/aarch64/">openEuler 20.03 LTS SP2 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-raspi-aarch64-alpha1.img.xz">openEuler 21.09 alpha1</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09.en.md">ChangeLog</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>242 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-5.10.0.8</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-UKUI-raspi-aarch64-alpha1.img.xz">openEuler 21.09 alpha1 (UKUI desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09-UKUI.en.md">ChangeLog</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.3 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-5.10.0.8</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-DDE-raspi-aarch64-alpha1.img.xz">openEuler 21.09 alpha1 (DDE desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09-DDE.en.md">ChangeLog</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.2 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-5.10.0.8</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 21.09 alpha1 (Xfce desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09-Xfce.en.md">ChangeLog</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.8 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-5.10.0.8</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-LXDE-raspi-aarch64-alpha1.img.xz">openEuler 21.09 alpha1 (LXDE desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09-LXDE.en.md">ChangeLog</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2021/10/18</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>548 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-5.10.0.8</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 repository built daily</a></td>
+</tr>
 </tbody></table>
 
 Other information:

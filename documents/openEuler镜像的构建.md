@@ -116,7 +116,7 @@
     - openEuler 20.03 LTS：`make openeuler-raspi_defconfig`
     - openEuler 20.09：`make openeuler-raspi_defconfig`
 
-对应的 defconfig 文件在 ../linux/arch/arm64/configs 下。
+对应的 defconfig 文件在 ./arch/arm64/configs 下。
 
 ### 编译
 

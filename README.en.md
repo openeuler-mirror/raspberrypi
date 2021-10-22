@@ -27,17 +27,17 @@ In addition, RaspberryPi SIG also aims to migrate openEuler to other SoCs, such 
 
 You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](https://gitee.com/openeuler/community/tree/master/sig/sig-RaspberryPi).
 
-- Issues: welcome to collaborate with us by create new issues or reply opened issues. You can get repository list from [sig-RaspberryPi](https://gitee.com/openeuler/community/tree/master/sig/sig-RaspberryPi).
-- Join Slack workspace: [openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com )
+- Issues: welcome to collaborate with us by creating new issues or reply opened issues. You can get repository list from [sig-RaspberryPi](https://gitee.com/openeuler/community/tree/master/sig/sig-RaspberryPi).
+- Join Slack workspace: [openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com)
   - [Invite link](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-uh95ug4n-yX7a~c7VrTEU64tZlX3Djw)
 - Weekly meeting schedule
   - Meeting Time: The 1st and 3rd Wednesday of each month, 17:00 - 17:30 UTC+8.
   - Meeting Link: There are two methods to get the meeting link which will be updated before each meeting.
     - Log in to the [openEuler Community](https://openeuler.org/) website, then view the booking information of `sig-RaspberryPi例会` in the meeting calendar.
-    - Search `openEuler` in mini programs of Wechat, add `openEuler mini program`. Then click `会议` and view the booking information of `sig-RaspberryPi例会`.
+    - Search `openEuler` in mini programs of WeChat, add `openEuler mini program`. Then click `会议` and view the booking information of `sig-RaspberryPi例会`.
   - [Meeting Agenda](https://etherpad.openeuler.org/p/sig-RaspberryPi-meetings)
   - [Meeting Minutes](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6)
-- Warmly welcome to sumbit Pull Requests.
+- Warmly welcome to submit Pull Requests.
 
 ## File description
 
@@ -46,7 +46,7 @@ You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](htt
 >- If you need to customize the image, please refer to [Building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md) and [Cross-compile the kernel](documents/交叉编译内核.md).
 
 - [documents](./documents/):
-  - [Install openEuler on a SD card](documents/刷写镜像.md)
+  - [Install openEuler on an SD card](documents/刷写镜像.md)
   - [How to use Raspberry Pi](documents/树莓派使用.md)
   - [Building openEuler image for Raspberry Pi](documents/openEuler镜像的构建.md)
   - [Cross-compile the kernel](documents/交叉编译内核.md)
@@ -185,13 +185,13 @@ Other information:
 
 ## How to Use image
 
-Refer to [Install openEuler on a SD card](documents/刷写镜像.md) and [How to use Raspberry Pi](documents/树莓派使用.md) for details about how to use the image on Raspberry Pi.
+Refer to [Install openEuler on an SD card](documents/刷写镜像.md) and [How to use Raspberry Pi](documents/树莓派使用.md) for details about how to use the image on Raspberry Pi.
 
 ## How to build image locally
 
 ### Prepare the environment
 
-To build openEuler AArch64 image for Raspberry Pi, the requirements of runing scripts of this repository are as follows:
+To build openEuler AArch64 image for Raspberry Pi, the requirements of running scripts of this repository are as follows:
 
 - OS: openEuler or CentOS 7/8
 - Hardware: AArch64 hardware, such as Raspberry Pi
@@ -246,9 +246,9 @@ The meaning of each parameter:
 
     Specify the image version:
     - `headless`, image without desktop environments.
-    - `xfce`, image with Xfce desktop environment and related softwares including CJK fonts and IME.
-    - `ukui`, image with UKUI desktop environment and fundamental softwares without CJK fonts and IME.
-    - `dde`, image with DDE desktop environment and fundamental softwares without CJK fonts and IME.
+    - `xfce`, image with Xfce desktop environment and related software including CJK fonts and IME.
+    - `ukui`, image with UKUI desktop environment and fundamental software without CJK fonts and IME.
+    - `dde`, image with DDE desktop environment and fundamental software without CJK fonts and IME.
     - The file path of rpmlist, the file contains a list of the software to be installed in the image, refer to [rpmlist](./scripts/config/rpmlist) for details.
 
     The default is `headless`.
@@ -322,9 +322,9 @@ The meaning of each parameter:
 
     Specify the image version:
     - `headless`, image without desktop environments.
-    - `xfce`, image with Xfce desktop environment and related softwares including CJK fonts and IME.
-    - `ukui`, image with UKUI desktop environment and fundamental softwares without CJK fonts and IME.
-    - `dde`, image with DDE desktop environment and fundamental softwares without CJK fonts and IME.
+    - `xfce`, image with Xfce desktop environment and related software including CJK fonts and IME.
+    - `ukui`, image with UKUI desktop environment and fundamental software without CJK fonts and IME.
+    - `dde`, image with DDE desktop environment and fundamental software without CJK fonts and IME.
     - The file path of rpmlist, the file contains a list of the software to be installed in the image, refer to [rpmlist](./scripts/config-common/rpmlist) for details.
 
     The default is `headless`.

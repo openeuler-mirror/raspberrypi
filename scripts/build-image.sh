@@ -247,10 +247,10 @@ make_rootfs(){
     dnf --installroot=${rootfs_dir}/ makecache
     set +e
     INSTALL_PACKAGES $CONFIG_RPM_LIST
-    cat ${rootfs_dir}/etc/systemd/timesyncd.conf | grep "^NTP*"
+    cat ${rootfs_dir}/etc/systemd/timesyncd.conf | grep "^NTP=*"
     if [ $? -ne 0 ]; then
-        sed -i 's/#NTP=/NTP=0.cn.pool.ntp.org/g' ${rootfs_dir}/etc/systemd/timesyncd.conf
-        sed -i 's/#FallbackNTP=/FallbackNTP=1.asia.pool.ntp.org 2.asia.pool.ntp.org/g' ${rootfs_dir}/etc/systemd/timesyncd.conf
+        sed -i -e '/^#NTP=/cNTP=0.cn.pool.ntp.org' ${rootfs_dir}/etc/systemd/timesyncd.conf
+        sed -i -e '/^#FallbackNTP=/cFallbackNTP=1.asia.pool.ntp.org 2.asia.pool.ntp.org' ${rootfs_dir}/etc/systemd/timesyncd.conf
     fi
     set -e
     cp ${euler_dir}/hosts ${rootfs_dir}/etc/hosts

@@ -309,11 +309,13 @@ make_img(){
     mkdir -p ${root_mnt} ${boot_mnt}
     mount -t vfat -o uid=root,gid=root,umask=0000 ${bootp} ${boot_mnt}
     mount -t ext4 ${rootp} ${root_mnt}
+    prefix_len=${#loopX}
+    let prefix_len=prefix_len+13
     fstab_array=("" "" "" "")
     for line in `blkid | grep /dev/mapper/${loopX}p`
     do
         partuuid=${line#*PARTUUID=\"}
-        fstab_array[${line:18:1}]=${partuuid%%\"*}
+        fstab_array[${line:$prefix_len:1}]=${partuuid%%\"*}
     done
     echo "PARTUUID=${fstab_array[3]}  / ext4    defaults,noatime 0 0" > ${rootfs_dir}/etc/fstab
     echo "PARTUUID=${fstab_array[1]}  /boot vfat    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab

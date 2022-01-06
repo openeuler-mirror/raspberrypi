@@ -2,6 +2,25 @@
 
 [English](./changelog-21.09-LXDE.en.md) | 简体中文
 
+### 2022-01-07
+
+#### 基本信息
+
+- 发布时间：2022/01/07
+- 大小：548 MiB
+- 操作系统版本：openEuler 21.09
+- 内核版本：5.10.0-5.10.0.8
+- 固件来源：[firmware](https://github.com/raspberrypi/firmware)、[bluez-firmware](https://github.com/RPi-Distro/bluez-firmware)、[firmware-nonfree](https://github.com/RPi-Distro/firmware-nonfree)
+- 构建文件系统的源仓库：[openEuler 21.09 每日构建的源仓库](http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/)
+- 镜像内置源仓库：[openEuler 21.09 源仓库](https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-21.09/generic.repo)
+
+#### 更新说明
+
+##### 功能改动
+
+- 修复：时钟同步服务器设置错误。
+- 修复：EPOL 软件源地址错误。
+
 ### 2021-10-18
 
 #### 基本信息

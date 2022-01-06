@@ -31,3 +31,9 @@ chkconfig --add extend-root.sh
 chkconfig extend-root.sh on
 cd -
 ln -s /lib/firmware /etc/firmware
+if [ "x$1" == "xxfce" ] || [ "x$1" == "xukui" ] || [ "x$1" == "xdde" ]; then
+    if [ -f /etc/locale.conf ]; then
+        sed -i -e "s/^LANG/#LANG/" /etc/locale.conf
+    fi
+    echo 'LANG="zh_CN.UTF-8"' >> /etc/locale.conf
+fi

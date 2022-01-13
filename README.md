@@ -142,6 +142,15 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/openeuler/communit
 <td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 每日构建源仓库</a></td>
 </tr>
 <tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-DDE-raspi-aarch64-alpha2.img.xz">openEuler 21.09 内测版（DDE 桌面、中文输入法）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09-DDE.md">更新日志</a></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/01/13</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.2 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-5.10.0.8</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/21.09/standard_aarch64/aarch64/">openEuler 21.09 每日构建源仓库</a></td>
+</tr>
+<tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-21.09-Xfce-raspi-aarch64-alpha2.img.xz">openEuler 21.09 内测版（Xfce 桌面、中文输入法）</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="documents/changelog/changelog-21.09-Xfce.md">更新日志</a></td>

@@ -16,4 +16,5 @@ pulseaudio-module-bluetooth
 parted
 sudo
 bc
+systemd-timesyncd
 openEuler-repos

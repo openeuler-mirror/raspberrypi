@@ -21,4 +21,5 @@ sudo
 ukui
 firefox
 bc
+systemd-timesyncd
 openEuler-repos

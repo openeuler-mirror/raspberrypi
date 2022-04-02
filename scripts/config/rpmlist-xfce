@@ -31,4 +31,5 @@ network-manager-applet
 lightdm
 lightdm-gtk
 bc
+systemd-timesyncd
 openEuler-repos

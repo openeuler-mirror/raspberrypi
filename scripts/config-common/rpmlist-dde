@@ -17,4 +17,5 @@ parted
 sudo
 dde
 bc
+systemd-timesyncd
 openEuler-repos

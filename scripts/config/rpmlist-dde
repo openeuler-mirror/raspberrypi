@@ -20,4 +20,5 @@ raspberrypi-bluetooth
 sudo
 dde
 bc
+systemd-timesyncd
 openEuler-repos

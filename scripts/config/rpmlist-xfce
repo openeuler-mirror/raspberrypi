@@ -30,5 +30,7 @@ xfce4-*-plugin
 network-manager-applet
 lightdm
 lightdm-gtk
+firefox
 bc
+systemd-timesyncd
 openEuler-repos

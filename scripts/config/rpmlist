@@ -19,4 +19,5 @@ raspberrypi-firmware
 raspberrypi-bluetooth
 sudo
 bc
+systemd-timesyncd
 openEuler-repos

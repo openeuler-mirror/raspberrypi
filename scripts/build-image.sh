@@ -285,7 +285,7 @@ make_img(){
     device=""
     LOSETUP_D_IMG
     size=`du -sh --block-size=1MiB ${rootfs_dir} | cut -f 1 | xargs`
-    size=$(($size+1150))
+    size=$(($size+1500))
     losetup -D
     dd if=/dev/zero of=${img_file} bs=1MiB count=$size && sync
     parted ${img_file} mklabel msdos mkpart primary fat32 8192s 593919s

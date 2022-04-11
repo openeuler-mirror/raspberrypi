@@ -16,6 +16,7 @@ pulseaudio-module-bluetooth
 parted
 sudo
 dde
+firefox
 bc
 systemd-timesyncd
 openEuler-repos

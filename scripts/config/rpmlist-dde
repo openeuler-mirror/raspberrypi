@@ -19,6 +19,7 @@ raspberrypi-firmware
 raspberrypi-bluetooth
 sudo
 dde
+firefox
 bc
 systemd-timesyncd
 openEuler-repos

@@ -4,11 +4,12 @@
 
 本仓库是 openEuler 社区树莓派 SIG 组的主仓库，提供 SIG 组相关信息以及适用于树莓派的 openEuler 镜像的构建脚本和相关文档。
 
-此外，树莓派 SIG 还致力于将 openEuler 移植到其他开发板，例如 [Rockchip](https://gitee.com/openeuler/rockchip)。
+此外，树莓派 SIG 还致力于将 openEuler 移植到其他开发板，例如 [Rockchip](https://gitee.com/openeuler/rockchip)、[全志](https://gitee.com/openeuler/allwinner-kernel)。
 
 <!-- TOC -->
 
 - [raspberrypi](#raspberrypi)
+    - [To Do List](#to-do-list)
     - [如何参与 SIG 组](#如何参与-sig-组)
     - [文件说明](#文件说明)
     - [最新镜像](#最新镜像)
@@ -22,6 +23,16 @@
                 - [Docker 容器内构建](#docker-容器内构建)
 
 <!-- /TOC -->
+## To Do List
+
+1. 树莓派
+   1. [openEuler 22.09 适配到树莓派](https://gitee.com/openeuler/raspberrypi/issues/I5CHUF)
+   2. [树莓派 CM4 核心板适配、测试](https://gitee.com/openeuler/raspberrypi/issues/I5CHSV)
+2. Rockchip
+   1. [openEuler 22.09 适配到 RK3399](https://gitee.com/openeuler/rockchip/issues/I5CHNJ)
+   2. [openEuler 22.03 LTS (Next) 适配到 Rockchip 开发板](https://gitee.com/openeuler/rockchip/issues/I5CHO9)
+3. 全志
+   1. [openEuler 5.10 内核适配到全志开发板](https://gitee.com/openeuler/allwinner-kernel/issues/I5CHOF)
 
 ## 如何参与 SIG 组
 

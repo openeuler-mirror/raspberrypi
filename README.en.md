@@ -4,11 +4,12 @@ English | [简体中文](./README.md)
 
 This repository is main repository of openEuler RaspberryPi SIG, and provides scripts for building openEuler image for Raspberry Pi and related documents.
 
-In addition, RaspberryPi SIG also aims to migrate openEuler to other SoCs, such as [Rockchip](https://gitee.com/openeuler/rockchip).
+In addition, RaspberryPi SIG also aims to migrate openEuler to other SoCs, such as [Rockchip](https://gitee.com/openeuler/rockchip) and [Allwinner](https://gitee.com/openeuler/allwinner-kernel).
 
 <!-- TOC -->
 
 - [raspberrypi](#raspberrypi)
+    - [To Do List](#to-do-list)
     - [How to collaborate](#how-to-collaborate)
     - [File description](#file-description)
     - [How to download latest image](#how-to-download-latest-image)
@@ -22,6 +23,16 @@ In addition, RaspberryPi SIG also aims to migrate openEuler to other SoCs, such 
                 - [Build in a Docker container](#build-in-a-docker-container)
 
 <!-- /TOC -->
+
+## To Do List
+1. Raspberry Pi
+   1. [Migrate openEuler 22.09 to Raspberry Pi](https://gitee.com/openeuler/raspberrypi/issues/I5CHUF)
+   2. [Migrate openEuler to Raspberry Pi CM4](https://gitee.com/openeuler/raspberrypi/issues/I5CHSV)
+2. Rockchip
+   1. [Migrate openEuler 22.09 to RK3399 SoCs](https://gitee.com/openeuler/rockchip/issues/I5CHNJ)
+   2. [Migrate openEuler 22.03 LTS (Next) to Rockchip SoCs](https://gitee.com/openeuler/rockchip/issues/I5CHO9)
+3. Allwinner
+   1. [Migrate openEuler 5.10 kernel to Allwinner SoCs](https://gitee.com/openeuler/allwinner-kernel/issues/I5CHOF)
 
 ## How to collaborate
 

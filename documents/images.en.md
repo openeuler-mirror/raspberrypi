@@ -15,6 +15,60 @@ Basic information of the image is as follows:
 </tr></thead>
 <tbody>
 <tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.09-raspi-aarch64-alpha1.img.xz">openEuler 22.09 alpha1</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/10/28</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>237 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.13</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.09/standard_aarch64/aarch64/">openEuler 22.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.09-UKUI-raspi-aarch64-alpha1.img.xz">openEuler 22.09 alpha1 (UKUI desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/10/28</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.4 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.13</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.09/standard_aarch64/aarch64/">openEuler 22.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.09-DDE-raspi-aarch64-alpha1.img.xz">openEuler 22.09 alpha1 (DDE desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/10/28</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.3 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.13</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.09/standard_aarch64/aarch64/">openEuler 22.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.09-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 22.09 alpha1 (Xfce desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/10/28</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.13</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.09/standard_aarch64/aarch64/">openEuler 22.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.09-UEFI-raspi-aarch64-alpha1.img.xz">openEuler 22.09 alpha1 (EFI boot)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/10/28</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>259 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.14</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.09/standard_aarch64/aarch64/">openEuler 22.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-22.09/raspi_img/openEuler-22.09-raspi-aarch64.img.xz">openEuler 22.09</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/09/30</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>237 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.13</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/raw/openEuler-22.09/generic.repo">openEuler 22.09 repository</a></td>
+</tr>
+<tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS alpha1</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
@@ -42,7 +96,7 @@ Basic information of the image is as follows:
 <td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.03:/LTS/standard_aarch64/aarch64/">openEuler 22.03 LTS repository built daily</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 22.03 alpha1 (Xfce desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS alpha1 (Xfce desktop and Chinese input method)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/04/11</p></td>

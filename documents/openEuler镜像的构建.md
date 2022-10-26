@@ -92,6 +92,7 @@
 
 1.  5.10 内核
 
+    - openEuler 22.09：`git clone git@gitee.com:openeuler/raspberrypi-kernel.git -b openEuler-22.09 && cd raspberrypi-kernel`
     - openEuler 22.03 LTS：`git clone git@gitee.com:openeuler/raspberrypi-kernel.git -b openEuler-22.03-LTS && cd raspberrypi-kernel`
     - openEuler 21.09：`git clone git@gitee.com:openeuler/raspberrypi-kernel.git -b openEuler-21.09 && cd raspberrypi-kernel`
     - openEuler 21.03：`git clone git@gitee.com:openeuler/kernel.git -b openEuler-21.03 && cd kernel`
@@ -109,6 +110,7 @@
 
 1.  5.10 内核
 
+    - openEuler 22.09：`make bcm2711_defconfig`
     - openEuler 22.03 LTS：`make bcm2711_defconfig`
     - openEuler 21.09：`make bcm2711_defconfig`
     - openEuler 21.03：`make bcm2711_defconfig`
@@ -204,7 +206,7 @@
 
 3.  下载 firmware-nonfree
 
-    `git clone --depth=1 https://github.com/RPi-Distro/firmware-nonfree`
+    `git clone --depth=1 -b buster https://github.com/RPi-Distro/firmware-nonfree`
 
     得到文件 ${WORKDIR}/firmware-nonfree。
 

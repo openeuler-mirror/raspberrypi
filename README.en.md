@@ -31,6 +31,7 @@ In addition, RaspberryPi SIG also aims to migrate openEuler to other SoCs, such 
 2. Rockchip
    1. [Migrate openEuler 22.09 to RK3399 SoCs](https://gitee.com/openeuler/rockchip/issues/I5CHNJ)
    2. [Migrate openEuler 22.03 LTS (Next) to Rockchip SoCs](https://gitee.com/openeuler/rockchip/issues/I5CHO9)
+   3. [Migrate openEuler 22.03 LTS (Next) to ITX-3588J SoCs](https://gitee.com/openeuler/rockchip-kernel/issues/I5XTK1)
 3. Allwinner
    1. [Migrate openEuler 5.10 kernel to Allwinner SoCs](https://gitee.com/openeuler/allwinner-kernel/issues/I5CHOF)
 
@@ -83,7 +84,6 @@ Basic information of the image is as follows. [more images](documents/images.en.
 <table><thead align="left"><tr>
 <th class="cellrowborder" valign="top" width="10%"><p><strong>Version</strong></p></th>
 <th class="cellrowborder" valign="top" width="10%"><p><strong>System user(password)</strong></p></th>
-<th class="cellrowborder" valign="top" width="10%"><p><strong>Change log</strong></p></th>
 <th class="cellrowborder" valign="top" width="10%"><p><strong>Release date</strong></p></th>
 <th class="cellrowborder" valign="top" width="10%"><p><strong>Size</strong></p></th>
 <th class="cellrowborder" valign="top" width="10%"><p><strong>Kernel version</strong></p></th>
@@ -91,9 +91,56 @@ Basic information of the image is as follows. [more images](documents/images.en.
 </tr></thead>
 <tbody>
 <tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.09-raspi-aarch64-alpha1.img.xz">openEuler 22.09 alpha1</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/10/28</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>237 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.13</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.09/standard_aarch64/aarch64/">openEuler 22.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.09-UKUI-raspi-aarch64-alpha1.img.xz">openEuler 22.09 alpha1 (UKUI desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/10/28</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.4 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.13</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.09/standard_aarch64/aarch64/">openEuler 22.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.09-DDE-raspi-aarch64-alpha1.img.xz">openEuler 22.09 alpha1 (DDE desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/10/28</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.3 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.13</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.09/standard_aarch64/aarch64/">openEuler 22.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.09-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 22.09 alpha1 (Xfce desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/10/28</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.13</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.09/standard_aarch64/aarch64/">openEuler 22.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.09-UEFI-raspi-aarch64-alpha1.img.xz">openEuler 22.09 alpha1 (EFI boot)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/10/28</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>259 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.14</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.09/standard_aarch64/aarch64/">openEuler 22.09 repository built daily</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-22.09/raspi_img/openEuler-22.09-raspi-aarch64.img.xz">openEuler 22.09</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2022/09/30</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>237 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-106.18.0.13</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/raw/openEuler-22.09/generic.repo">openEuler 22.09 repository</a></td>
+</tr>
+<tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS alpha1</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/04/11</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>234 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>5.10.0-60.18.0.13</p></td>
@@ -102,7 +149,6 @@ Basic information of the image is as follows. [more images](documents/images.en.
 <tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-UKUI-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS alpha1 (UKUI desktop and Chinese input method)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/04/11</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>1.3 GiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>5.10.0-60.18.0.13</p></td>
@@ -111,16 +157,14 @@ Basic information of the image is as follows. [more images](documents/images.en.
 <tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-DDE-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS alpha1 (DDE desktop and Chinese input method)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/04/11</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>1.2 GiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>5.10.0-60.18.0.13</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="http://119.3.219.20:82/openEuler:/22.03:/LTS/standard_aarch64/aarch64/">openEuler 22.03 LTS repository built daily</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 22.03 alpha1 (Xfce desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS alpha1 (Xfce desktop and Chinese input method)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/04/11</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>1.8 GiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>5.10.0-60.18.0.13</p></td>
@@ -129,7 +173,6 @@ Basic information of the image is as follows. [more images](documents/images.en.
 <tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-LXDE-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS alpha1 (LXDE desktop and Chinese input method)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/04/11</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>655 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>5.10.0-60.18.0.13</p></td>
@@ -138,7 +181,6 @@ Basic information of the image is as follows. [more images](documents/images.en.
 <tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-UEFI-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS alpha1 (EFI boot)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/04/12</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>568 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>5.10.0-60.18.0.14</p></td>
@@ -147,7 +189,6 @@ Basic information of the image is as follows. [more images](documents/images.en.
 <tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-22.03-LTS/raspi_img/openEuler-22.03-LTS-raspi-aarch64.img.xz">openEuler 22.03 LTS</a></td>
 <td class="cellrowborder" valign="top" width="10%"><p>root (openeuler)</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/04/01</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>235 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>5.10.0-60.18.0.13</p></td>
@@ -156,7 +197,6 @@ Basic information of the image is as follows. [more images](documents/images.en.
 <tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP3-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP3 alpha1</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/01/07</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>234 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2112.6.0.0037</p></td>
@@ -165,7 +205,6 @@ Basic information of the image is as follows. [more images](documents/images.en.
 <tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP3-UKUI-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP3 alpha1 (UKUI desktop and Chinese input method)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/01/07</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>1.1 GiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2112.6.0.0037</p></td>
@@ -174,7 +213,6 @@ Basic information of the image is as follows. [more images](documents/images.en.
 <tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP3-DDE-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP3 alpha1 (DDE desktop and Chinese input method)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/01/07</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>1.4 GiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2112.6.0.0037</p></td>
@@ -183,7 +221,6 @@ Basic information of the image is as follows. [more images](documents/images.en.
 <tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-20.03-LTS-SP3-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 20.03 LTS SP3 alpha1 (Xfce desktop and Chinese input method)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/01/07</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>1.8 GiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2112.6.0.0037</p></td>
@@ -192,7 +229,6 @@ Basic information of the image is as follows. [more images](documents/images.en.
 <tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-20.03-LTS-SP2/raspi_img/openEuler-20.03-LTS-SP3-raspi-aarch64.img.xz">openEuler 20.03 LTS SP3</a></td>
 <td class="cellrowborder" valign="top" width="10%"><p>root (openeuler)</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2022/01/01</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>259 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>4.19.90-2112.6.0.0037</p></td>
@@ -225,10 +261,10 @@ Refer to [Script for building openEuler image for Raspberry Pi](documents/openEu
 #### Quickly Build without kernel compilation(Recommended)
 
 >![](documents/public_sys-resources/icon-notice.gif) **NOTICE:**  
->Most openEuler versions are currently supported, i.e., 20.09, 20.03 LTS SP1, 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3 and 22.03 LTS.
+>Most openEuler versions are currently supported, i.e., 20.09, 20.03 LTS SP1, 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3, 22.03 LTS and 22.09.
 >When building an image with Xfce/UKUI/DDE desktop environment, you need to pay attention to three issues:
->1. For building an image with Xfce desktop environment, note that only openEuler 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3 and 22.03 LTS are currently supported.
->2. For building an image with DDE desktop environment, note that only openEuler 20.03 LTS SP1, 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3 and 22.03 LTS are currently supported.
+>1. For building an image with Xfce desktop environment, note that only openEuler 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3, 22.03 LTS and 22.09 are currently supported.
+>2. For building an image with DDE desktop environment, note that only openEuler 20.03 LTS SP1, 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3, 22.03 LTS and 22.09 are currently supported.
 >3. Need to set the parameter `-s/--spec`. Please refer to the description of this parameter for details.
 
 Build images with packages of raspberrypi-kernel, raspberrypi-firmware, and raspberrypi-bluetooth.
@@ -282,24 +318,27 @@ The meaning of each parameter:
 Here, we provide two approaches to build an image, which both include compiling kernel and downloading firmware files of Raspberry Pi. These approaches will take considerably longer.
 
 >![](documents/public_sys-resources/icon-notice.gif) **NOTICE:**  
->Three openEuler versions are currently supported, i.e., 20.03 LTS, 20.09, 20.03 LTS SP1, 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3 and 22.03 LTS.
+>Three openEuler versions are currently supported, i.e., 20.03 LTS, 20.09, 20.03 LTS SP1, 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3, 22.03 LTS and 22.09.
 >When building an image with Xfce/UKUI/DDE desktop environment, you need to pay attention to four issues:
->1. For building an image with Xfce desktop environment, note that only openEuler 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3 and 22.03 LTS are currently supported.
+>1. For building an image with Xfce desktop environment, note that only openEuler 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3, 22.03 LTS and 22.09 are currently supported.
 >    -  openEuler 21.03: You need to select the branch [openEuler-21.03](https://gitee.com/openeuler/kernel/tree/openEuler-21.03/) of the [openEuler kernel](https://gitee.com/openeuler/kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/kernel.git` and set the parameter `-b/--branch` to `openEuler-21.03`.
 >    -  openEuler 20.03 LTS SP2/20.03 LTS SP3: You need to select the branch [openEuler-20.03-LTS](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-20.03-LTS/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-20.03-LTS`.
 >    -  openEuler 21.09: You need to select the branch [openEuler-21.09](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-21.09/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-21.09`.
 >    -  openEuler 22.03 LTS: You need to select the branch [openEuler-22.03-LTS](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.03-LTS/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-22.03-LTS`.
->2. For building an image with UKUI desktop environment, note that only openEuler 20.09, 20.03 LTS SP1, 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3 and 22.03 LTS are currently supported.
+>    -  openEuler 22.09: You need to select the branch [openEuler-22.09](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.09/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-22.09`.
+>2. For building an image with UKUI desktop environment, note that only openEuler 20.09, 20.03 LTS SP1, 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3, 22.03 LTS and 22.09 are currently supported.
 >    -  openEuler 20.09: You need to select the branch [openEuler-20.09](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-20.09/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-20.09`.
 >    -  openEuler 20.03 LTS SP1/20.03 LTS SP2/20.03 LTS SP3: You need to select the branch [openEuler-20.03-LTS](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-20.03-LTS/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-20.03-LTS`.
 >    -  openEuler 21.03: You need to select the branch [openEuler-21.03](https://gitee.com/openeuler/kernel/tree/openEuler-21.03/) of the [openEuler kernel](https://gitee.com/openeuler/kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/kernel.git` and set the parameter `-b/--branch` to `openEuler-21.03`.
 >    -  openEuler 21.09: You need to select the branch [openEuler-21.09](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-21.09/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-21.09`.
 >    -  openEuler 22.03 LTS: You need to select the branch [openEuler-22.03-LTS](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.03-LTS/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-22.03-LTS`.
->3. For building an image with DDE desktop environment, note that only openEuler 20.03 LTS SP1, 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3 and 22.03 LTS are currently supported.
+>    -  openEuler 22.09: You need to select the branch [openEuler-22.09](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.09/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-22.09`.
+>3. For building an image with DDE desktop environment, note that only openEuler 20.03 LTS SP1, 21.03, 20.03 LTS SP2, 21.09, 20.03 LTS SP3, 22.03 LTS and 22.09 are currently supported.
 >    -  openEuler 20.03 LTS SP1/20.03 LTS SP2/20.03 LTS SP3: You need to select the branch [openEuler-20.03-LTS](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-20.03-LTS/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-20.03-LTS`.
 >    -  openEuler 21.03: You need to select the branch [openEuler-21.03](https://gitee.com/openeuler/kernel/tree/openEuler-21.03/) of the [openEuler kernel](https://gitee.com/openeuler/kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/kernel.git` and set the parameter `-b/--branch` to `openEuler-21.03`.
 >    -  openEuler 21.09: You need to select the branch [openEuler-21.09](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-21.09/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-21.09`.
 >    -  openEuler 22.03 LTS: You need to select the branch [openEuler-22.03-LTS](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.03-LTS/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-22.03-LTS`.
+>    -  openEuler 22.09: You need to select the branch [openEuler-22.09](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.09/) of the [openEuler-RaspberryPi kernel](https://gitee.com/openeuler/raspberrypi-kernel), i.e., set the parameter `-k/--kernel` to `git@gitee.com:openeuler/raspberrypi-kernel.git` and set the parameter `-b/--branch` to `openEuler-22.09`.
 >4. Need to set the parameter `-s/--spec`. Please refer to the description of this parameter for details.
 
 ##### Build on host

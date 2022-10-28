@@ -25,6 +25,11 @@ xfdesktop
 xfce4-*
 xfce4-*-plugin
 network-manager-applet
+fcitx
+fcitx-qt5
+fcitx-cloudpinyin
+fcitx-sunpinyin
+fcitx-configtool
 lightdm
 lightdm-gtk
 firefox

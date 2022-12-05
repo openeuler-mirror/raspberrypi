@@ -7,6 +7,11 @@ net-tools
 iproute
 iputils
 NetworkManager
+NetworkManager-wifi
+NetworkManager-wwan
+NetworkManager-bluetooth
+NetworkManager-ovs
+NetworkManager-ppp
 openssh-server
 openssh-clients
 passwd

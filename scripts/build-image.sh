@@ -269,6 +269,7 @@ make_rootfs(){
         mkdir -p ${rootfs_dir}/etc/rc.d/init.d
     fi
     cp ${euler_dir}/extend-root.sh ${rootfs_dir}/etc/rc.d/init.d/extend-root.sh
+    echo net.ipv4.conf.wlan0.rp_filter=0 >> ${rootfs_dir}/etc/sysctl.conf
     chmod +x ${rootfs_dir}/chroot.sh
     mount --bind /dev ${rootfs_dir}/dev
     mount -t proc /proc ${rootfs_dir}/proc

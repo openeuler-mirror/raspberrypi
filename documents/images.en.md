@@ -33,10 +33,10 @@ Basic information of the image is as follows:
 <td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-23.03/generic.repo">openEuler 23.03 repository</a></td>
 </tr>
 <tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-23.03-DDE-raspi-aarch64-alpha1.img.xz">openEuler 23.03 alpha1 (DDE desktop and Chinese input method)</a></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-23.03-DDE-raspi-aarch64-alpha2.img.xz">openEuler 23.03 alpha2 (DDE desktop and Chinese input method)</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><p>-</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2023/04/07</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2023/04/09</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>1.6 GiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>6.1.19-1.0.0.2</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-23.03/generic.repo">openEuler 23.03 repository</a></td>

@@ -24,6 +24,7 @@ raspberrypi-firmware
 raspberrypi-bluetooth
 sudo
 dde
+ibus-libpinyin
 firefox
 bc
 systemd-timesyncd

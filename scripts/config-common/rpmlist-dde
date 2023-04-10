@@ -21,6 +21,7 @@ pulseaudio-module-bluetooth
 parted
 sudo
 dde
+ibus-libpinyin
 firefox
 bc
 systemd-timesyncd

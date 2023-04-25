@@ -318,7 +318,7 @@ etc/ usr/ var/
 
 ```
 mkdir -p ${WORKDIR}/rootfs/lib/firmware ${WORKDIR}/rootfs/usr/bin ${WORKDIR}/rootfs/lib/udev/rules.d ${WORKDIR}/rootfs/lib/systemd/system
-cp ${WORKDIR}/bluez-firmware/broadcom/* ${WORKDIR}/rootfs/lib/firmware/`
+cp ${WORKDIR}/bluez-firmware/broadcom/* ${WORKDIR}/rootfs/lib/firmware/
 cp -r ${WORKDIR}/firmware-nonfree/brcm/ ${WORKDIR}/rootfs/lib/firmware/
 wget https://raw.githubusercontent.com/RPi-Distro/raspberrypi-sys-mods/master/etc.armhf/udev/rules.d/99-com.rules -P ${WORKDIR}/rootfs/lib/udev/rules.d/
 cp pi-bluetooth/usr/bin/* ${WORKDIR}/rootfs/usr/bin/
@@ -330,7 +330,7 @@ cp pi-bluetooth/debian/pi-bluetooth.hciuart.service ${WORKDIR}/rootfs/lib/system
 蓝牙相关固件放到 ${WORKDIR}/rootfs/lib/firmware/brcm/ 下：
 
 ```
-mv ${WORKDIR}/rootfs/lib/firmware/BCM43430A1.hcd ${WORKDIR}/rootfs/lib/firmware/brcm/`
+mv ${WORKDIR}/rootfs/lib/firmware/BCM43430A1.hcd ${WORKDIR}/rootfs/lib/firmware/brcm/
 mv ${WORKDIR}/rootfs/lib/firmware/BCM4345C0.hcd ${WORKDIR}/rootfs/lib/firmware/brcm/
 ```
 
@@ -352,9 +352,9 @@ mv ${WORKDIR}/rootfs/lib/firmware/BCM4345C0.hcd ${WORKDIR}/rootfs/lib/firmware/b
 
     `chroot ${WORKDIR}/rootfs /bin/bash`
 
-3.  开机自启ssh
+3.  开机自启sshd
 
-    `systemctl enable ssh`
+    `systemctl enable sshd`
 
 4.  设置root密码
  
@@ -393,9 +393,10 @@ mv ${WORKDIR}/rootfs/lib/firmware/BCM4345C0.hcd ${WORKDIR}/rootfs/lib/firmware/b
 ### 计算镜像大小
 
 `du -sh --block-size=1MiB ${WORKDIR}/rootfs`
+
 `du -sh --block-size=1MiB ${WORKDIR}/firmware/boot`
 
-得到总大小略加 1100MiB 即可，将该大小记为 `SIZE`。
+得到总大小后略加 1100MiB 即可，将该大小记为 `SIZE`。
 
 ### 创建空镜像
 
@@ -403,7 +404,7 @@ mv ${WORKDIR}/rootfs/lib/firmware/BCM4345C0.hcd ${WORKDIR}/rootfs/lib/firmware/b
 
 `dd if=/dev/zero of=openEuler_raspi.img bs=1M count=SIZE`
 
-其中 `SIZE` 为前面计算得到的计算镜像大小，最终生成空的镜像文件 ${WORKDIR}/openEuler_raspi.img。
+其中 `SIZE` 为前面计算得到的镜像大小，最终生成空的镜像文件 ${WORKDIR}/openEuler_raspi.img。
 
 ### 镜像分区
 

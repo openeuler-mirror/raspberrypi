@@ -296,7 +296,7 @@ update_firmware_app(){
     fi
     ######## firmware-nonfree
     if [[ ! -d firmware-nonfree ]]; then
-        git clone --depth=1 https://github.com/RPi-Distro/firmware-nonfree
+        git clone --depth=1 -b buster https://github.com/RPi-Distro/firmware-nonfree
         if [[ $? -eq 0 ]]; then
             LOG "clone firmware-nonfree done."
         else

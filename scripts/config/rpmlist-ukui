@@ -1,4 +1,5 @@
 dnf
+dnf-plugins-core
 alsa-utils
 haveged
 wpa_supplicant

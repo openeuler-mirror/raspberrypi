@@ -96,6 +96,7 @@
 
 2.  5.10 内核
 
+    - openEuler 22.03 LTS SP2：`git clone git@gitee.com:openeuler/raspberrypi-kernel.git -b openEuler-22.03-LTS-SP2 && cd raspberrypi-kernel`
     - openEuler 22.03 LTS SP1：`git clone git@gitee.com:openeuler/raspberrypi-kernel.git -b openEuler-22.03-LTS-SP1 && cd raspberrypi-kernel`
     - openEuler 22.09：`git clone git@gitee.com:openeuler/raspberrypi-kernel.git -b openEuler-22.09 && cd raspberrypi-kernel`
     - openEuler 22.03 LTS：`git clone git@gitee.com:openeuler/raspberrypi-kernel.git -b openEuler-22.03-LTS && cd raspberrypi-kernel`
@@ -119,6 +120,7 @@
 
 2.  5.10 内核
 
+    - openEuler 22.03 LTS SP2：`make bcm2711_defconfig`
     - openEuler 22.03 LTS SP1：`make bcm2711_defconfig`
     - openEuler 22.09：`make bcm2711_defconfig`
     - openEuler 22.03 LTS：`make bcm2711_defconfig`

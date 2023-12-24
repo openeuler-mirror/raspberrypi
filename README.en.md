@@ -91,6 +91,14 @@ Basic information of the image is as follows. [more images](documents/images.en.
 </tr></thead>
 <tbody>
 <tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://eulixos.com/repo/others/openeuler-raspberrypi/images/openEuler-23.09-raspi-aarch64.img.xz">openEuler 23.09 alpha1</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2023/12/25</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>244 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>6.4.0-10.1.0.1</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-23.09/generic.repo">openEuler 23.09 repository</a></td>
+</tr>
+<tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-SP2-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS SP2 alpha1</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root (openeuler)</li><li>pi (raspberry)</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2023/11/06</p></td>

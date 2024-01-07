@@ -90,60 +90,60 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/openeuler/communit
 </tr></thead>
 <tbody>
 <tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-SP3-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS SP3 内测版</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2024/01/08</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>236 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-182.0.0.19</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP3/generic.repo">openEuler 22.03 LTS SP3 源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-SP3-UKUI-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS SP3 内测版（UKUI 桌面、中文输入法）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2024/01/08</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.5 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-182.0.0.19</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP3/generic.repo">openEuler 22.03 LTS SP3 源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-SP3-DDE-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS SP3 内测版（DDE 桌面、中文输入法）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2024/01/08</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>1.5 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-182.0.0.19</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP3/generic.repo">openEuler 22.03 LTS SP3 源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-SP3-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS SP3 内测版（Xfce 桌面、中文输入法）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2024/01/08</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2.1 GiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-182.0.0.19</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP3/generic.repo">openEuler 22.03 LTS SP3 源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-SP3-UEFI-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS SP3 内测版（EFI 引导启动）</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2024/01/08</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>257 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-182.0.0.20</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP3/generic.repo">openEuler 22.03 LTS SP3 源仓库</a></td>
+</tr>
+<tr>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-22.03-LTS-SP3/raspi_img/openEuler-22.03-LTS-SP3-raspi-aarch64.img.xz">openEuler 22.03 LTS SP3</a></td>
+<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
+<td class="cellrowborder" valign="top" width="10%"><p>2024/01/02</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>229 MiB</p></td>
+<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-182.0.0.19</p></td>
+<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP3/generic.repo">openEuler 22.03 LTS SP3 源仓库</a></td>
+</tr>
+<tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://eulixos.com/repo/others/openeuler-raspberrypi/images/openEuler-23.09-raspi-aarch64.img.xz">openEuler 23.09 内测版</a></td>
 <td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
 <td class="cellrowborder" valign="top" width="10%"><p>2023/12/25</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>244 MiB</p></td>
 <td class="cellrowborder" valign="top" width="10%"><p>6.4.0-10.1.0.1</p></td>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-23.09/generic.repo">openEuler 23.09 源仓库</a></td>
-</tr>
-<tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-SP2-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS SP2 内测版</a></td>
-<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2023/11/06</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>253 MiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-153.12.0.17</p></td>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP2/generic.repo">openEuler 22.03 LTS SP2 源仓库</a></td>
-</tr>
-<tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-SP2-UKUI-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS SP2 内测版（UKUI 桌面、中文输入法）</a></td>
-<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2023/11/06</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>1.5 GiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-153.12.0.17</p></td>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP2/generic.repo">openEuler 22.03 LTS SP2 源仓库</a></td>
-</tr>
-<tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-SP2-DDE-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS SP2 内测版（DDE 桌面、中文输入法）</a></td>
-<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2023/11/06</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>1.4 GiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-153.12.0.17</p></td>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP2/generic.repo">openEuler 22.03 LTS SP2 源仓库</a></td>
-</tr>
-<tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-SP2-Xfce-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS SP2 内测版（Xfce 桌面、中文输入法）</a></td>
-<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2023/11/06</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2.1 GiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-153.12.0.17</p></td>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP2/generic.repo">openEuler 22.03 LTS SP2 源仓库</a></td>
-</tr>
-<tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-22.03-LTS-SP2-UEFI-raspi-aarch64-alpha1.img.xz">openEuler 22.03 LTS SP2 内测版（EFI 引导启动）</a></td>
-<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2023/11/06</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>274 MiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-153.12.0.18</p></td>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP2/generic.repo">openEuler 22.03 LTS SP2 源仓库</a></td>
-</tr>
-<tr>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://repo.openeuler.org/openEuler-22.03-LTS-SP2/raspi_img/openEuler-22.03-LTS-SP2-raspi-aarch64.img.xz">openEuler 22.03 LTS SP2</a></td>
-<td class="cellrowborder" valign="top" width="10%"><ul><li>root（openeuler）</li><li>pi（raspberry）</li></ul></td>
-<td class="cellrowborder" valign="top" width="10%"><p>2023/06/30</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>228 MiB</p></td>
-<td class="cellrowborder" valign="top" width="10%"><p>5.10.0-153.12.0.17</p></td>
-<td class="cellrowborder" valign="top" width="10%"><a href="https://gitee.com/src-openeuler/openEuler-repos/blob/openEuler-22.03-LTS-SP2/generic.repo">openEuler 22.03 LTS SP2 源仓库</a></td>
 </tr>
 <tr>
 <td class="cellrowborder" valign="top" width="10%"><a href="https://isrc.iscas.ac.cn/eulixos/repo/others/openeuler-raspberrypi/images/openEuler-23.03-raspi-aarch64-alpha1.img.xz">openEuler 23.03 内测版</a></td>
@@ -263,10 +263,10 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/openeuler/communit
 #### 快速构建（无需编译内核，推荐）
 
 >![](documents/public_sys-resources/icon-notice.gif) **须知：**  
->当前支持多个 openEuler 版本，即 20.09、20.03 LTS SP1、21.03、20.03 LTS SP2、21.09、20.03 LTS SP3、22.03 LTS、22.09、22.03 LTS SP1、23.03、22.03 LTS SP2 版本。
+>当前支持多个 openEuler 版本，即 20.09、20.03 LTS SP1、21.03、20.03 LTS SP2、21.09、20.03 LTS SP3、22.03 LTS、22.09、22.03 LTS SP1、23.03、22.03 LTS SP2、22.03 LTS SP3 版本。
 >如果构建包含 Xfce/UKUI/DDE 桌面环境的镜像，需要注意三点：
->1. 构建包含 Xfce 桌面环境的镜像，当前只支持 openEuler 21.03/20.03 LTS SP2/21.09/20.03 LTS SP3/22.03 LTS/22.09/22.03 LTS SP1/23.03/22.03 LTS SP2 版本。
->2. 构建包含 DDE 桌面环境的镜像，当前只支持 openEuler 20.03 LTS SP1/21.03/20.03 LTS SP2/21.09/20.03 LTS SP3/22.03 LTS/22.09/22.03 LTS SP1/23.03/22.03 LTS SP2 版本。
+>1. 构建包含 Xfce 桌面环境的镜像，当前只支持 openEuler 21.03/20.03 LTS SP2/21.09/20.03 LTS SP3/22.03 LTS/22.09/22.03 LTS SP1/23.03/22.03 LTS SP2/22.03 LTS SP3 版本。
+>2. 构建包含 DDE 桌面环境的镜像，当前只支持 openEuler 20.03 LTS SP1/21.03/20.03 LTS SP2/21.09/20.03 LTS SP3/22.03 LTS/22.09/22.03 LTS SP1/23.03/22.03 LTS SP2/22.03 LTS SP3 版本。
 >3. 根据需要设置 -s/--spec，其具体意义见该参数的介绍部分。
 
 使用已有的树莓派内核、固件、蓝牙等 RPM 包构建镜像。
@@ -321,9 +321,9 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/openeuler/communit
 这里，提供两种构建方式。
 
 >![](documents/public_sys-resources/icon-notice.gif) **须知：**  
->当前支持三个 openEuler 版本，即 20.03 LTS、20.09、20.03 LTS SP1、21.03、20.03 LTS SP2、21.09、20.03 LTS SP3、22.03 LTS、22.09、22.03 LTS SP1、23.03、22.03 LTS SP2 版本。
+>当前支持三个 openEuler 版本，即 20.03 LTS、20.09、20.03 LTS SP1、21.03、20.03 LTS SP2、21.09、20.03 LTS SP3、22.03 LTS、22.09、22.03 LTS SP1、23.03、22.03 LTS SP2、22.03 LTS SP3 版本。
 >如果构建包含 Xfce/UKUI/DDE 桌面环境的镜像，需要注意四点：
->1. 构建包含 Xfce 桌面环境的镜像，当前只支持 openEuler 21.03/20.03 LTS SP2/21.09/20.03 LTS SP3/22.03 LTS/22.09/22.03 LTS SP1/23.03/22.03 LTS SP2 版本，需要选择对应内核源码和分支。
+>1. 构建包含 Xfce 桌面环境的镜像，当前只支持 openEuler 21.03/20.03 LTS SP2/21.09/20.03 LTS SP3/22.03 LTS/22.09/22.03 LTS SP1/23.03/22.03 LTS SP2/22.03 LTS SP3 版本，需要选择对应内核源码和分支。
 >    -  openEuler 21.03：需要选择 [openEuler 内核](https://gitee.com/openeuler/kernel) 的 [openEuler-21.03](https://gitee.com/openeuler/kernel/tree/openEuler-21.03/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/kernel.git`，-b/--branch` 设置为 `openEuler-21.03`。
 >    -  openEuler 20.03 LTS SP2/20.03 LTS SP3：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-20.03-LTS](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-20.03-LTS/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-20.03-LTS`。
 >    -  openEuler 21.09：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-21.09](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-21.09/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-21.09`。
@@ -332,7 +332,8 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/openeuler/communit
 >    -  openEuler 22.03 LTS SP1：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-22.03-LTS-SP1](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.03-LTS-SP1/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-22.03-LTS-SP1`。
 >    -  openEuler 23.03：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-23.03](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-23.03/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-23.03`。
 >    -  openEuler 22.03 LTS SP2：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-22.03-LTS-SP2](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.03-LTS-SP2/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-22.03-LTS-SP2`。
->2. 构建包含 UKUI 桌面环境的镜像，当前只支持 openEuler 20.09/20.03 LTS SP1/21.03/20.03 LTS SP2/21.09/20.03 LTS SP3/22.03 LTS/22.09/22.03 LTS SP1/23.03/22.03 LTS SP2 版本，需要选择对应内核源码和分支。
+>    -  openEuler 22.03 LTS SP3：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [OLK-5.10](https://gitee.com/openeuler/raspberrypi-kernel/tree/OLK-5.10/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `OLK-5.10`。
+>2. 构建包含 UKUI 桌面环境的镜像，当前只支持 openEuler 20.09/20.03 LTS SP1/21.03/20.03 LTS SP2/21.09/20.03 LTS SP3/22.03 LTS/22.09/22.03 LTS SP1/23.03/22.03 LTS SP2/22.03 LTS SP3 版本，需要选择对应内核源码和分支。
 >    -  openEuler 20.09：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-20.09](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-20.09/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-20.09`。
 >    -  openEuler 20.03 LTS SP1/20.03 LTS SP2/20.03 LTS SP3：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-20.03-LTS](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-20.03-LTS/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-20.03-LTS`。
 >    -  openEuler 21.03：需要选择 [openEuler 内核](https://gitee.com/openeuler/kernel) 的 [openEuler-21.03](https://gitee.com/openeuler/kernel/tree/openEuler-21.03/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/kernel.git`，-b/--branch` 设置为 `openEuler-21.03`。
@@ -342,7 +343,8 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/openeuler/communit
 >    -  openEuler 22.03 LTS SP1：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-22.03-LTS-SP1](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.03-LTS-SP1/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-22.03-LTS-SP1`。
 >    -  openEuler 23.03：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-23.03](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-23.03/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-23.03`。
 >    -  openEuler 22.03 LTS SP2：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-22.03-LTS-SP2](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.03-LTS-SP2/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-22.03-LTS-SP2`。
->3. 构建包含 DDE 桌面环境的镜像，当前只支持 openEuler 20.03 LTS SP1/21.03/20.03 LTS SP2/21.09/20.03 LTS SP3/22.03 LTS/22.09/22.03 LTS SP1/23.03/22.03 LTS SP2 版本。
+>    -  openEuler 22.03 LTS SP3：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [OLK-5.10](https://gitee.com/openeuler/raspberrypi-kernel/tree/OLK-5.10/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `OLK-5.10`。
+>3. 构建包含 DDE 桌面环境的镜像，当前只支持 openEuler 20.03 LTS SP1/21.03/20.03 LTS SP2/21.09/20.03 LTS SP3/22.03 LTS/22.09/22.03 LTS SP1/23.03/22.03 LTS SP2/22.03 LTS SP3 版本。
 >    -  openEuler 20.03 LTS SP1/20.03 LTS SP2/20.03 LTS SP3：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-20.03-LTS](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-20.03-LTS/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-20.03-LTS`。
 >    -  openEuler 21.03：需要选择 [openEuler 内核](https://gitee.com/openeuler/kernel) 的 [openEuler-21.03](https://gitee.com/openeuler/kernel/tree/openEuler-21.03/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/kernel.git`，-b/--branch` 设置为 `openEuler-21.03`。
 >    -  openEuler 21.09：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-21.09](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-21.09/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-21.09`。
@@ -351,6 +353,7 @@ SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/openeuler/communit
 >    -  openEuler 22.03 LTS SP1：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-22.03-LTS-SP1](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.03-LTS-SP1/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-22.03-LTS-SP1`。
 >    -  openEuler 23.03：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-23.03](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-23.03/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-23.03`。
 >    -  openEuler 22.03 LTS SP2：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [openEuler-22.03-LTS-SP2](https://gitee.com/openeuler/raspberrypi-kernel/tree/openEuler-22.03-LTS-SP2/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `openEuler-22.03-LTS-SP2`。
+>    -  openEuler 22.03 LTS SP3：需要选择 [openEuler-RaspberryPi 内核](https://gitee.com/openeuler/raspberrypi-kernel) 的 [OLK-5.10](https://gitee.com/openeuler/raspberrypi-kernel/tree/OLK-5.10/) 分支，即将参数 `-k/--kernel` 设置为 `git@gitee.com:openeuler/raspberrypi-kernel.git`，`-b/--branch` 设置为 `OLK-5.10`。
 >4. 根据需要设置 -s/--spec，其具体意义见该参数的介绍部分。
 
 ##### 主机上构建

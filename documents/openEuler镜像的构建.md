@@ -182,7 +182,7 @@
 
 ### 删除没有必要的文件
 
-`rm *.dtb cmdline.txt kernel.img kernel7.img`
+`rm *.dtb cmdline.txt kernel*.img`
 
 ### 添加cmdline.txt
 
@@ -361,7 +361,7 @@ mv ${WORKDIR}/rootfs/lib/firmware/BCM4345C0.hcd ${WORKDIR}/rootfs/lib/firmware/b
     `systemctl enable sshd`
 
 4.  设置root密码
- 
+
     `passwd root`
 
     输入要设置的root密码。

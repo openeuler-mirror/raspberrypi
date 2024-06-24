@@ -37,9 +37,9 @@
 
 ## 如何参与 SIG 组
 
-SIG 组基本信息位于 [sig-RaspberryPi](https://gitee.com/openeuler/community/tree/master/sig/sig-RaspberryPi)。
+SIG 组基本信息位于 [sig-SBC](https://gitee.com/openeuler/community/tree/master/sig/sig-SBC)。
 
-- 建立或回复 issue：欢迎通过建立或回复 issue 来讨论，此 SIG 组维护的仓库列表可在 [sig-RaspberryPi](https://gitee.com/openeuler/community/tree/master/sig/sig-RaspberryPi) 中查看。
+- 建立或回复 issue：欢迎通过建立或回复 issue 来讨论，此 SIG 组维护的仓库列表可在 [sig-SBC](https://gitee.com/openeuler/community/tree/master/sig/sig-SBC) 中查看。
 - 加入 Slack 群组：[openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com )
   - [加入群组链接](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-uh95ug4n-yX7a~c7VrTEU64tZlX3Djw)
 - SIG 组会议：每个月的第一个和第三个周三下午 17:00 - 17:30 会进行一次讨论会议

@@ -327,7 +327,7 @@ make_img(){
     fi
     cp -a ${rootfs_dir}/boot/* ${boot_mnt}/
     cp ${euler_dir}/config.txt ${boot_mnt}/
-    echo "console=serial0,115200 console=tty1 root=PARTUUID=${fstab_array[3]} rootfstype=ext4 elevator=deadline rootwait" > ${boot_mnt}/cmdline.txt
+    echo "console=serial0,115200 console=tty1 root=PARTUUID=${fstab_array[3]} rootfstype=ext4 elevator=deadline rootwait net.ifnames=0" > ${boot_mnt}/cmdline.txt
 
     rm -rf ${rootfs_dir}/boot
     rsync -avHAXq ${rootfs_dir}/* ${root_mnt}

@@ -553,7 +553,7 @@ make_img(){
     pushd ${boot_mnt}/
     rm -f *.dtb cmdline.txt kernel.img kernel7.img kernel7l.img
     cp ${euler_dir}/config.txt ./
-    echo "console=serial0,115200 console=tty1 root=PARTUUID=${fstab_array[3]} rootfstype=ext4 elevator=deadline rootwait" > cmdline.txt
+    echo "console=serial0,115200 console=tty1 root=PARTUUID=${fstab_array[3]} rootfstype=ext4 elevator=deadline rootwait net.ifnames=0" > cmdline.txt
     popd
     cp --preserve=mode,timestamps --no-preserve=ownership ${output_dir}/Image ${boot_mnt}/kernel8.img
     cp --preserve=mode,timestamps --no-preserve=ownership ${output_dir}/*.dtb ${boot_mnt}/

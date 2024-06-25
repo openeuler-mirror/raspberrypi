@@ -37,9 +37,9 @@ In addition, RaspberryPi SIG also aims to migrate openEuler to other SoCs, such 
 
 ## How to collaborate
 
-You can get introduction of openEuler RaspberryPi SIG from [sig-RaspberryPi](https://gitee.com/openeuler/community/tree/master/sig/sig-RaspberryPi).
+You can get introduction of openEuler SBC SIG from [sig-SBC](https://gitee.com/openeuler/community/tree/master/sig/sig-SBC).
 
-- Issues: welcome to collaborate with us by creating new issues or reply opened issues. You can get repository list from [sig-RaspberryPi](https://gitee.com/openeuler/community/tree/master/sig/sig-RaspberryPi).
+- Issues: welcome to collaborate with us by creating new issues or reply opened issues. You can get repository list from [sig-SBC](https://gitee.com/openeuler/community/tree/master/sig/sig-SBC).
 - Join Slack workspace: [openeuler-raspberrypi](https://openeuler-raspberrypi.slack.com)
   - [Invite link](https://join.slack.com/t/openeuler-raspberrypi/shared_invite/zt-uh95ug4n-yX7a~c7VrTEU64tZlX3Djw)
 - Weekly meeting schedule

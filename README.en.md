@@ -47,7 +47,7 @@ You can get introduction of openEuler SBC SIG from [sig-SBC](https://gitee.com/o
   - Meeting Link: There are two methods to get the meeting link which will be updated before each meeting.
     - Log in to the [openEuler Community](https://openeuler.org/) website, then view the booking information of `sig-RaspberryPi例会` in the meeting calendar.
     - Search `openEuler` in mini programs of WeChat, add `openEuler mini program`. Then click `会议` and view the booking information of `sig-RaspberryPi例会`.
-  - [Meeting Agenda](https://etherpad.openeuler.org/p/sig-RaspberryPi-meetings)
+  - [Meeting Agenda](https://etherpad.openeuler.org/p/sig-SBC-meetings)
   - [Meeting Minutes](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6)
 - Warmly welcome to submit Pull Requests.
 

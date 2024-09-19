@@ -46,7 +46,7 @@ SIG 组基本信息位于 [sig-SBC](https://gitee.com/openeuler/community/tree/m
   - 会议链接：有以下两种获取方式
     - [openEuler 社区网站](https://openeuler.org/)下的会议日历中查看 `sig-RaspberryPi例会` 预定信息。
     - 微信小程序搜索 `openEuler`，添加 `openEuler` 小程序，可在其`会议`栏目查看 `sig-RaspberryPi例会` 预定信息。
-  - [会议议题](https://etherpad.openeuler.org/p/sig-RaspberryPi-meetings)：每次会议前填写要讨论的议题，我们也会从 issue 列表中提取本周讨论的内容。
+  - [会议议题](https://etherpad.openeuler.org/p/sig-SBC-meetings)：每次会议前填写要讨论的议题，我们也会从 issue 列表中提取本周讨论的内容。
   - [会议记录](https://gitee.com/openeuler/raspberrypi/issues/I1EYZ6)：每次会议结束后会议结论会更新在此 issue 中。
 - 重要的事说三遍：**欢迎提交 PR！欢迎提交 PR！欢迎提交 PR！**
 

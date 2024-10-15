@@ -154,7 +154,7 @@
 
 ### 创建编译内核模块目录
 
-`mkdir ${WORKDIR}/ouput`
+`mkdir ${WORKDIR}/output`
 
 ### 编译内核模块
 

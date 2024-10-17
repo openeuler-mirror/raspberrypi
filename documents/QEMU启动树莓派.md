@@ -111,7 +111,7 @@
 
     ```
     cd IMG_DIR
-    qemu-system-aarch64 -M raspi3 -cpu cortex-a53 -m 1024 -kernel kernel8.img -dtb bcm2710-rpi-3-b.dtb -sd openEuler-20.03-LTS-SP1-raspi-aarch64.img  -net user,hostfwd=tcp::6022-:22 -append "rw earlyprintk loglevl=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p3 rootwait  panic=1" -no-reboot -nographic
+    qemu-system-aarch64 -M raspi3 -cpu cortex-a53 -m 1024 -kernel kernel8.img -dtb bcm2710-rpi-3-b.dtb -sd openEuler-20.03-LTS-SP1-raspi-aarch64.img  -net user,hostfwd=tcp::6022-:22 -append "rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p3 rootwait  panic=1" -no-reboot -nographic
     ```
 
     QEMU 相关命令及其参数可参考 [QEMU Quick Start](https://qemu-project.gitlab.io/qemu/system/quickstart.html)。
